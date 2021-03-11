@@ -1,0 +1,4 @@
+<launch>
+  <node name="server_endpoint" pkg="unityrossample-ros" type="server_endpoint.py" />
+  <rosparam command="load" file="$(find unityrossample-ros)/config/params.yaml" />
+</launch>
