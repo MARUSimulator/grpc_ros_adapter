@@ -27,43 +27,71 @@ namespace Sensorstreaming {
             "ChZzZW5zb3Jfc3RyZWFtaW5nLnByb3RvEg9zZW5zb3JzdHJlYW1pbmcaDGNv",
             "bW1vbi5wcm90byJqChZDYW1lcmFTdHJlYW1pbmdSZXF1ZXN0EgwKBGRhdGEY",
             "ASABKAwSEQoJdGltZVN0YW1wGAIgASgBEg0KBXdpZHRoGAMgASgNEg4KBmhl",
-            "aWdodBgEIAEoDRIQCghmcmFtZV9pZBgFIAEoCSIqChdDYW1lcmFTdHJlYW1p",
-            "bmdSZXNwb25zZRIPCgdzdWNjZXNzGAEgASgIIsgBCgpQb2ludEZpZWxkEgwK",
-            "BElOVDgYASABKA0SDQoFVUlOVDgYAiABKA0SDQoFSU5UMTYYAyABKA0SDgoG",
-            "VUlOVDE2GAQgASgNEg0KBUlOVDMyGAUgASgNEg4KBlVJTlQzMhgGIAEoDRIP",
-            "CgdGTE9BVDMyGAcgASgNEg8KB0ZMT0FUNjQYCCABKA0SDAoEbmFtZRgJIAEo",
-            "CRIOCgZvZmZzZXQYCiABKA0SEAoIZGF0YXR5cGUYCyABKA0SDQoFY291bnQY",
-            "DCABKA0i1QEKFUxpZGFyU3RyZWFtaW5nUmVxdWVzdBIVCg10aW1lSW5TZWNv",
-            "bmRzGAEgASgBEg4KBmhlaWdodBgCIAEoDRINCgV3aWR0aBgDIAEoDRIrCgZm",
-            "aWVsZHMYBCADKAsyGy5zZW5zb3JzdHJlYW1pbmcuUG9pbnRGaWVsZBITCgtp",
-            "c0JpZ0VuZGlhbhgFIAEoCBISCgpwb2ludF9zdGVwGAYgASgNEhAKCHJvd19z",
-            "dGVwGAcgASgNEgwKBGRhdGEYCCABKAwSEAoIaXNfZGVuc2UYCSABKAgiKQoW",
-            "TGlkYXJTdHJlYW1pbmdSZXNwb25zZRIPCgdzdWNjZXNzGAEgASgIItMBChVS",
-            "YWRhclN0cmVhbWluZ1JlcXVlc3QSFgoOcmFuZ2VJbmNyZW1lbnQYASABKAIS",
-            "EgoKcmFuZ2VTdGFydBgCIAEoAhISCgpudW1TYW1wbGVzGAMgASgNEhEKCW51",
-            "bVNwb2tlcxgEIAEoDRIUCgxtaW5JbnRlbnNpdHkYBSABKA0SFAoMbWF4SW50",
-            "ZW5zaXR5GAYgASgNEhUKDXRpbWVJblNlY29uZHMYByADKAESDwoHYXppbXV0",
-            "aBgIIAMoAhITCgtyYWRhclNwb2tlcxgJIAEoDCIpChZSYWRhclN0cmVhbWlu",
-            "Z1Jlc3BvbnNlEg8KB3N1Y2Nlc3MYASABKAgyzAIKD1NlbnNvclN0cmVhbWlu",
-            "ZxJpChJTdHJlYW1DYW1lcmFTZW5zb3ISJy5zZW5zb3JzdHJlYW1pbmcuQ2Ft",
-            "ZXJhU3RyZWFtaW5nUmVxdWVzdBooLnNlbnNvcnN0cmVhbWluZy5DYW1lcmFT",
-            "dHJlYW1pbmdSZXNwb25zZSIAEmYKEVN0cmVhbUxpZGFyU2Vuc29yEiYuc2Vu",
-            "c29yc3RyZWFtaW5nLkxpZGFyU3RyZWFtaW5nUmVxdWVzdBonLnNlbnNvcnN0",
-            "cmVhbWluZy5MaWRhclN0cmVhbWluZ1Jlc3BvbnNlIgASZgoRU3RyZWFtUmFk",
-            "YXJTZW5zb3ISJi5zZW5zb3JzdHJlYW1pbmcuUmFkYXJTdHJlYW1pbmdSZXF1",
-            "ZXN0Gicuc2Vuc29yc3RyZWFtaW5nLlJhZGFyU3RyZWFtaW5nUmVzcG9uc2Ui",
-            "AEI7CiBpby5ncnBjLmV4YW1wbGVzLnNlbnNvcnN0cmVhbWluZ0IPU2Vuc29y",
-            "U3RyZWFtaW5nUAGiAgNITFdiBnByb3RvMw=="));
+            "aWdodBgEIAEoDRIQCghzZW5zb3JJZBgFIAEoCSIkChFTdHJlYW1pbmdSZXNw",
+            "b25zZRIPCgdzdWNjZXNzGAEgASgIIsgBCgpQb2ludEZpZWxkEgwKBElOVDgY",
+            "ASABKA0SDQoFVUlOVDgYAiABKA0SDQoFSU5UMTYYAyABKA0SDgoGVUlOVDE2",
+            "GAQgASgNEg0KBUlOVDMyGAUgASgNEg4KBlVJTlQzMhgGIAEoDRIPCgdGTE9B",
+            "VDMyGAcgASgNEg8KB0ZMT0FUNjQYCCABKA0SDAoEbmFtZRgJIAEoCRIOCgZv",
+            "ZmZzZXQYCiABKA0SEAoIZGF0YXR5cGUYCyABKA0SDQoFY291bnQYDCABKA0i",
+            "1QEKFUxpZGFyU3RyZWFtaW5nUmVxdWVzdBIVCg10aW1lSW5TZWNvbmRzGAEg",
+            "ASgBEg4KBmhlaWdodBgCIAEoDRINCgV3aWR0aBgDIAEoDRIrCgZmaWVsZHMY",
+            "BCADKAsyGy5zZW5zb3JzdHJlYW1pbmcuUG9pbnRGaWVsZBITCgtpc0JpZ0Vu",
+            "ZGlhbhgFIAEoCBISCgpwb2ludF9zdGVwGAYgASgNEhAKCHJvd19zdGVwGAcg",
+            "ASgNEgwKBGRhdGEYCCABKAwSEAoIaXNfZGVuc2UYCSABKAgi0wEKFVJhZGFy",
+            "U3RyZWFtaW5nUmVxdWVzdBIWCg5yYW5nZUluY3JlbWVudBgBIAEoAhISCgpy",
+            "YW5nZVN0YXJ0GAIgASgCEhIKCm51bVNhbXBsZXMYAyABKA0SEQoJbnVtU3Bv",
+            "a2VzGAQgASgNEhQKDG1pbkludGVuc2l0eRgFIAEoDRIUCgxtYXhJbnRlbnNp",
+            "dHkYBiABKA0SFQoNdGltZUluU2Vjb25kcxgHIAMoARIPCgdhemltdXRoGAgg",
+            "AygCEhMKC3JhZGFyU3Bva2VzGAkgASgMIjgKFURlcHRoU3RyZWFtaW5nUmVx",
+            "dWVzdBINCgVkZXB0aBgBIAEoAhIQCghzZW5zb3JJZBgCIAEoCSJzChNEdmxT",
+            "dHJlYW1pbmdSZXF1ZXN0EhAKCGFsdGl0dWRlGAEgASgCEiQKDmdyb3VuZFZl",
+            "bG9jaXR5GAIgASgLMgwuY29tbW9uLlZlYzMSEgoKYmVhbVJhbmdlcxgDIAMo",
+            "AhIQCghzZW5zb3JJZBgEIAEoCSJJChRHbnNzU3RyZWFtaW5nUmVxdWVzdBIf",
+            "CgVwb2ludBgBIAEoCzIQLmNvbW1vbi5HZW9Qb2ludBIQCghzZW5zb3JJZBgC",
+            "IAEoCSKvAQoTSW11U3RyZWFtaW5nUmVxdWVzdBIqCgxhY2NlbGVyYXRpb24Y",
+            "ASABKAsyFC5jb21tb24uQWNjZWxlcmF0aW9uEjAKD2FuZ3VsYXJWZWxvY2l0",
+            "eRgCIAEoCzIXLmNvbW1vbi5Bbmd1bGFyVmVsb2NpdHkSKAoLb3JpZW50YXRp",
+            "b24YAyABKAsyEy5jb21tb24uT3JpZW50YXRpb24SEAoIc2Vuc29ySWQYBCAB",
+            "KAkiRAoUUG9zZVN0cmVhbWluZ1JlcXVlc3QSGgoEcG9zZRgBIAEoCzIMLmNv",
+            "bW1vbi5Qb3NlEhAKCHNlbnNvcklkGAIgASgJIkkKFVNvbmFyU3RyZWFtaW5n",
+            "UmVxdWVzdBINCgVyYW5nZRgBIAEoAhIPCgdiZWFyaW5nGAIgASgCEhAKCHNl",
+            "bnNvcklkGAMgASgJMpQHCg9TZW5zb3JTdHJlYW1pbmcSZQoSU3RyZWFtQ2Ft",
+            "ZXJhU2Vuc29yEicuc2Vuc29yc3RyZWFtaW5nLkNhbWVyYVN0cmVhbWluZ1Jl",
+            "cXVlc3QaIi5zZW5zb3JzdHJlYW1pbmcuU3RyZWFtaW5nUmVzcG9uc2UiACgB",
+            "EmMKEVN0cmVhbUxpZGFyU2Vuc29yEiYuc2Vuc29yc3RyZWFtaW5nLkxpZGFy",
+            "U3RyZWFtaW5nUmVxdWVzdBoiLnNlbnNvcnN0cmVhbWluZy5TdHJlYW1pbmdS",
+            "ZXNwb25zZSIAKAESYwoRU3RyZWFtUmFkYXJTZW5zb3ISJi5zZW5zb3JzdHJl",
+            "YW1pbmcuUmFkYXJTdHJlYW1pbmdSZXF1ZXN0GiIuc2Vuc29yc3RyZWFtaW5n",
+            "LlN0cmVhbWluZ1Jlc3BvbnNlIgAoARJjChFTdHJlYW1EZXB0aFNlbnNvchIm",
+            "LnNlbnNvcnN0cmVhbWluZy5EZXB0aFN0cmVhbWluZ1JlcXVlc3QaIi5zZW5z",
+            "b3JzdHJlYW1pbmcuU3RyZWFtaW5nUmVzcG9uc2UiACgBEl8KD1N0cmVhbUR2",
+            "bFNlbnNvchIkLnNlbnNvcnN0cmVhbWluZy5EdmxTdHJlYW1pbmdSZXF1ZXN0",
+            "GiIuc2Vuc29yc3RyZWFtaW5nLlN0cmVhbWluZ1Jlc3BvbnNlIgAoARJhChBT",
+            "dHJlYW1HbnNzU2Vuc29yEiUuc2Vuc29yc3RyZWFtaW5nLkduc3NTdHJlYW1p",
+            "bmdSZXF1ZXN0GiIuc2Vuc29yc3RyZWFtaW5nLlN0cmVhbWluZ1Jlc3BvbnNl",
+            "IgAoARJfCg9TdHJlYW1JbXVTZW5zb3ISJC5zZW5zb3JzdHJlYW1pbmcuSW11",
+            "U3RyZWFtaW5nUmVxdWVzdBoiLnNlbnNvcnN0cmVhbWluZy5TdHJlYW1pbmdS",
+            "ZXNwb25zZSIAKAESYQoQU3RyZWFtUG9zZVNlbnNvchIlLnNlbnNvcnN0cmVh",
+            "bWluZy5Qb3NlU3RyZWFtaW5nUmVxdWVzdBoiLnNlbnNvcnN0cmVhbWluZy5T",
+            "dHJlYW1pbmdSZXNwb25zZSIAKAESYwoRU3RyZWFtU29uYXJTZW5zb3ISJi5z",
+            "ZW5zb3JzdHJlYW1pbmcuU29uYXJTdHJlYW1pbmdSZXF1ZXN0GiIuc2Vuc29y",
+            "c3RyZWFtaW5nLlN0cmVhbWluZ1Jlc3BvbnNlIgAoAUI7CiBpby5ncnBjLmV4",
+            "YW1wbGVzLnNlbnNvcnN0cmVhbWluZ0IPU2Vuc29yU3RyZWFtaW5nUAGiAgNI",
+            "TFdiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Common.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Sensorstreaming.CameraStreamingRequest), global::Sensorstreaming.CameraStreamingRequest.Parser, new[]{ "Data", "TimeStamp", "Width", "Height", "FrameId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Sensorstreaming.CameraStreamingResponse), global::Sensorstreaming.CameraStreamingResponse.Parser, new[]{ "Success" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Sensorstreaming.CameraStreamingRequest), global::Sensorstreaming.CameraStreamingRequest.Parser, new[]{ "Data", "TimeStamp", "Width", "Height", "SensorId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Sensorstreaming.StreamingResponse), global::Sensorstreaming.StreamingResponse.Parser, new[]{ "Success" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Sensorstreaming.PointField), global::Sensorstreaming.PointField.Parser, new[]{ "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "FLOAT32", "FLOAT64", "Name", "Offset", "Datatype", "Count" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Sensorstreaming.LidarStreamingRequest), global::Sensorstreaming.LidarStreamingRequest.Parser, new[]{ "TimeInSeconds", "Height", "Width", "Fields", "IsBigEndian", "PointStep", "RowStep", "Data", "IsDense" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Sensorstreaming.LidarStreamingResponse), global::Sensorstreaming.LidarStreamingResponse.Parser, new[]{ "Success" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Sensorstreaming.RadarStreamingRequest), global::Sensorstreaming.RadarStreamingRequest.Parser, new[]{ "RangeIncrement", "RangeStart", "NumSamples", "NumSpokes", "MinIntensity", "MaxIntensity", "TimeInSeconds", "Azimuth", "RadarSpokes" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Sensorstreaming.RadarStreamingResponse), global::Sensorstreaming.RadarStreamingResponse.Parser, new[]{ "Success" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Sensorstreaming.DepthStreamingRequest), global::Sensorstreaming.DepthStreamingRequest.Parser, new[]{ "Depth", "SensorId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Sensorstreaming.DvlStreamingRequest), global::Sensorstreaming.DvlStreamingRequest.Parser, new[]{ "Altitude", "GroundVelocity", "BeamRanges", "SensorId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Sensorstreaming.GnssStreamingRequest), global::Sensorstreaming.GnssStreamingRequest.Parser, new[]{ "Point", "SensorId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Sensorstreaming.ImuStreamingRequest), global::Sensorstreaming.ImuStreamingRequest.Parser, new[]{ "Acceleration", "AngularVelocity", "Orientation", "SensorId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Sensorstreaming.PoseStreamingRequest), global::Sensorstreaming.PoseStreamingRequest.Parser, new[]{ "Pose", "SensorId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Sensorstreaming.SonarStreamingRequest), global::Sensorstreaming.SonarStreamingRequest.Parser, new[]{ "Range", "Bearing", "SensorId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -103,7 +131,7 @@ namespace Sensorstreaming {
       timeStamp_ = other.timeStamp_;
       width_ = other.width_;
       height_ = other.height_;
-      frameId_ = other.frameId_;
+      sensorId_ = other.sensorId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -156,14 +184,14 @@ namespace Sensorstreaming {
       }
     }
 
-    /// <summary>Field number for the "frame_id" field.</summary>
-    public const int FrameIdFieldNumber = 5;
-    private string frameId_ = "";
+    /// <summary>Field number for the "sensorId" field.</summary>
+    public const int SensorIdFieldNumber = 5;
+    private string sensorId_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string FrameId {
-      get { return frameId_; }
+    public string SensorId {
+      get { return sensorId_; }
       set {
-        frameId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        sensorId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -184,7 +212,7 @@ namespace Sensorstreaming {
       if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(TimeStamp, other.TimeStamp)) return false;
       if (Width != other.Width) return false;
       if (Height != other.Height) return false;
-      if (FrameId != other.FrameId) return false;
+      if (SensorId != other.SensorId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -195,7 +223,7 @@ namespace Sensorstreaming {
       if (TimeStamp != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(TimeStamp);
       if (Width != 0) hash ^= Width.GetHashCode();
       if (Height != 0) hash ^= Height.GetHashCode();
-      if (FrameId.Length != 0) hash ^= FrameId.GetHashCode();
+      if (SensorId.Length != 0) hash ^= SensorId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -228,9 +256,9 @@ namespace Sensorstreaming {
         output.WriteRawTag(32);
         output.WriteUInt32(Height);
       }
-      if (FrameId.Length != 0) {
+      if (SensorId.Length != 0) {
         output.WriteRawTag(42);
-        output.WriteString(FrameId);
+        output.WriteString(SensorId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -257,9 +285,9 @@ namespace Sensorstreaming {
         output.WriteRawTag(32);
         output.WriteUInt32(Height);
       }
-      if (FrameId.Length != 0) {
+      if (SensorId.Length != 0) {
         output.WriteRawTag(42);
-        output.WriteString(FrameId);
+        output.WriteString(SensorId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -282,8 +310,8 @@ namespace Sensorstreaming {
       if (Height != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(Height);
       }
-      if (FrameId.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(FrameId);
+      if (SensorId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SensorId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -308,8 +336,8 @@ namespace Sensorstreaming {
       if (other.Height != 0) {
         Height = other.Height;
       }
-      if (other.FrameId.Length != 0) {
-        FrameId = other.FrameId;
+      if (other.SensorId.Length != 0) {
+        SensorId = other.SensorId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -342,7 +370,7 @@ namespace Sensorstreaming {
             break;
           }
           case 42: {
-            FrameId = input.ReadString();
+            SensorId = input.ReadString();
             break;
           }
         }
@@ -376,7 +404,7 @@ namespace Sensorstreaming {
             break;
           }
           case 42: {
-            FrameId = input.ReadString();
+            SensorId = input.ReadString();
             break;
           }
         }
@@ -386,15 +414,15 @@ namespace Sensorstreaming {
 
   }
 
-  public sealed partial class CameraStreamingResponse : pb::IMessage<CameraStreamingResponse>
+  public sealed partial class StreamingResponse : pb::IMessage<StreamingResponse>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<CameraStreamingResponse> _parser = new pb::MessageParser<CameraStreamingResponse>(() => new CameraStreamingResponse());
+    private static readonly pb::MessageParser<StreamingResponse> _parser = new pb::MessageParser<StreamingResponse>(() => new StreamingResponse());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<CameraStreamingResponse> Parser { get { return _parser; } }
+    public static pb::MessageParser<StreamingResponse> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -407,21 +435,21 @@ namespace Sensorstreaming {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public CameraStreamingResponse() {
+    public StreamingResponse() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public CameraStreamingResponse(CameraStreamingResponse other) : this() {
+    public StreamingResponse(StreamingResponse other) : this() {
       success_ = other.success_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public CameraStreamingResponse Clone() {
-      return new CameraStreamingResponse(this);
+    public StreamingResponse Clone() {
+      return new StreamingResponse(this);
     }
 
     /// <summary>Field number for the "success" field.</summary>
@@ -437,11 +465,11 @@ namespace Sensorstreaming {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as CameraStreamingResponse);
+      return Equals(other as StreamingResponse);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(CameraStreamingResponse other) {
+    public bool Equals(StreamingResponse other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -508,7 +536,7 @@ namespace Sensorstreaming {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(CameraStreamingResponse other) {
+    public void MergeFrom(StreamingResponse other) {
       if (other == null) {
         return;
       }
@@ -1575,178 +1603,6 @@ namespace Sensorstreaming {
 
   }
 
-  public sealed partial class LidarStreamingResponse : pb::IMessage<LidarStreamingResponse>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<LidarStreamingResponse> _parser = new pb::MessageParser<LidarStreamingResponse>(() => new LidarStreamingResponse());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<LidarStreamingResponse> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Sensorstreaming.SensorStreamingReflection.Descriptor.MessageTypes[4]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public LidarStreamingResponse() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public LidarStreamingResponse(LidarStreamingResponse other) : this() {
-      success_ = other.success_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public LidarStreamingResponse Clone() {
-      return new LidarStreamingResponse(this);
-    }
-
-    /// <summary>Field number for the "success" field.</summary>
-    public const int SuccessFieldNumber = 1;
-    private bool success_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Success {
-      get { return success_; }
-      set {
-        success_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as LidarStreamingResponse);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(LidarStreamingResponse other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (Success != other.Success) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Success != false) hash ^= Success.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      if (Success != false) {
-        output.WriteRawTag(8);
-        output.WriteBool(Success);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Success != false) {
-        output.WriteRawTag(8);
-        output.WriteBool(Success);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (Success != false) {
-        size += 1 + 1;
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(LidarStreamingResponse other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Success != false) {
-        Success = other.Success;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            Success = input.ReadBool();
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 8: {
-            Success = input.ReadBool();
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
   public sealed partial class RadarStreamingRequest : pb::IMessage<RadarStreamingRequest>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -1759,7 +1615,7 @@ namespace Sensorstreaming {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Sensorstreaming.SensorStreamingReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Sensorstreaming.SensorStreamingReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2189,19 +2045,19 @@ namespace Sensorstreaming {
 
   }
 
-  public sealed partial class RadarStreamingResponse : pb::IMessage<RadarStreamingResponse>
+  public sealed partial class DepthStreamingRequest : pb::IMessage<DepthStreamingRequest>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<RadarStreamingResponse> _parser = new pb::MessageParser<RadarStreamingResponse>(() => new RadarStreamingResponse());
+    private static readonly pb::MessageParser<DepthStreamingRequest> _parser = new pb::MessageParser<DepthStreamingRequest>(() => new DepthStreamingRequest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<RadarStreamingResponse> Parser { get { return _parser; } }
+    public static pb::MessageParser<DepthStreamingRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Sensorstreaming.SensorStreamingReflection.Descriptor.MessageTypes[6]; }
+      get { return global::Sensorstreaming.SensorStreamingReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -2210,55 +2066,69 @@ namespace Sensorstreaming {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RadarStreamingResponse() {
+    public DepthStreamingRequest() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RadarStreamingResponse(RadarStreamingResponse other) : this() {
-      success_ = other.success_;
+    public DepthStreamingRequest(DepthStreamingRequest other) : this() {
+      depth_ = other.depth_;
+      sensorId_ = other.sensorId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public RadarStreamingResponse Clone() {
-      return new RadarStreamingResponse(this);
+    public DepthStreamingRequest Clone() {
+      return new DepthStreamingRequest(this);
     }
 
-    /// <summary>Field number for the "success" field.</summary>
-    public const int SuccessFieldNumber = 1;
-    private bool success_;
+    /// <summary>Field number for the "depth" field.</summary>
+    public const int DepthFieldNumber = 1;
+    private float depth_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Success {
-      get { return success_; }
+    public float Depth {
+      get { return depth_; }
       set {
-        success_ = value;
+        depth_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "sensorId" field.</summary>
+    public const int SensorIdFieldNumber = 2;
+    private string sensorId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string SensorId {
+      get { return sensorId_; }
+      set {
+        sensorId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as RadarStreamingResponse);
+      return Equals(other as DepthStreamingRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(RadarStreamingResponse other) {
+    public bool Equals(DepthStreamingRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Success != other.Success) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Depth, other.Depth)) return false;
+      if (SensorId != other.SensorId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Success != false) hash ^= Success.GetHashCode();
+      if (Depth != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Depth);
+      if (SensorId.Length != 0) hash ^= SensorId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2275,9 +2145,13 @@ namespace Sensorstreaming {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Success != false) {
-        output.WriteRawTag(8);
-        output.WriteBool(Success);
+      if (Depth != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(Depth);
+      }
+      if (SensorId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SensorId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -2288,9 +2162,13 @@ namespace Sensorstreaming {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Success != false) {
-        output.WriteRawTag(8);
-        output.WriteBool(Success);
+      if (Depth != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(Depth);
+      }
+      if (SensorId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SensorId);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -2301,8 +2179,11 @@ namespace Sensorstreaming {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Success != false) {
-        size += 1 + 1;
+      if (Depth != 0F) {
+        size += 1 + 4;
+      }
+      if (SensorId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SensorId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2311,12 +2192,15 @@ namespace Sensorstreaming {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(RadarStreamingResponse other) {
+    public void MergeFrom(DepthStreamingRequest other) {
       if (other == null) {
         return;
       }
-      if (other.Success != false) {
-        Success = other.Success;
+      if (other.Depth != 0F) {
+        Depth = other.Depth;
+      }
+      if (other.SensorId.Length != 0) {
+        SensorId = other.SensorId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -2332,8 +2216,12 @@ namespace Sensorstreaming {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            Success = input.ReadBool();
+          case 13: {
+            Depth = input.ReadFloat();
+            break;
+          }
+          case 18: {
+            SensorId = input.ReadString();
             break;
           }
         }
@@ -2350,8 +2238,1277 @@ namespace Sensorstreaming {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
-            Success = input.ReadBool();
+          case 13: {
+            Depth = input.ReadFloat();
+            break;
+          }
+          case 18: {
+            SensorId = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class DvlStreamingRequest : pb::IMessage<DvlStreamingRequest>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<DvlStreamingRequest> _parser = new pb::MessageParser<DvlStreamingRequest>(() => new DvlStreamingRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<DvlStreamingRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Sensorstreaming.SensorStreamingReflection.Descriptor.MessageTypes[6]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DvlStreamingRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DvlStreamingRequest(DvlStreamingRequest other) : this() {
+      altitude_ = other.altitude_;
+      groundVelocity_ = other.groundVelocity_ != null ? other.groundVelocity_.Clone() : null;
+      beamRanges_ = other.beamRanges_.Clone();
+      sensorId_ = other.sensorId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DvlStreamingRequest Clone() {
+      return new DvlStreamingRequest(this);
+    }
+
+    /// <summary>Field number for the "altitude" field.</summary>
+    public const int AltitudeFieldNumber = 1;
+    private float altitude_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float Altitude {
+      get { return altitude_; }
+      set {
+        altitude_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "groundVelocity" field.</summary>
+    public const int GroundVelocityFieldNumber = 2;
+    private global::Common.Vec3 groundVelocity_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Common.Vec3 GroundVelocity {
+      get { return groundVelocity_; }
+      set {
+        groundVelocity_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "beamRanges" field.</summary>
+    public const int BeamRangesFieldNumber = 3;
+    private static readonly pb::FieldCodec<float> _repeated_beamRanges_codec
+        = pb::FieldCodec.ForFloat(26);
+    private readonly pbc::RepeatedField<float> beamRanges_ = new pbc::RepeatedField<float>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<float> BeamRanges {
+      get { return beamRanges_; }
+    }
+
+    /// <summary>Field number for the "sensorId" field.</summary>
+    public const int SensorIdFieldNumber = 4;
+    private string sensorId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string SensorId {
+      get { return sensorId_; }
+      set {
+        sensorId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as DvlStreamingRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(DvlStreamingRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Altitude, other.Altitude)) return false;
+      if (!object.Equals(GroundVelocity, other.GroundVelocity)) return false;
+      if(!beamRanges_.Equals(other.beamRanges_)) return false;
+      if (SensorId != other.SensorId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Altitude != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Altitude);
+      if (groundVelocity_ != null) hash ^= GroundVelocity.GetHashCode();
+      hash ^= beamRanges_.GetHashCode();
+      if (SensorId.Length != 0) hash ^= SensorId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Altitude != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(Altitude);
+      }
+      if (groundVelocity_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(GroundVelocity);
+      }
+      beamRanges_.WriteTo(output, _repeated_beamRanges_codec);
+      if (SensorId.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(SensorId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Altitude != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(Altitude);
+      }
+      if (groundVelocity_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(GroundVelocity);
+      }
+      beamRanges_.WriteTo(ref output, _repeated_beamRanges_codec);
+      if (SensorId.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(SensorId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Altitude != 0F) {
+        size += 1 + 4;
+      }
+      if (groundVelocity_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(GroundVelocity);
+      }
+      size += beamRanges_.CalculateSize(_repeated_beamRanges_codec);
+      if (SensorId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SensorId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(DvlStreamingRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Altitude != 0F) {
+        Altitude = other.Altitude;
+      }
+      if (other.groundVelocity_ != null) {
+        if (groundVelocity_ == null) {
+          GroundVelocity = new global::Common.Vec3();
+        }
+        GroundVelocity.MergeFrom(other.GroundVelocity);
+      }
+      beamRanges_.Add(other.beamRanges_);
+      if (other.SensorId.Length != 0) {
+        SensorId = other.SensorId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 13: {
+            Altitude = input.ReadFloat();
+            break;
+          }
+          case 18: {
+            if (groundVelocity_ == null) {
+              GroundVelocity = new global::Common.Vec3();
+            }
+            input.ReadMessage(GroundVelocity);
+            break;
+          }
+          case 26:
+          case 29: {
+            beamRanges_.AddEntriesFrom(input, _repeated_beamRanges_codec);
+            break;
+          }
+          case 34: {
+            SensorId = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 13: {
+            Altitude = input.ReadFloat();
+            break;
+          }
+          case 18: {
+            if (groundVelocity_ == null) {
+              GroundVelocity = new global::Common.Vec3();
+            }
+            input.ReadMessage(GroundVelocity);
+            break;
+          }
+          case 26:
+          case 29: {
+            beamRanges_.AddEntriesFrom(ref input, _repeated_beamRanges_codec);
+            break;
+          }
+          case 34: {
+            SensorId = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class GnssStreamingRequest : pb::IMessage<GnssStreamingRequest>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<GnssStreamingRequest> _parser = new pb::MessageParser<GnssStreamingRequest>(() => new GnssStreamingRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GnssStreamingRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Sensorstreaming.SensorStreamingReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GnssStreamingRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GnssStreamingRequest(GnssStreamingRequest other) : this() {
+      point_ = other.point_ != null ? other.point_.Clone() : null;
+      sensorId_ = other.sensorId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GnssStreamingRequest Clone() {
+      return new GnssStreamingRequest(this);
+    }
+
+    /// <summary>Field number for the "point" field.</summary>
+    public const int PointFieldNumber = 1;
+    private global::Common.GeoPoint point_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Common.GeoPoint Point {
+      get { return point_; }
+      set {
+        point_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "sensorId" field.</summary>
+    public const int SensorIdFieldNumber = 2;
+    private string sensorId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string SensorId {
+      get { return sensorId_; }
+      set {
+        sensorId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GnssStreamingRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GnssStreamingRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Point, other.Point)) return false;
+      if (SensorId != other.SensorId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (point_ != null) hash ^= Point.GetHashCode();
+      if (SensorId.Length != 0) hash ^= SensorId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (point_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Point);
+      }
+      if (SensorId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SensorId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (point_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Point);
+      }
+      if (SensorId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SensorId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (point_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Point);
+      }
+      if (SensorId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SensorId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GnssStreamingRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.point_ != null) {
+        if (point_ == null) {
+          Point = new global::Common.GeoPoint();
+        }
+        Point.MergeFrom(other.Point);
+      }
+      if (other.SensorId.Length != 0) {
+        SensorId = other.SensorId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (point_ == null) {
+              Point = new global::Common.GeoPoint();
+            }
+            input.ReadMessage(Point);
+            break;
+          }
+          case 18: {
+            SensorId = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            if (point_ == null) {
+              Point = new global::Common.GeoPoint();
+            }
+            input.ReadMessage(Point);
+            break;
+          }
+          case 18: {
+            SensorId = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class ImuStreamingRequest : pb::IMessage<ImuStreamingRequest>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<ImuStreamingRequest> _parser = new pb::MessageParser<ImuStreamingRequest>(() => new ImuStreamingRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<ImuStreamingRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Sensorstreaming.SensorStreamingReflection.Descriptor.MessageTypes[8]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ImuStreamingRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ImuStreamingRequest(ImuStreamingRequest other) : this() {
+      acceleration_ = other.acceleration_ != null ? other.acceleration_.Clone() : null;
+      angularVelocity_ = other.angularVelocity_ != null ? other.angularVelocity_.Clone() : null;
+      orientation_ = other.orientation_ != null ? other.orientation_.Clone() : null;
+      sensorId_ = other.sensorId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public ImuStreamingRequest Clone() {
+      return new ImuStreamingRequest(this);
+    }
+
+    /// <summary>Field number for the "acceleration" field.</summary>
+    public const int AccelerationFieldNumber = 1;
+    private global::Common.Acceleration acceleration_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Common.Acceleration Acceleration {
+      get { return acceleration_; }
+      set {
+        acceleration_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "angularVelocity" field.</summary>
+    public const int AngularVelocityFieldNumber = 2;
+    private global::Common.AngularVelocity angularVelocity_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Common.AngularVelocity AngularVelocity {
+      get { return angularVelocity_; }
+      set {
+        angularVelocity_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "orientation" field.</summary>
+    public const int OrientationFieldNumber = 3;
+    private global::Common.Orientation orientation_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Common.Orientation Orientation {
+      get { return orientation_; }
+      set {
+        orientation_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "sensorId" field.</summary>
+    public const int SensorIdFieldNumber = 4;
+    private string sensorId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string SensorId {
+      get { return sensorId_; }
+      set {
+        sensorId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as ImuStreamingRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(ImuStreamingRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Acceleration, other.Acceleration)) return false;
+      if (!object.Equals(AngularVelocity, other.AngularVelocity)) return false;
+      if (!object.Equals(Orientation, other.Orientation)) return false;
+      if (SensorId != other.SensorId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (acceleration_ != null) hash ^= Acceleration.GetHashCode();
+      if (angularVelocity_ != null) hash ^= AngularVelocity.GetHashCode();
+      if (orientation_ != null) hash ^= Orientation.GetHashCode();
+      if (SensorId.Length != 0) hash ^= SensorId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (acceleration_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Acceleration);
+      }
+      if (angularVelocity_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(AngularVelocity);
+      }
+      if (orientation_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Orientation);
+      }
+      if (SensorId.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(SensorId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (acceleration_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Acceleration);
+      }
+      if (angularVelocity_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(AngularVelocity);
+      }
+      if (orientation_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(Orientation);
+      }
+      if (SensorId.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(SensorId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (acceleration_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Acceleration);
+      }
+      if (angularVelocity_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(AngularVelocity);
+      }
+      if (orientation_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Orientation);
+      }
+      if (SensorId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SensorId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(ImuStreamingRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.acceleration_ != null) {
+        if (acceleration_ == null) {
+          Acceleration = new global::Common.Acceleration();
+        }
+        Acceleration.MergeFrom(other.Acceleration);
+      }
+      if (other.angularVelocity_ != null) {
+        if (angularVelocity_ == null) {
+          AngularVelocity = new global::Common.AngularVelocity();
+        }
+        AngularVelocity.MergeFrom(other.AngularVelocity);
+      }
+      if (other.orientation_ != null) {
+        if (orientation_ == null) {
+          Orientation = new global::Common.Orientation();
+        }
+        Orientation.MergeFrom(other.Orientation);
+      }
+      if (other.SensorId.Length != 0) {
+        SensorId = other.SensorId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (acceleration_ == null) {
+              Acceleration = new global::Common.Acceleration();
+            }
+            input.ReadMessage(Acceleration);
+            break;
+          }
+          case 18: {
+            if (angularVelocity_ == null) {
+              AngularVelocity = new global::Common.AngularVelocity();
+            }
+            input.ReadMessage(AngularVelocity);
+            break;
+          }
+          case 26: {
+            if (orientation_ == null) {
+              Orientation = new global::Common.Orientation();
+            }
+            input.ReadMessage(Orientation);
+            break;
+          }
+          case 34: {
+            SensorId = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            if (acceleration_ == null) {
+              Acceleration = new global::Common.Acceleration();
+            }
+            input.ReadMessage(Acceleration);
+            break;
+          }
+          case 18: {
+            if (angularVelocity_ == null) {
+              AngularVelocity = new global::Common.AngularVelocity();
+            }
+            input.ReadMessage(AngularVelocity);
+            break;
+          }
+          case 26: {
+            if (orientation_ == null) {
+              Orientation = new global::Common.Orientation();
+            }
+            input.ReadMessage(Orientation);
+            break;
+          }
+          case 34: {
+            SensorId = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class PoseStreamingRequest : pb::IMessage<PoseStreamingRequest>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<PoseStreamingRequest> _parser = new pb::MessageParser<PoseStreamingRequest>(() => new PoseStreamingRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<PoseStreamingRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Sensorstreaming.SensorStreamingReflection.Descriptor.MessageTypes[9]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PoseStreamingRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PoseStreamingRequest(PoseStreamingRequest other) : this() {
+      pose_ = other.pose_ != null ? other.pose_.Clone() : null;
+      sensorId_ = other.sensorId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public PoseStreamingRequest Clone() {
+      return new PoseStreamingRequest(this);
+    }
+
+    /// <summary>Field number for the "pose" field.</summary>
+    public const int PoseFieldNumber = 1;
+    private global::Common.Pose pose_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Common.Pose Pose {
+      get { return pose_; }
+      set {
+        pose_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "sensorId" field.</summary>
+    public const int SensorIdFieldNumber = 2;
+    private string sensorId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string SensorId {
+      get { return sensorId_; }
+      set {
+        sensorId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as PoseStreamingRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(PoseStreamingRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(Pose, other.Pose)) return false;
+      if (SensorId != other.SensorId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (pose_ != null) hash ^= Pose.GetHashCode();
+      if (SensorId.Length != 0) hash ^= SensorId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (pose_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Pose);
+      }
+      if (SensorId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SensorId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (pose_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Pose);
+      }
+      if (SensorId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SensorId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (pose_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Pose);
+      }
+      if (SensorId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SensorId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(PoseStreamingRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.pose_ != null) {
+        if (pose_ == null) {
+          Pose = new global::Common.Pose();
+        }
+        Pose.MergeFrom(other.Pose);
+      }
+      if (other.SensorId.Length != 0) {
+        SensorId = other.SensorId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (pose_ == null) {
+              Pose = new global::Common.Pose();
+            }
+            input.ReadMessage(Pose);
+            break;
+          }
+          case 18: {
+            SensorId = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            if (pose_ == null) {
+              Pose = new global::Common.Pose();
+            }
+            input.ReadMessage(Pose);
+            break;
+          }
+          case 18: {
+            SensorId = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  public sealed partial class SonarStreamingRequest : pb::IMessage<SonarStreamingRequest>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<SonarStreamingRequest> _parser = new pb::MessageParser<SonarStreamingRequest>(() => new SonarStreamingRequest());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SonarStreamingRequest> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Sensorstreaming.SensorStreamingReflection.Descriptor.MessageTypes[10]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SonarStreamingRequest() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SonarStreamingRequest(SonarStreamingRequest other) : this() {
+      range_ = other.range_;
+      bearing_ = other.bearing_;
+      sensorId_ = other.sensorId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SonarStreamingRequest Clone() {
+      return new SonarStreamingRequest(this);
+    }
+
+    /// <summary>Field number for the "range" field.</summary>
+    public const int RangeFieldNumber = 1;
+    private float range_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float Range {
+      get { return range_; }
+      set {
+        range_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "bearing" field.</summary>
+    public const int BearingFieldNumber = 2;
+    private float bearing_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public float Bearing {
+      get { return bearing_; }
+      set {
+        bearing_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "sensorId" field.</summary>
+    public const int SensorIdFieldNumber = 3;
+    private string sensorId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string SensorId {
+      get { return sensorId_; }
+      set {
+        sensorId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SonarStreamingRequest);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SonarStreamingRequest other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Range, other.Range)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Bearing, other.Bearing)) return false;
+      if (SensorId != other.SensorId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Range != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Range);
+      if (Bearing != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Bearing);
+      if (SensorId.Length != 0) hash ^= SensorId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Range != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(Range);
+      }
+      if (Bearing != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(Bearing);
+      }
+      if (SensorId.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(SensorId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Range != 0F) {
+        output.WriteRawTag(13);
+        output.WriteFloat(Range);
+      }
+      if (Bearing != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(Bearing);
+      }
+      if (SensorId.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(SensorId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Range != 0F) {
+        size += 1 + 4;
+      }
+      if (Bearing != 0F) {
+        size += 1 + 4;
+      }
+      if (SensorId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SensorId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SonarStreamingRequest other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Range != 0F) {
+        Range = other.Range;
+      }
+      if (other.Bearing != 0F) {
+        Bearing = other.Bearing;
+      }
+      if (other.SensorId.Length != 0) {
+        SensorId = other.SensorId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 13: {
+            Range = input.ReadFloat();
+            break;
+          }
+          case 21: {
+            Bearing = input.ReadFloat();
+            break;
+          }
+          case 26: {
+            SensorId = input.ReadString();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 13: {
+            Range = input.ReadFloat();
+            break;
+          }
+          case 21: {
+            Bearing = input.ReadFloat();
+            break;
+          }
+          case 26: {
+            SensorId = input.ReadString();
             break;
           }
         }

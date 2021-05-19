@@ -14,10 +14,12 @@ import geometry_msgs.msg as geomsgs
 
 import grpc
 
+from protobuf import ping_pb2_grpc
 from protobuf import navigation_pb2_grpc
 from protobuf import sensor_streaming_pb2_grpc
 from protobuf import remote_control_pb2_grpc
 
+from services.ping_service import PingService
 from services.sensor_streaming import SensorStreaming
 from services.remote_control import RemoteControl
 from services.navigation import Navigation
@@ -29,6 +31,10 @@ def serve(server_ip, server_port, camera_pubs,
           pose_pub, twist_pub, tf_pub):
 
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
+
+    ping_pb2_grpc.add_PingServicer_to_server(
+            PingService(),
+            server)
 
     sensor_streaming_pb2_grpc.add_SensorStreamingServicer_to_server(
             SensorStreaming(camera_pubs, lidar_pub, radar_pub, clock_pub),

@@ -10,9 +10,15 @@ option objc_class_prefix = "HLW";
 package sensorstreaming;
 
 service SensorStreaming {
-    rpc StreamCameraSensor(CameraStreamingRequest) returns (CameraStreamingResponse) {}
-    rpc StreamLidarSensor(LidarStreamingRequest) returns (LidarStreamingResponse) {}
-    rpc StreamRadarSensor(RadarStreamingRequest) returns (RadarStreamingResponse) {}
+    rpc StreamCameraSensor(stream CameraStreamingRequest) returns (StreamingResponse) {}
+    rpc StreamLidarSensor(stream LidarStreamingRequest) returns (StreamingResponse) {}
+    rpc StreamRadarSensor(stream RadarStreamingRequest) returns (StreamingResponse) {}
+    rpc StreamDepthSensor(stream DepthStreamingRequest) returns (StreamingResponse) {}
+    rpc StreamDvlSensor(stream DvlStreamingRequest) returns (StreamingResponse) {}
+    rpc StreamGnssSensor(stream GnssStreamingRequest) returns (StreamingResponse) {}
+    rpc StreamImuSensor(stream ImuStreamingRequest) returns (StreamingResponse) {}
+    rpc StreamPoseSensor(stream PoseStreamingRequest) returns (StreamingResponse) {}
+    rpc StreamSonarSensor(stream SonarStreamingRequest) returns (StreamingResponse) {}
 } 
 
 message CameraStreamingRequest {
@@ -20,10 +26,10 @@ message CameraStreamingRequest {
     double timeStamp = 2;
     uint32 width = 3;
     uint32 height = 4;
-    string frame_id = 5;
+    string sensorId = 5;
 }
 
-message CameraStreamingResponse {
+message StreamingResponse {
     bool success = 1;
 }
 
@@ -56,10 +62,6 @@ message LidarStreamingRequest {
     bool is_dense = 9;
 }
 
-message LidarStreamingResponse {
-    bool success = 1;
-}
-
 message RadarStreamingRequest {
     float rangeIncrement = 1;
     float rangeStart = 2;
@@ -73,6 +75,37 @@ message RadarStreamingRequest {
 
 }
 
-message RadarStreamingResponse {
-    bool success = 1;
+message DepthStreamingRequest {
+    float depth = 1;
+    string sensorId = 2;
+}
+
+message DvlStreamingRequest {
+    float altitude = 1;
+    common.Vec3 groundVelocity = 2;
+    repeated float beamRanges = 3;
+    string sensorId = 4;
+}
+
+message GnssStreamingRequest {
+    common.GeoPoint point = 1;
+    string sensorId = 2;
+}
+
+message ImuStreamingRequest {
+    common.Acceleration acceleration = 1;
+    common.AngularVelocity angularVelocity = 2;
+    common.Orientation orientation = 3;
+    string sensorId = 4;
+}
+
+message PoseStreamingRequest {
+    common.Pose pose = 1;
+    string sensorId = 2;
+}
+
+message SonarStreamingRequest {
+    float range = 1;
+    float bearing = 2;
+    string sensorId = 3;
 }

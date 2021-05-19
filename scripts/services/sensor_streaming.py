@@ -23,39 +23,40 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
         self.radar_pub = radar_pub
         self.clock_pub = clock_pub
 
-    def StreamCameraSensor(self, request, context):
+    def StreamCameraSensor(self, request_iterator, context):
         """
         Takes in a gRPC SensorStreamingRequest containing
         all the data needed to create and publish a sensor_msgs/Image
         ROS message.
         """
-        img_string = request.data
+        for request in request_iterator:
+            img_string = request.data
 
-        cv_image = np.fromstring(img_string, np.uint8)
+            cv_image = np.fromstring(img_string, np.uint8)
 
-        # NOTE, the height is specifiec as a parameter before the width
-        cv_image = cv_image.reshape(request.height, request.width, 3)
-        cv_image = cv2.flip(cv_image, 0)
+            # NOTE, the height is specifiec as a parameter before the width
+            cv_image = cv_image.reshape(request.height, request.width, 3)
+            cv_image = cv2.flip(cv_image, 0)
 
-        bgr_image = cv2.cvtColor(cv_image, cv2.COLOR_RGB2BGR)
+            bgr_image = cv2.cvtColor(cv_image, cv2.COLOR_RGB2BGR)
 
-        msg = Image()
-        header = std_msgs.msg.Header()
-        try:
-            # RGB
-            # msg = self.bridge.cv2_to_imgmsg(cv_image, 'rgb8')
+            msg = Image()
+            header = std_msgs.msg.Header()
+            try:
+                # RGB
+                # msg = self.bridge.cv2_to_imgmsg(cv_image, 'rgb8')
 
-            # BGR
-            msg = self.bridge.cv2_to_imgmsg(bgr_image, 'bgr8')
+                # BGR
+                msg = self.bridge.cv2_to_imgmsg(bgr_image, 'bgr8')
 
-            header.stamp = rospy.Time.from_sec(request.timeStamp)
-            msg.header = header
-        except CvBridgeError as e:
-            print(e)
+                header.stamp = rospy.Time.from_sec(request.timeStamp)
+                msg.header = header
+            except CvBridgeError as e:
+                print(e)
 
-        self.camera_pubs[request.frame_id].publish(msg)
+            self.camera_pubs[request.sensorId].publish(msg)
 
-        return sensor_streaming_pb2.CameraStreamingResponse(success=True)
+        return sensor_streaming_pb2.StreamingResponse(success=True)
 
     def StreamLidarSensor(self, request, context):
         """

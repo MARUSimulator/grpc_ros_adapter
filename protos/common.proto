@@ -3,9 +3,9 @@ syntax = "proto3";
 package common;
 
 message Position {
-    float north = 1;
-    float east = 2;
-    float down = 3;
+    float x = 1;
+    float y = 2;
+    float z = 3;
 }
 
 message Orientation {
@@ -21,9 +21,9 @@ message Velocity {
 }
 
 message AngularVelocity {
-    float p = 1;
-    float q = 2;
-    float r = 3;
+    float x = 1;
+    float y = 2;
+    float z = 3;
 }
 
 message Acceleration {
@@ -33,9 +33,14 @@ message Acceleration {
 }
 
 message AngularAcceleration {
-    float p = 1;
-    float q = 2;
-    float r = 3;
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
+
+message Pose {
+    Position position = 1;
+    Orientation orientation = 2;
 }
 
 message GeneralizedForce {
@@ -60,8 +65,26 @@ message Quaternion {
     float w = 4; 
 }
 
-message Pose {
+message PoseVec {
+    Vec3 position = 1;
+    Quaternion orientation = 2;
+}
+
+
+message PoseNED2D {
     float north = 1;
     float east = 2;
     float heading = 3;
+}
+
+message PositionNED {
+    float north = 1;
+    float east = 2;
+    float down = 3;
+}
+
+message GeoPoint {
+    float latitude = 1;
+    float longitude = 2;
+    float altitude = 3;
 }
