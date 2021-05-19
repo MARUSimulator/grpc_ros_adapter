@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+import public "common.proto";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.navigation";
+option java_outer_classname = "Navigation";
+option objc_class_prefix = "HLW";
+
+package navigation;
+
+
+service Navigation {
+    rpc SendNavigationMessage(NavigationRequest) returns (NavigationResponse) {}
+} 
+
+
+message NavigationRequest {
+    double timeStamp = 1;
+    common.Vec3 position = 2; 
+    common.Quaternion orientation = 3; 
+    common.Vec3 linearVelocity = 4;
+    common.Vec3 angularVelocity = 5;
+}
+
+message NavigationResponse {
+    bool success = 1;
+}
+

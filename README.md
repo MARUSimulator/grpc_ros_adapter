@@ -37,3 +37,4 @@ the `launch/launch_server.launch`.
 
     * Move most of the configuration into a script for increased automation
 
+RUN cd /tmp && git clone -b v1.34.1 --depth 1 https://github.com/grpc/grpc && cd grpc && git submodule update --init && make grpc_php_plugin

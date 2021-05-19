@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package common;
+
+message Position {
+    float north = 1;
+    float east = 2;
+    float down = 3;
+}
+
+message Orientation {
+    float roll = 1;
+    float pitch = 2;
+    float yaw = 3;
+}
+
+message Velocity {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
+
+message AngularVelocity {
+    float p = 1;
+    float q = 2;
+    float r = 3;
+}
+
+message Acceleration {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
+
+message AngularAcceleration {
+    float p = 1;
+    float q = 2;
+    float r = 3;
+}
+
+message GeneralizedForce {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+    float k = 4;
+    float m = 5;
+    float n = 6;
+}
+
+message Vec3 {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
+
+message Quaternion {
+    float x = 1; 
+    float y = 2; 
+    float z = 3; 
+    float w = 4; 
+}
+
+message Pose {
+    float north = 1;
+    float east = 2;
+    float heading = 3;
+}

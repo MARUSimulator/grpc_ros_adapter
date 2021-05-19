@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import sensor_streaming.sensor_streaming_pb2 as sensor__streaming__pb2
+import sensor_streaming_pb2 as sensor__streaming__pb2
 
 
 class SensorStreamingStub(object):

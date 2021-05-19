@@ -1,0 +1,24 @@
+
+syntax = "proto3";
+
+import "common.proto";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.remotecontrol";
+option java_outer_classname = "RemoteControl";
+option objc_class_prefix = "HLW";
+
+package remotecontrol;
+
+service RemoteControl {
+    rpc ApplyForce(ForceRequest) returns (stream ForceResponse) {}
+}
+
+message ForceRequest {
+    string vehId = 1;
+}
+
+message ForceResponse {
+    bool success = 1;
+    common.GeneralizedForce generalizedForce = 2;
+}

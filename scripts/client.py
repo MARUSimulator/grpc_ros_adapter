@@ -10,11 +10,11 @@ from cv_bridge import CvBridge, CvBridgeError
 import grpc
 import cv2
 
-from sensordata import sensordata_pb2
-from sensordata import sensordata_pb2_grpc
-
-from sensor_streaming import sensor_streaming_pb2
-from sensor_streaming import sensor_streaming_pb2_grpc
+from protobuf import common_pb2
+from protobuf import sensor_streaming_pb2
+from protobuf import sensor_streaming_pb2_grpc
+from protobuf import remote_control_pb2
+from protobuf import remote_control_pb2_grpc
 
 import numpy as np
 
@@ -64,9 +64,23 @@ def streamer():
         #rate.sleep()
 
 
+def remote_control_test():
+    remote_control_channel = grpc.insecure_channel('172.19.126.65:30052')
+    remote_control_stub = remote_control_pb2_grpc.RemoteControlStub(remote_control_channel)
+
+    response = remote_control_stub.ApplyForce(remote_control_pb2.ForceRequest(vehId="idea"))
+    try:
+        for s in response:
+            print("response")
+            response.cancel()
+    except:
+        print("Socket closed")
+
+    print("gotovo buraz")
+
 if __name__ == '__main__':
     try:
         #new_streamer()
-        grpc_streamer()
+        remote_control_test()
     except rospy.ROSInterruptException:
         pass
