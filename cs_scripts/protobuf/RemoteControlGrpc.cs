@@ -52,13 +52,6 @@ namespace Remotecontrol {
         __Marshaller_remotecontrol_ForceRequest,
         __Marshaller_remotecontrol_ForceResponse);
 
-    static readonly grpc::Method<global::Remotecontrol.ForceRequest, global::Remotecontrol.ForceResponse> __Method_StopRemoteControl = new grpc::Method<global::Remotecontrol.ForceRequest, global::Remotecontrol.ForceResponse>(
-        grpc::MethodType.Unary,
-        __ServiceName,
-        "StopRemoteControl",
-        __Marshaller_remotecontrol_ForceRequest,
-        __Marshaller_remotecontrol_ForceResponse);
-
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
@@ -70,11 +63,6 @@ namespace Remotecontrol {
     public abstract partial class RemoteControlBase
     {
       public virtual global::System.Threading.Tasks.Task ApplyForce(global::Remotecontrol.ForceRequest request, grpc::IServerStreamWriter<global::Remotecontrol.ForceResponse> responseStream, grpc::ServerCallContext context)
-      {
-        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
-      }
-
-      public virtual global::System.Threading.Tasks.Task<global::Remotecontrol.ForceResponse> StopRemoteControl(global::Remotecontrol.ForceRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -112,22 +100,6 @@ namespace Remotecontrol {
       {
         return CallInvoker.AsyncServerStreamingCall(__Method_ApplyForce, null, options, request);
       }
-      public virtual global::Remotecontrol.ForceResponse StopRemoteControl(global::Remotecontrol.ForceRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return StopRemoteControl(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual global::Remotecontrol.ForceResponse StopRemoteControl(global::Remotecontrol.ForceRequest request, grpc::CallOptions options)
-      {
-        return CallInvoker.BlockingUnaryCall(__Method_StopRemoteControl, null, options, request);
-      }
-      public virtual grpc::AsyncUnaryCall<global::Remotecontrol.ForceResponse> StopRemoteControlAsync(global::Remotecontrol.ForceRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
-      {
-        return StopRemoteControlAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
-      }
-      public virtual grpc::AsyncUnaryCall<global::Remotecontrol.ForceResponse> StopRemoteControlAsync(global::Remotecontrol.ForceRequest request, grpc::CallOptions options)
-      {
-        return CallInvoker.AsyncUnaryCall(__Method_StopRemoteControl, null, options, request);
-      }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override RemoteControlClient NewInstance(ClientBaseConfiguration configuration)
       {
@@ -140,8 +112,7 @@ namespace Remotecontrol {
     public static grpc::ServerServiceDefinition BindService(RemoteControlBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_ApplyForce, serviceImpl.ApplyForce)
-          .AddMethod(__Method_StopRemoteControl, serviceImpl.StopRemoteControl).Build();
+          .AddMethod(__Method_ApplyForce, serviceImpl.ApplyForce).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the  service binding logic.
@@ -151,7 +122,6 @@ namespace Remotecontrol {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, RemoteControlBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_ApplyForce, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Remotecontrol.ForceRequest, global::Remotecontrol.ForceResponse>(serviceImpl.ApplyForce));
-      serviceBinder.AddMethod(__Method_StopRemoteControl, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Remotecontrol.ForceRequest, global::Remotecontrol.ForceResponse>(serviceImpl.StopRemoteControl));
     }
 
   }

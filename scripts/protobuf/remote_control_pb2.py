@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\036io.grpc.examples.remotecontrolB\rRemoteControlP\001\242\002\003HLW',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x14remote_control.proto\x12\rremotecontrol\x1a\x0c\x63ommon.proto\"\x1d\n\x0c\x46orceRequest\x12\r\n\x05vehId\x18\x01 \x01(\t\"T\n\rForceResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x32\n\x10generalizedForce\x18\x02 \x01(\x0b\x32\x18.common.GeneralizedForce2\xae\x01\n\rRemoteControl\x12K\n\nApplyForce\x12\x1b.remotecontrol.ForceRequest\x1a\x1c.remotecontrol.ForceResponse\"\x00\x30\x01\x12P\n\x11StopRemoteControl\x12\x1b.remotecontrol.ForceRequest\x1a\x1c.remotecontrol.ForceResponse\"\x00\x42\x37\n\x1eio.grpc.examples.remotecontrolB\rRemoteControlP\x01\xa2\x02\x03HLWb\x06proto3'
+  serialized_pb=b'\n\x14remote_control.proto\x12\rremotecontrol\x1a\x0c\x63ommon.proto\"\x1d\n\x0c\x46orceRequest\x12\r\n\x05vehId\x18\x01 \x01(\t\"T\n\rForceResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x32\n\x10generalizedForce\x18\x02 \x01(\x0b\x32\x18.common.GeneralizedForce2\\\n\rRemoteControl\x12K\n\nApplyForce\x12\x1b.remotecontrol.ForceRequest\x1a\x1c.remotecontrol.ForceResponse\"\x00\x30\x01\x42\x37\n\x1eio.grpc.examples.remotecontrolB\rRemoteControlP\x01\xa2\x02\x03HLWb\x06proto3'
   ,
   dependencies=[common__pb2.DESCRIPTOR,])
 
@@ -126,23 +126,13 @@ _REMOTECONTROL = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=171,
-  serialized_end=345,
+  serialized_start=170,
+  serialized_end=262,
   methods=[
   _descriptor.MethodDescriptor(
     name='ApplyForce',
     full_name='remotecontrol.RemoteControl.ApplyForce',
     index=0,
-    containing_service=None,
-    input_type=_FORCEREQUEST,
-    output_type=_FORCERESPONSE,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='StopRemoteControl',
-    full_name='remotecontrol.RemoteControl.StopRemoteControl',
-    index=1,
     containing_service=None,
     input_type=_FORCEREQUEST,
     output_type=_FORCERESPONSE,

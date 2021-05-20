@@ -27,13 +27,11 @@ namespace Remotecontrol {
             "ChRyZW1vdGVfY29udHJvbC5wcm90bxINcmVtb3RlY29udHJvbBoMY29tbW9u",
             "LnByb3RvIh0KDEZvcmNlUmVxdWVzdBINCgV2ZWhJZBgBIAEoCSJUCg1Gb3Jj",
             "ZVJlc3BvbnNlEg8KB3N1Y2Nlc3MYASABKAgSMgoQZ2VuZXJhbGl6ZWRGb3Jj",
-            "ZRgCIAEoCzIYLmNvbW1vbi5HZW5lcmFsaXplZEZvcmNlMq4BCg1SZW1vdGVD",
-            "b250cm9sEksKCkFwcGx5Rm9yY2USGy5yZW1vdGVjb250cm9sLkZvcmNlUmVx",
-            "dWVzdBocLnJlbW90ZWNvbnRyb2wuRm9yY2VSZXNwb25zZSIAMAESUAoRU3Rv",
-            "cFJlbW90ZUNvbnRyb2wSGy5yZW1vdGVjb250cm9sLkZvcmNlUmVxdWVzdBoc",
-            "LnJlbW90ZWNvbnRyb2wuRm9yY2VSZXNwb25zZSIAQjcKHmlvLmdycGMuZXhh",
-            "bXBsZXMucmVtb3RlY29udHJvbEINUmVtb3RlQ29udHJvbFABogIDSExXYgZw",
-            "cm90bzM="));
+            "ZRgCIAEoCzIYLmNvbW1vbi5HZW5lcmFsaXplZEZvcmNlMlwKDVJlbW90ZUNv",
+            "bnRyb2wSSwoKQXBwbHlGb3JjZRIbLnJlbW90ZWNvbnRyb2wuRm9yY2VSZXF1",
+            "ZXN0GhwucmVtb3RlY29udHJvbC5Gb3JjZVJlc3BvbnNlIgAwAUI3Ch5pby5n",
+            "cnBjLmV4YW1wbGVzLnJlbW90ZWNvbnRyb2xCDVJlbW90ZUNvbnRyb2xQAaIC",
+            "A0hMV2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Common.CommonReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {

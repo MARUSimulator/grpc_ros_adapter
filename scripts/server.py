@@ -30,8 +30,10 @@ def serve(server_ip, server_port, camera_pubs,
           lidar_pub, radar_pub, clock_pub,
           pose_pub, twist_pub, tf_pub):
 
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
-
+    options = {
+        # ("grpc.max_concurrent_streams", 5)
+    }
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=20), options=options)
     ping_pb2_grpc.add_PingServicer_to_server(
             PingService(),
             server)

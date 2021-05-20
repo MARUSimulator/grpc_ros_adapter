@@ -6,6 +6,7 @@ import cv2
 import rospy
 from cv_bridge import CvBridge, CvBridgeError
 import std_msgs.msg
+from geometry_msgs.msg import Vector3
 from sensor_msgs.msg import Image
 from sensor_msgs.msg import PointCloud2, PointField
 from ros_adapter.msg import RadarSpoke
@@ -22,6 +23,7 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
         self.lidar_pub = lidar_pub
         self.radar_pub = radar_pub
         self.clock_pub = clock_pub
+        self.imu_pub = rospy.Publisher("imuimu", Vector3)
 
     def StreamCameraSensor(self, request_iterator, context):
         """
@@ -132,3 +134,9 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
             self.radar_pub.publish(radar_spoke_msg)
 
         return sensor_streaming_pb2.RadarStreamingResponse(success=True)
+
+    def StreamImuSensor(self, request_iterator, context):
+
+        for request in request_iterator:
+            acc = request.acceleration
+            self.imu_pub.publish(Vector3(acc.x, acc.y, acc.z))
