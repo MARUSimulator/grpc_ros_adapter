@@ -1,4 +1,4 @@
-# ros_adapter
+# ros_adapter - old version; skip to unity ros proxy
 
 This repo includes functionality for interfacing with Gemini over gRPC and publish 
 sensor data over ROS such that it is available to other ROS nodes.
@@ -38,3 +38,11 @@ the `launch/launch_server.launch`.
     * Move most of the configuration into a script for increased automation
 
 RUN cd /tmp && git clone -b v1.34.1 --depth 1 https://github.com/grpc/grpc && cd grpc && git submodule update --init && make grpc_php_plugin
+
+
+# unity ros proxy
+
+Clone and build with `catkin build`
+
+Start the server.py script or launch the _launch_ file.
+
