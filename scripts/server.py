@@ -26,24 +26,21 @@ from services.navigation import Navigation
 
 
 
-def serve(server_ip, server_port, camera_pubs,
-          lidar_pub, radar_pub, clock_pub,
-          pose_pub, twist_pub, tf_pub):
-
-    options = {
-        # ("grpc.max_concurrent_streams", 5)
-    }
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=20), options=options)
+def serve(server_ip, server_port):
+    """
+    Add service handles to server and start server execution
+    """
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=20))
     ping_pb2_grpc.add_PingServicer_to_server(
             PingService(),
             server)
 
     sensor_streaming_pb2_grpc.add_SensorStreamingServicer_to_server(
-            SensorStreaming(camera_pubs, lidar_pub, radar_pub, clock_pub),
+            SensorStreaming(),
             server)
 
     navigation_pb2_grpc.add_NavigationServicer_to_server(
-            Navigation(pose_pub, twist_pub, tf_pub),
+            Navigation(None, None, None),
             server)
 
     remote_control_pb2_grpc.add_RemoteControlServicer_to_server(
@@ -64,29 +61,4 @@ if __name__ == '__main__':
     server_ip = server_params["server_ip"]
     server_port = server_params["server_port"]
 
-    cam_ids = ["F", "FL", "FR", "RL", "RR"]
-    camera_pubs = dict()
-    for cam_id in cam_ids:
-        camera_pubs[cam_id] = rospy.Publisher('EO/' + cam_id + '/image_raw',
-                                              Image, queue_size=10)
-
-    lidar_pub = rospy.Publisher('lidar/driver/velodyne_points',
-                                PointCloud2,
-                                queue_size=10)
-
-    # TODO: Change the message type to be published
-    radar_pub = rospy.Publisher('radar/driver/spokes',
-                                RadarSpoke,
-                                queue_size=10)
-
-    clock_pub = rospy.Publisher('clock', Clock, queue_size=10)
-
-    pose_pub = rospy.Publisher('milliampere/pose', geomsgs.PoseStamped, queue_size=10)
-
-    twist_pub = rospy.Publisher('milliampere/twist', geomsgs.TwistStamped, queue_size=10)
-
-    tf_pub = tf2_ros.TransformBroadcaster()
-
-    serve(server_ip, server_port, camera_pubs,
-          lidar_pub, radar_pub, clock_pub,
-          pose_pub, twist_pub, tf_pub)
+    serve(server_ip, server_port)

@@ -20,7 +20,7 @@ class Navigation(navigation_pb2_grpc.NavigationServicer):
             frame_id="fosenkaia_NED",
             stamp=rospy.Time.from_sec(request.timeStamp)
         )
-
+    
         position = geomsgs.Point()
         position.x = request.position.x
         position.y = request.position.y

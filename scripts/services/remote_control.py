@@ -10,6 +10,10 @@ from protobuf import remote_control_pb2_grpc
 from protobuf import common_pb2
 
 class RemoteControl(remote_control_pb2_grpc.RemoteControlServicer):
+    """
+    Server streaming service.
+    POC implementation
+    """
     def __init__(self):
 
         self._client_lock = threading.Lock()       
@@ -31,9 +35,9 @@ class RemoteControl(remote_control_pb2_grpc.RemoteControlServicer):
 
     def ApplyForce(self, request, context):
         
-        client_id = context.peer() # unique client if
+        client_id = context.peer() 
         veh_id = request.vehId
-        request_buffer = Queue(100) # every client has a request buffer 
+        request_buffer = Queue(100) # every client has a request buffer for every veh it controls 
 
         with self._client_lock:
             self._registered_clients[(client_id, veh_id)] = request_buffer

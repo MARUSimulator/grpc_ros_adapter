@@ -88,3 +88,7 @@ message GeoPoint {
     float longitude = 2;
     float altitude = 3;
 }
+
+message Pwm {
+    repeated float out = 1; 
+}
