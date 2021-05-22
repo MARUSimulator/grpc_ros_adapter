@@ -20,5 +20,5 @@ message ForceRequest {
 
 message ForceResponse {
     bool success = 1;
-    common.GeneralizedForce generalizedForce = 2;
+    common.Pwm pwm = 2;
 }

@@ -4,9 +4,11 @@ import grpc
 import cv2
 
 import rospy
+from rospy import Publisher
 from cv_bridge import CvBridge, CvBridgeError
 import std_msgs.msg
-from geometry_msgs.msg import Vector3
+from geometry_msgs.msg import Vector3, Pose
+from std_msgs.msg import Float32
 from sensor_msgs.msg import Image
 from sensor_msgs.msg import PointCloud2, PointField
 from ros_adapter.msg import RadarSpoke
@@ -15,15 +17,35 @@ from rosgraph_msgs.msg import Clock
 from protobuf import sensor_streaming_pb2
 from protobuf import sensor_streaming_pb2_grpc
 
+
+_PUBLISHER_TYPES = {
+    "camera": Image,
+    "depth": Float32,
+    "pose": Pose,
+    "imu": Vector3
+}
+
 class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
-    def __init__(self, camera_pubs, lidar_pub, radar_pub, clock_pub):
+    def __init__(self, camera_topic="camera", lidar_topic="lidar", radar_topic="radar", depth_topic="depth", pose_topic="pose"):
         print("creating")
         self.bridge = CvBridge()
-        self.camera_pubs = camera_pubs
-        self.lidar_pub = lidar_pub
-        self.radar_pub = radar_pub
-        self.clock_pub = clock_pub
-        self.imu_pub = rospy.Publisher("imuimu", Vector3)
+        self.publishers = {}
+
+    def _get_publisher(self, pub_type, sensor_id) -> Publisher:
+        # TODO: better check and logging
+        if pub_type not in _PUBLISHER_TYPES:
+            return None
+
+        pub_type_dict = self.publishers.get(pub_type, {})
+        if not pub_type_dict:
+            self.publishers[pub_type] = pub_type_dict
+        
+        publisher = pub_type_dict.get(sensor_id, None)
+        if not publisher:
+            publisher = Publisher(f"{pub_type}/{sensor_id}", _PUBLISHER_TYPES[pub_type], queue_size=10)
+            pub_type_dict[sensor_id] = publisher
+        return publisher
+
 
     def StreamCameraSensor(self, request_iterator, context):
         """
@@ -56,7 +78,8 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
             except CvBridgeError as e:
                 print(e)
 
-            self.camera_pubs[request.sensorId].publish(msg)
+            pub = self._get_publisher("camera", request.sensorId)
+            pub.publish(msg)
 
         return sensor_streaming_pb2.StreamingResponse(success=True)
 
@@ -136,7 +159,23 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
         return sensor_streaming_pb2.RadarStreamingResponse(success=True)
 
     def StreamImuSensor(self, request_iterator, context):
-
+        # TODO - write this
         for request in request_iterator:
             acc = request.acceleration
-            self.imu_pub.publish(Vector3(acc.x, acc.y, acc.z))
+            pub = self._get_publisher("imu", request.sensorId)
+            pub.publish(Vector3(acc.x, acc.y, acc.z))
+
+
+    def StreamPoseSensor(self, request_iterator, context):
+
+        for request in request_iterator:
+            pub = self._get_publisher("pose", request.sensorId)
+            pub.publish(Pose())
+            pass
+
+    def StreamDepthSensor(self, request_iterator, context):
+
+        for request in request_iterator:
+            depth = request.depth
+            pub = self._get_publisher("depth", request.sensorId)
+            pub.publish(Float32(depth))

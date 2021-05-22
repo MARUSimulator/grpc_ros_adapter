@@ -20,6 +20,8 @@ import numpy as np
 
 import time
 
+## DUMMY CLIENT IMPLEMENTATIONS
+## TODO: MOVE USEFUL CLIENTS TO UNIT TESTS WHEN UNIT TEST PROJECT IS SET UP
 
 def grpc_streamer():
 
