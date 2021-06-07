@@ -28,31 +28,32 @@ _PUBLISHER_TYPES = {
     "imu": Imu
 }
 
+class Context:
+    pass
 
 class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
-    def __init__(self, camera_topic="camera", lidar_topic="lidar", radar_topic="radar", depth_topic="depth", pose_topic="pose"):
+    def __init__(self, callbacks={}):
         print("creating")
         self.bridge = CvBridge()
         self.publishers = {}
+        self._callbacks = callbacks
+        self._callback_contexts = {}
 
-    def _get_publisher(self, pub_type, address) -> Publisher:
-        # TODO: better check and logging
-        if pub_type not in _PUBLISHER_TYPES:
-            return None
 
-        pub_type_dict = self.publishers.get(pub_type, {})
-        if not pub_type_dict:
-            self.publishers[pub_type] = pub_type_dict
-        
-        address = address or f"{pub_type}"
-        if not address.startswith("/"):
-            address = "/" + address
+    def _get_callback_context(self, callback):
+        context = self._callback_contexts.get(callback, None)
+        if not context:
+            context = Context()
+        self._callback_contexts[callback] = context
+        return context
 
-        publisher = pub_type_dict.get(address, None)
-        if not publisher:
-            publisher = Publisher(f"{address}", _PUBLISHER_TYPES[pub_type], queue_size=10)
-            pub_type_dict[address] = publisher
-        return publisher
+
+    def trigger_callbacks(self, service_function, request):
+        callbacks = self._callbacks.get(service_function.__name__, [])
+        for c in callbacks:
+            context = self._get_callback_context(c)
+            c(request, context)
+
 
 
     def StreamCameraSensor(self, request_iterator, context):
@@ -62,32 +63,7 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
         ROS message.
         """
         for request in request_iterator:
-            img_string = request.data
-
-            cv_image = np.fromstring(img_string, np.uint8)
-
-            # NOTE, the height is specifiec as a parameter before the width
-            cv_image = cv_image.reshape(request.height, request.width, 3)
-            cv_image = cv2.flip(cv_image, 0)
-
-            bgr_image = cv2.cvtColor(cv_image, cv2.COLOR_RGB2BGR)
-
-            msg = Image()
-            header = std_msgs.msg.Header()
-            try:
-                # RGB
-                # msg = self.bridge.cv2_to_imgmsg(cv_image, 'rgb8')
-
-                # BGR
-                msg = self.bridge.cv2_to_imgmsg(bgr_image, 'bgr8')
-
-                header.stamp = rospy.Time.from_sec(request.timeStamp)
-                msg.header = header
-            except CvBridgeError as e:
-                print(e)
-
-            pub = self._get_publisher("camera", request.address)
-            pub.publish(msg)
+            self.trigger_callbacks(self.StreamCameraSensor, request)
 
         return sensor_streaming_pb2.StreamingResponse(success=True)
 
@@ -97,7 +73,7 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
         all the data needed to create and publish a PointCloud2
         ROS message.
         """
-
+        # TODO
         pointcloud_msg = PointCloud2()
         header = std_msgs.msg.Header()
         header.stamp = rospy.Time.from_sec(request.timeInSeconds)
@@ -143,6 +119,7 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
         ROS message.
         """
         
+        # TODO
         number_of_spokes = request.numSpokes
 
         for i in range(number_of_spokes):
@@ -167,37 +144,20 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
         return sensor_streaming_pb2.RadarStreamingResponse(success=True)
 
     def StreamImuSensor(self, request_iterator, context):
-        # TODO - write this
         for request in request_iterator:
-            imu = Imu()
-            pub = self._get_publisher("imu", request.address)
+            self.trigger_callbacks(self.StreamImuSensor, request)
 
-            imu.linear_acceleration = request.acceleration.as_ros()
-            imu.angular_velocity = request.angularVelocity.as_ros()
-            eu = request.orientation.as_ros()
-            q = quaternion_from_euler(eu.x, eu.y, eu.z)
-            imu.orientation = Quaternion(*q)
-            pub.publish(imu)
+        return sensor_streaming_pb2.StreamingResponse(success=True)
 
 
     def StreamPoseSensor(self, request_iterator, context):
-
         for request in request_iterator:
-            pub = self._get_publisher("pose", request.address)
+            self.trigger_callbacks(self.StreamPoseSensor, request)
 
-            nav = NavigationStatus()
-            pos = request.pose.position.as_ros()
-            o = request.pose.orientation.as_ros()
-            nav.position = NED(pos.x, pos.y, pos.z)
-            nav.orientation = o
-            pub.publish(nav)
+        return sensor_streaming_pb2.StreamingResponse(success=True)
 
     def StreamDepthSensor(self, request_iterator, context):
-
         for request in request_iterator:
-            depth = request.depth
-            pub = self._get_publisher("depth", request.address)
+            self.trigger_callbacks(self.StreamDepthSensor, request)
 
-            pose = PoseWithCovarianceStamped()
-            pose.pose.pose.position = Point(0, 0, -depth)
-            pub.publish(pose)
+        return sensor_streaming_pb2.StreamingResponse(success=True)
