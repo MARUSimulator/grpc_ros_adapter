@@ -26,7 +26,7 @@ message CameraStreamingRequest {
     double timeStamp = 2;
     uint32 width = 3;
     uint32 height = 4;
-    string sensorId = 5;
+    string address = 5;
 }
 
 message StreamingResponse {
@@ -77,35 +77,35 @@ message RadarStreamingRequest {
 
 message DepthStreamingRequest {
     float depth = 1;
-    string sensorId = 2;
+    string address = 2;
 }
 
 message DvlStreamingRequest {
     float altitude = 1;
-    common.Vec3 groundVelocity = 2;
+    common.Vector3 groundVelocity = 2;
     repeated float beamRanges = 3;
-    string sensorId = 4;
+    string address = 4;
 }
 
 message GnssStreamingRequest {
     common.GeoPoint point = 1;
-    string sensorId = 2;
+    string address = 2;
 }
 
 message ImuStreamingRequest {
-    common.Acceleration acceleration = 1;
-    common.AngularVelocity angularVelocity = 2;
-    common.Orientation orientation = 3;
-    string sensorId = 4;
+    common.Vector3 acceleration = 1;
+    common.Vector3 angularVelocity = 2;
+    common.Vector3 orientation = 3;
+    string address = 4;
 }
 
 message PoseStreamingRequest {
     common.Pose pose = 1;
-    string sensorId = 2;
+    string address = 2;
 }
 
 message SonarStreamingRequest {
     float range = 1;
     float bearing = 2;
-    string sensorId = 3;
+    string address = 3;
 }

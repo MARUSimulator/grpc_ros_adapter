@@ -17,10 +17,10 @@ service Navigation {
 
 message NavigationRequest {
     double timeStamp = 1;
-    common.Vec3 position = 2; 
-    common.Quaternion orientation = 3; 
-    common.Vec3 linearVelocity = 4;
-    common.Vec3 angularVelocity = 5;
+    common.Vector3 position = 2; 
+    common.Vector3 orientation = 3; 
+    common.Vector3 linearVelocity = 4;
+    common.Vector3 angularVelocity = 5;
 }
 
 message NavigationResponse {

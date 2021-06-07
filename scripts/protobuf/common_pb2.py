@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0c\x63ommon.proto\x12\x06\x63ommon\"+\n\x08Position\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\"7\n\x0bOrientation\x12\x0c\n\x04roll\x18\x01 \x01(\x02\x12\r\n\x05pitch\x18\x02 \x01(\x02\x12\x0b\n\x03yaw\x18\x03 \x01(\x02\"+\n\x08Velocity\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\"2\n\x0f\x41ngularVelocity\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\"/\n\x0c\x41\x63\x63\x65leration\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\"6\n\x13\x41ngularAcceleration\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\"T\n\x04Pose\x12\"\n\x08position\x18\x01 \x01(\x0b\x32\x10.common.Position\x12(\n\x0borientation\x18\x02 \x01(\x0b\x32\x13.common.Orientation\"T\n\x10GeneralizedForce\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\x12\t\n\x01k\x18\x04 \x01(\x02\x12\t\n\x01m\x18\x05 \x01(\x02\x12\t\n\x01n\x18\x06 \x01(\x02\"\'\n\x04Vec3\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\"8\n\nQuaternion\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\x12\t\n\x01w\x18\x04 \x01(\x02\"R\n\x07PoseVec\x12\x1e\n\x08position\x18\x01 \x01(\x0b\x32\x0c.common.Vec3\x12\'\n\x0borientation\x18\x02 \x01(\x0b\x32\x12.common.Quaternion\"9\n\tPoseNED2D\x12\r\n\x05north\x18\x01 \x01(\x02\x12\x0c\n\x04\x65\x61st\x18\x02 \x01(\x02\x12\x0f\n\x07heading\x18\x03 \x01(\x02\"8\n\x0bPositionNED\x12\r\n\x05north\x18\x01 \x01(\x02\x12\x0c\n\x04\x65\x61st\x18\x02 \x01(\x02\x12\x0c\n\x04\x64own\x18\x03 \x01(\x02\"A\n\x08GeoPoint\x12\x10\n\x08latitude\x18\x01 \x01(\x02\x12\x11\n\tlongitude\x18\x02 \x01(\x02\x12\x10\n\x08\x61ltitude\x18\x03 \x01(\x02\"\x12\n\x03Pwm\x12\x0b\n\x03out\x18\x01 \x03(\x02\x62\x06proto3'
+  serialized_pb=b'\n\x0c\x63ommon.proto\x12\x06\x63ommon\"+\n\x08Position\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\".\n\x0bOrientation\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\"+\n\x08Velocity\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\"2\n\x0f\x41ngularVelocity\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\"/\n\x0c\x41\x63\x63\x65leration\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\"6\n\x13\x41ngularAcceleration\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\"O\n\x04Pose\x12!\n\x08position\x18\x01 \x01(\x0b\x32\x0f.common.Vector3\x12$\n\x0borientation\x18\x02 \x01(\x0b\x32\x0f.common.Vector3\"T\n\x10GeneralizedForce\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\x12\t\n\x01k\x18\x04 \x01(\x02\x12\t\n\x01m\x18\x05 \x01(\x02\x12\t\n\x01n\x18\x06 \x01(\x02\"*\n\x07Vector3\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\"8\n\nQuaternion\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\x12\t\n\x01w\x18\x04 \x01(\x02\"9\n\tPoseNED2D\x12\r\n\x05north\x18\x01 \x01(\x02\x12\x0c\n\x04\x65\x61st\x18\x02 \x01(\x02\x12\x0f\n\x07heading\x18\x03 \x01(\x02\"8\n\x0bPositionNED\x12\r\n\x05north\x18\x01 \x01(\x02\x12\x0c\n\x04\x65\x61st\x18\x02 \x01(\x02\x12\x0c\n\x04\x64own\x18\x03 \x01(\x02\"A\n\x08GeoPoint\x12\x10\n\x08latitude\x18\x01 \x01(\x02\x12\x11\n\tlongitude\x18\x02 \x01(\x02\x12\x10\n\x08\x61ltitude\x18\x03 \x01(\x02\"\x12\n\x03Pwm\x12\x0b\n\x03out\x18\x01 \x03(\x02\x62\x06proto3'
 )
 
 
@@ -80,21 +80,21 @@ _ORIENTATION = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='roll', full_name='common.Orientation.roll', index=0,
+      name='x', full_name='common.Orientation.x', index=0,
       number=1, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='pitch', full_name='common.Orientation.pitch', index=1,
+      name='y', full_name='common.Orientation.y', index=1,
       number=2, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='yaw', full_name='common.Orientation.yaw', index=2,
+      name='z', full_name='common.Orientation.z', index=2,
       number=3, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
@@ -113,7 +113,7 @@ _ORIENTATION = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=69,
-  serialized_end=124,
+  serialized_end=115,
 )
 
 
@@ -158,8 +158,8 @@ _VELOCITY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=126,
-  serialized_end=169,
+  serialized_start=117,
+  serialized_end=160,
 )
 
 
@@ -204,8 +204,8 @@ _ANGULARVELOCITY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=171,
-  serialized_end=221,
+  serialized_start=162,
+  serialized_end=212,
 )
 
 
@@ -250,8 +250,8 @@ _ACCELERATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=223,
-  serialized_end=270,
+  serialized_start=214,
+  serialized_end=261,
 )
 
 
@@ -296,8 +296,8 @@ _ANGULARACCELERATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=272,
-  serialized_end=326,
+  serialized_start=263,
+  serialized_end=317,
 )
 
 
@@ -335,8 +335,8 @@ _POSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=328,
-  serialized_end=412,
+  serialized_start=319,
+  serialized_end=398,
 )
 
 
@@ -402,35 +402,35 @@ _GENERALIZEDFORCE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=414,
-  serialized_end=498,
+  serialized_start=400,
+  serialized_end=484,
 )
 
 
-_VEC3 = _descriptor.Descriptor(
-  name='Vec3',
-  full_name='common.Vec3',
+_VECTOR3 = _descriptor.Descriptor(
+  name='Vector3',
+  full_name='common.Vector3',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='x', full_name='common.Vec3.x', index=0,
+      name='x', full_name='common.Vector3.x', index=0,
       number=1, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='y', full_name='common.Vec3.y', index=1,
+      name='y', full_name='common.Vector3.y', index=1,
       number=2, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='z', full_name='common.Vec3.z', index=2,
+      name='z', full_name='common.Vector3.z', index=2,
       number=3, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
@@ -448,8 +448,8 @@ _VEC3 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=500,
-  serialized_end=539,
+  serialized_start=486,
+  serialized_end=528,
 )
 
 
@@ -501,47 +501,8 @@ _QUATERNION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=541,
-  serialized_end=597,
-)
-
-
-_POSEVEC = _descriptor.Descriptor(
-  name='PoseVec',
-  full_name='common.PoseVec',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='position', full_name='common.PoseVec.position', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='orientation', full_name='common.PoseVec.orientation', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=599,
-  serialized_end=681,
+  serialized_start=530,
+  serialized_end=586,
 )
 
 
@@ -586,8 +547,8 @@ _POSENED2D = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=683,
-  serialized_end=740,
+  serialized_start=588,
+  serialized_end=645,
 )
 
 
@@ -632,8 +593,8 @@ _POSITIONNED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=742,
-  serialized_end=798,
+  serialized_start=647,
+  serialized_end=703,
 )
 
 
@@ -678,8 +639,8 @@ _GEOPOINT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=800,
-  serialized_end=865,
+  serialized_start=705,
+  serialized_end=770,
 )
 
 
@@ -710,14 +671,12 @@ _PWM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=867,
-  serialized_end=885,
+  serialized_start=772,
+  serialized_end=790,
 )
 
-_POSE.fields_by_name['position'].message_type = _POSITION
-_POSE.fields_by_name['orientation'].message_type = _ORIENTATION
-_POSEVEC.fields_by_name['position'].message_type = _VEC3
-_POSEVEC.fields_by_name['orientation'].message_type = _QUATERNION
+_POSE.fields_by_name['position'].message_type = _VECTOR3
+_POSE.fields_by_name['orientation'].message_type = _VECTOR3
 DESCRIPTOR.message_types_by_name['Position'] = _POSITION
 DESCRIPTOR.message_types_by_name['Orientation'] = _ORIENTATION
 DESCRIPTOR.message_types_by_name['Velocity'] = _VELOCITY
@@ -726,9 +685,8 @@ DESCRIPTOR.message_types_by_name['Acceleration'] = _ACCELERATION
 DESCRIPTOR.message_types_by_name['AngularAcceleration'] = _ANGULARACCELERATION
 DESCRIPTOR.message_types_by_name['Pose'] = _POSE
 DESCRIPTOR.message_types_by_name['GeneralizedForce'] = _GENERALIZEDFORCE
-DESCRIPTOR.message_types_by_name['Vec3'] = _VEC3
+DESCRIPTOR.message_types_by_name['Vector3'] = _VECTOR3
 DESCRIPTOR.message_types_by_name['Quaternion'] = _QUATERNION
-DESCRIPTOR.message_types_by_name['PoseVec'] = _POSEVEC
 DESCRIPTOR.message_types_by_name['PoseNED2D'] = _POSENED2D
 DESCRIPTOR.message_types_by_name['PositionNED'] = _POSITIONNED
 DESCRIPTOR.message_types_by_name['GeoPoint'] = _GEOPOINT
@@ -791,12 +749,12 @@ GeneralizedForce = _reflection.GeneratedProtocolMessageType('GeneralizedForce', 
   })
 _sym_db.RegisterMessage(GeneralizedForce)
 
-Vec3 = _reflection.GeneratedProtocolMessageType('Vec3', (_message.Message,), {
-  'DESCRIPTOR' : _VEC3,
+Vector3 = _reflection.GeneratedProtocolMessageType('Vector3', (_message.Message,), {
+  'DESCRIPTOR' : _VECTOR3,
   '__module__' : 'common_pb2'
-  # @@protoc_insertion_point(class_scope:common.Vec3)
+  # @@protoc_insertion_point(class_scope:common.Vector3)
   })
-_sym_db.RegisterMessage(Vec3)
+_sym_db.RegisterMessage(Vector3)
 
 Quaternion = _reflection.GeneratedProtocolMessageType('Quaternion', (_message.Message,), {
   'DESCRIPTOR' : _QUATERNION,
@@ -804,13 +762,6 @@ Quaternion = _reflection.GeneratedProtocolMessageType('Quaternion', (_message.Me
   # @@protoc_insertion_point(class_scope:common.Quaternion)
   })
 _sym_db.RegisterMessage(Quaternion)
-
-PoseVec = _reflection.GeneratedProtocolMessageType('PoseVec', (_message.Message,), {
-  'DESCRIPTOR' : _POSEVEC,
-  '__module__' : 'common_pb2'
-  # @@protoc_insertion_point(class_scope:common.PoseVec)
-  })
-_sym_db.RegisterMessage(PoseVec)
 
 PoseNED2D = _reflection.GeneratedProtocolMessageType('PoseNED2D', (_message.Message,), {
   'DESCRIPTOR' : _POSENED2D,

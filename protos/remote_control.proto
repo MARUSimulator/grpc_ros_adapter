@@ -15,7 +15,7 @@ service RemoteControl {
 }
 
 message ForceRequest {
-    string vehId = 1;
+    string address = 1;
 }
 
 message ForceResponse {

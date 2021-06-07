@@ -7,23 +7,27 @@ import rospy
 from rospy import Publisher
 from cv_bridge import CvBridge, CvBridgeError
 import std_msgs.msg
-from geometry_msgs.msg import Vector3, Pose
+from geometry_msgs.msg import Vector3, Pose, Quaternion, PoseWithCovarianceStamped, Point
+from auv_msgs.msg import NavigationStatus, NED
 from std_msgs.msg import Float32
 from sensor_msgs.msg import Image
-from sensor_msgs.msg import PointCloud2, PointField
+from sensor_msgs.msg import PointCloud2, PointField, Imu
 from ros_adapter.msg import RadarSpoke
 from rosgraph_msgs.msg import Clock
+from tf.transformations import quaternion_from_euler
 
+import utils.extensions
 from protobuf import sensor_streaming_pb2
 from protobuf import sensor_streaming_pb2_grpc
 
 
 _PUBLISHER_TYPES = {
     "camera": Image,
-    "depth": Float32,
-    "pose": Pose,
-    "imu": Vector3
+    "depth": PoseWithCovarianceStamped,
+    "pose": NavigationStatus,
+    "imu": Imu
 }
+
 
 class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
     def __init__(self, camera_topic="camera", lidar_topic="lidar", radar_topic="radar", depth_topic="depth", pose_topic="pose"):
@@ -31,7 +35,7 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
         self.bridge = CvBridge()
         self.publishers = {}
 
-    def _get_publisher(self, pub_type, sensor_id) -> Publisher:
+    def _get_publisher(self, pub_type, address) -> Publisher:
         # TODO: better check and logging
         if pub_type not in _PUBLISHER_TYPES:
             return None
@@ -40,10 +44,14 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
         if not pub_type_dict:
             self.publishers[pub_type] = pub_type_dict
         
-        publisher = pub_type_dict.get(sensor_id, None)
+        address = address or f"{pub_type}"
+        if not address.startswith("/"):
+            address = "/" + address
+
+        publisher = pub_type_dict.get(address, None)
         if not publisher:
-            publisher = Publisher(f"{pub_type}/{sensor_id}", _PUBLISHER_TYPES[pub_type], queue_size=10)
-            pub_type_dict[sensor_id] = publisher
+            publisher = Publisher(f"{address}", _PUBLISHER_TYPES[pub_type], queue_size=10)
+            pub_type_dict[address] = publisher
         return publisher
 
 
@@ -78,7 +86,7 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
             except CvBridgeError as e:
                 print(e)
 
-            pub = self._get_publisher("camera", request.sensorId)
+            pub = self._get_publisher("camera", request.address)
             pub.publish(msg)
 
         return sensor_streaming_pb2.StreamingResponse(success=True)
@@ -161,21 +169,35 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
     def StreamImuSensor(self, request_iterator, context):
         # TODO - write this
         for request in request_iterator:
-            acc = request.acceleration
-            pub = self._get_publisher("imu", request.sensorId)
-            pub.publish(Vector3(acc.x, acc.y, acc.z))
+            imu = Imu()
+            pub = self._get_publisher("imu", request.address)
+
+            imu.linear_acceleration = request.acceleration.as_ros()
+            imu.angular_velocity = request.angularVelocity.as_ros()
+            eu = request.orientation.as_ros()
+            q = quaternion_from_euler(eu.x, eu.y, eu.z)
+            imu.orientation = Quaternion(*q)
+            pub.publish(imu)
 
 
     def StreamPoseSensor(self, request_iterator, context):
 
         for request in request_iterator:
-            pub = self._get_publisher("pose", request.sensorId)
-            pub.publish(Pose())
-            pass
+            pub = self._get_publisher("pose", request.address)
+
+            nav = NavigationStatus()
+            pos = request.pose.position.as_ros()
+            o = request.pose.orientation.as_ros()
+            nav.position = NED(pos.x, pos.y, pos.z)
+            nav.orientation = o
+            pub.publish(nav)
 
     def StreamDepthSensor(self, request_iterator, context):
 
         for request in request_iterator:
             depth = request.depth
-            pub = self._get_publisher("depth", request.sensorId)
-            pub.publish(Float32(depth))
+            pub = self._get_publisher("depth", request.address)
+
+            pose = PoseWithCovarianceStamped()
+            pose.pose.pose.position = Point(0, 0, -depth)
+            pub.publish(pose)

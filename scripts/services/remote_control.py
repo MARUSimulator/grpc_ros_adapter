@@ -4,6 +4,7 @@ import threading
 
 import rospy
 import geometry_msgs.msg as geomsgs
+from std_msgs.msg import Float32MultiArray 
 
 from protobuf import remote_control_pb2
 from protobuf import remote_control_pb2_grpc
@@ -24,32 +25,34 @@ class RemoteControl(remote_control_pb2_grpc.RemoteControlServicer):
         self._veh_to_clients_map = {}
         self._thread_sleep_if_empty = 0.05
 
-    def _subscribe_to_veh(self, veh_id):
+    def _subscribe_to_veh(self, address):
         def callback(force):
             with self._veh_lock:
                 with self._client_lock:
-                    for cl in self._veh_to_clients_map[veh_id]:
-                        self._registered_clients[(cl, veh_id)].put(force)
+                    for cl in self._veh_to_clients_map[address]:
+                        self._registered_clients[(cl, address)].put(force)
 
-        rospy.Subscriber("{0}/remote_control".format(veh_id), geomsgs.Vector3, callback)
+        # rospy.Subscriber("{0}/remote_control".format(veh_id), geomsgs.Vector3, callback)
+        rospy.Subscriber("d2/pwm_out", Float32MultiArray, callback)
 
     def ApplyForce(self, request, context):
         
         client_id = context.peer() 
-        veh_id = request.vehId
+        address = request.address 
         request_buffer = Queue(100) # every client has a request buffer for every veh it controls 
 
         with self._client_lock:
-            self._registered_clients[(client_id, veh_id)] = request_buffer
+            self._registered_clients[(client_id, address)] = request_buffer
 
         with self._veh_lock:
-            if veh_id not in self._veh_to_clients_map:
-                self._subscribe_to_veh(veh_id)
-                self._veh_to_clients_map[veh_id] = []
-            self._veh_to_clients_map[veh_id].append(client_id)
+            if address not in self._veh_to_clients_map:
+                self._subscribe_to_veh(address)
+                self._veh_to_clients_map[address] = []
+            self._veh_to_clients_map[address].append(client_id)
 
         while True:
             
+            time.sleep(0.001)
             # if connection closed
             if not context.is_active():
                 self._cleanup(request, context)
@@ -59,14 +62,11 @@ class RemoteControl(remote_control_pb2_grpc.RemoteControlServicer):
                 time.sleep(self._thread_sleep_if_empty)
                 continue
             
-            force = request_buffer.get()
-            response = common_pb2.GeneralizedForce(
-                x = force.x,
-                y = force.y,
-                z = force.z
-            )
+            pwm_out = request_buffer.get()
+            response = common_pb2.Pwm()
+            response.out.extend(pwm_out.data)
 
-            response = remote_control_pb2.ForceResponse(success=1, generalizedForce=response)
+            response = remote_control_pb2.ForceResponse(success=1, pwm=response)
             yield response
 
     def _cleanup(self, request, context):

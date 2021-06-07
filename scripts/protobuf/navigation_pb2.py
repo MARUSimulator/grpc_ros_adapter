@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\033io.grpc.examples.navigationB\nNavigationP\001\242\002\003HLW',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x10navigation.proto\x12\nnavigation\x1a\x0c\x63ommon.proto\"\xbc\x01\n\x11NavigationRequest\x12\x11\n\ttimeStamp\x18\x01 \x01(\x01\x12\x1e\n\x08position\x18\x02 \x01(\x0b\x32\x0c.common.Vec3\x12\'\n\x0borientation\x18\x03 \x01(\x0b\x32\x12.common.Quaternion\x12$\n\x0elinearVelocity\x18\x04 \x01(\x0b\x32\x0c.common.Vec3\x12%\n\x0f\x61ngularVelocity\x18\x05 \x01(\x0b\x32\x0c.common.Vec3\"%\n\x12NavigationResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32\x66\n\nNavigation\x12X\n\x15SendNavigationMessage\x12\x1d.navigation.NavigationRequest\x1a\x1e.navigation.NavigationResponse\"\x00\x42\x31\n\x1bio.grpc.examples.navigationB\nNavigationP\x01\xa2\x02\x03HLWP\x00\x62\x06proto3'
+  serialized_pb=b'\n\x10navigation.proto\x12\nnavigation\x1a\x0c\x63ommon.proto\"\xc2\x01\n\x11NavigationRequest\x12\x11\n\ttimeStamp\x18\x01 \x01(\x01\x12!\n\x08position\x18\x02 \x01(\x0b\x32\x0f.common.Vector3\x12$\n\x0borientation\x18\x03 \x01(\x0b\x32\x0f.common.Vector3\x12\'\n\x0elinearVelocity\x18\x04 \x01(\x0b\x32\x0f.common.Vector3\x12(\n\x0f\x61ngularVelocity\x18\x05 \x01(\x0b\x32\x0f.common.Vector3\"%\n\x12NavigationResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32\x66\n\nNavigation\x12X\n\x15SendNavigationMessage\x12\x1d.navigation.NavigationRequest\x1a\x1e.navigation.NavigationResponse\"\x00\x42\x31\n\x1bio.grpc.examples.navigationB\nNavigationP\x01\xa2\x02\x03HLWP\x00\x62\x06proto3'
   ,
   dependencies=[common__pb2.DESCRIPTOR,],
   public_dependencies=[common__pb2.DESCRIPTOR,])
@@ -85,7 +85,7 @@ _NAVIGATIONREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=47,
-  serialized_end=235,
+  serialized_end=241,
 )
 
 
@@ -116,14 +116,14 @@ _NAVIGATIONRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=237,
-  serialized_end=274,
+  serialized_start=243,
+  serialized_end=280,
 )
 
-_NAVIGATIONREQUEST.fields_by_name['position'].message_type = common__pb2._VEC3
-_NAVIGATIONREQUEST.fields_by_name['orientation'].message_type = common__pb2._QUATERNION
-_NAVIGATIONREQUEST.fields_by_name['linearVelocity'].message_type = common__pb2._VEC3
-_NAVIGATIONREQUEST.fields_by_name['angularVelocity'].message_type = common__pb2._VEC3
+_NAVIGATIONREQUEST.fields_by_name['position'].message_type = common__pb2._VECTOR3
+_NAVIGATIONREQUEST.fields_by_name['orientation'].message_type = common__pb2._VECTOR3
+_NAVIGATIONREQUEST.fields_by_name['linearVelocity'].message_type = common__pb2._VECTOR3
+_NAVIGATIONREQUEST.fields_by_name['angularVelocity'].message_type = common__pb2._VECTOR3
 DESCRIPTOR.message_types_by_name['NavigationRequest'] = _NAVIGATIONREQUEST
 DESCRIPTOR.message_types_by_name['NavigationResponse'] = _NAVIGATIONRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -152,8 +152,8 @@ _NAVIGATION = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=276,
-  serialized_end=378,
+  serialized_start=282,
+  serialized_end=384,
   methods=[
   _descriptor.MethodDescriptor(
     name='SendNavigationMessage',

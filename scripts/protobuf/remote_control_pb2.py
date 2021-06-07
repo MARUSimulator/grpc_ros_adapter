@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\036io.grpc.examples.remotecontrolB\rRemoteControlP\001\242\002\003HLW',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x14remote_control.proto\x12\rremotecontrol\x1a\x0c\x63ommon.proto\"\x1d\n\x0c\x46orceRequest\x12\r\n\x05vehId\x18\x01 \x01(\t\":\n\rForceResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x18\n\x03pwm\x18\x02 \x01(\x0b\x32\x0b.common.Pwm2\\\n\rRemoteControl\x12K\n\nApplyForce\x12\x1b.remotecontrol.ForceRequest\x1a\x1c.remotecontrol.ForceResponse\"\x00\x30\x01\x42\x37\n\x1eio.grpc.examples.remotecontrolB\rRemoteControlP\x01\xa2\x02\x03HLWb\x06proto3'
+  serialized_pb=b'\n\x14remote_control.proto\x12\rremotecontrol\x1a\x0c\x63ommon.proto\"\x1f\n\x0c\x46orceRequest\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\":\n\rForceResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x18\n\x03pwm\x18\x02 \x01(\x0b\x32\x0b.common.Pwm2\\\n\rRemoteControl\x12K\n\nApplyForce\x12\x1b.remotecontrol.ForceRequest\x1a\x1c.remotecontrol.ForceResponse\"\x00\x30\x01\x42\x37\n\x1eio.grpc.examples.remotecontrolB\rRemoteControlP\x01\xa2\x02\x03HLWb\x06proto3'
   ,
   dependencies=[common__pb2.DESCRIPTOR,])
 
@@ -36,7 +36,7 @@ _FORCEREQUEST = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='vehId', full_name='remotecontrol.ForceRequest.vehId', index=0,
+      name='address', full_name='remotecontrol.ForceRequest.address', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -55,7 +55,7 @@ _FORCEREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=53,
-  serialized_end=82,
+  serialized_end=84,
 )
 
 
@@ -93,8 +93,8 @@ _FORCERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=84,
-  serialized_end=142,
+  serialized_start=86,
+  serialized_end=144,
 )
 
 _FORCERESPONSE.fields_by_name['pwm'].message_type = common__pb2._PWM
@@ -126,8 +126,8 @@ _REMOTECONTROL = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=144,
-  serialized_end=236,
+  serialized_start=146,
+  serialized_end=238,
   methods=[
   _descriptor.MethodDescriptor(
     name='ApplyForce',
