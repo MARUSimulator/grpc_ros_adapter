@@ -44,5 +44,15 @@ RUN cd /tmp && git clone -b v1.34.1 --depth 1 https://github.com/grpc/grpc && cd
 
 Clone and build with `catkin build`
 
+Make sure you have installed grpcio, grpcio-tools, protobuf. If not:
+
+`pip3 install grpcio`
+
+`pip3 install grpcio-tools`
+
+`pip3 install protobuf`
+
+
+
 Start the server.py script or launch the _launch_ file.
 
