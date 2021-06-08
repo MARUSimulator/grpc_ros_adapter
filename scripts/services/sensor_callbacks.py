@@ -8,6 +8,8 @@ from sensor_msgs.msg import Image, Imu
 from std_msgs.msg import Header
 from geometry_msgs.msg import Vector3, Pose, Quaternion, PoseWithCovarianceStamped, Point
 from auv_msgs.msg import NavigationStatus, NED
+from underwater_msgs.msg import SonarFix
+from uuv_sensor_msgs.msg import DVL
 from tf.transformations import quaternion_from_euler
 
 def publish_image(request, context):
@@ -75,3 +77,22 @@ def publish_depth(request, context):
 
     pub = RosPublisherRegistry.get_publisher(request.address.lower(), PoseWithCovarianceStamped)
     pub.publish(pose)
+
+def publish_dvl(request, context):
+    # not tested
+    dvl = DVL()
+    dvl.velocity = request.groundVelocity.as_msg()
+    dvl.altitude = request.altitude
+    dvl.beam_ranges.extend(request.beamRanges)
+
+    pub = RosPublisherRegistry.get_publisher(request.address.lower(), DVL)
+    pub.publish(dvl)
+
+def publish_sonar(request, context):
+    # not tested
+    sonar = SonarFix()
+    sonar.bearing = request.bearing
+    sonar.range = request.range
+
+    pub = RosPublisherRegistry.get_publisher(request.address.lower(), SonarFix)
+    pub.publish(sonar)

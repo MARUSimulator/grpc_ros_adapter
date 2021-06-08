@@ -31,7 +31,9 @@ def serve(server_ip, server_port):
         "StreamCameraSensor": [ publish_image ],
         "StreamImuSensor": [ publish_imu ],
         "StreamPoseSensor": [ publish_pose ],
-        "StreamDepthSensor": [ publish_depth ]
+        "StreamDepthSensor": [ publish_depth ],
+        "StreamDvlSensor": [ publish_dvl ],
+        "StreamSonarSensor": [ publish_sonar ]
     }
 
     sensor_streaming_pb2_grpc.add_SensorStreamingServicer_to_server(
