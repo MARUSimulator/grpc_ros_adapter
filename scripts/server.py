@@ -8,11 +8,15 @@ from protobuf import ping_pb2_grpc
 from protobuf import navigation_pb2_grpc
 from protobuf import sensor_streaming_pb2_grpc
 from protobuf import remote_control_pb2_grpc
+from protobuf import tf_pb2_grpc
+from protobuf import parameter_server_pb2_grpc
 
 from services.ping_service import PingService
 from services.sensor_streaming import SensorStreaming
 from services.remote_control import RemoteControl
 from services.navigation import Navigation
+from services.parameter_server import ParameterServer
+from services.frame_service import FrameService
 
 from services.sensor_callbacks import *
 
@@ -33,22 +37,25 @@ def serve(server_ip, server_port):
         "StreamPoseSensor": [ publish_pose ],
         "StreamDepthSensor": [ publish_depth ],
         "StreamDvlSensor": [ publish_dvl ],
-        "StreamSonarSensor": [ publish_sonar ]
+        "StreamSonarSensor": [ publish_sonar ],
+        "StreamGnssSensor" : [ publish_gnss ]
     }
 
     sensor_streaming_pb2_grpc.add_SensorStreamingServicer_to_server(
             SensorStreaming(sensor_streaming_callbacks),
             server)
 
-    navigation_pb2_grpc.add_NavigationServicer_to_server(
-            Navigation(None, None, None),
-            server)
-
     remote_control_pb2_grpc.add_RemoteControlServicer_to_server(
             RemoteControl(), server
     )
 
+    tf_pb2_grpc.add_TfServicer_to_server(
+            FrameService(), server
+    )
 
+    parameter_server_pb2_grpc.add_ParameterServerServicer_to_server(
+            ParameterServer(), server
+    )
 
     server.add_insecure_port(server_ip + ':' + str(server_port))
     print(server_ip + ":" + str(server_port))

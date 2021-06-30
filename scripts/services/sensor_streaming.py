@@ -153,3 +153,9 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
             self.trigger_callbacks(self.StreamSonarSensor, request)
 
         return sensor_streaming_pb2.StreamingResponse(success=True)
+
+    def StreamGnssSensor(self, request_iterator, context):
+        for request in request_iterator:
+            self.trigger_callbacks(self.StreamGnssSensor, request)
+
+        return sensor_streaming_pb2.StreamingResponse(success=True)

@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package parameterserver;
+
+import "common.proto";
+
+service ParameterServer {
+    rpc GetParameter (GetParamRequest) returns (ParamValue) {}
+    rpc SetParameter (SetParamRequest) returns (common.Empty) {}
+}
+
+message GetParamRequest {
+    string name = 1;
+}
+
+message SetParamRequest {
+    string name = 1;
+    ParamValue value = 2;
+}
+
+message ParamValue {
+    oneof parameterValue {
+        string valueStr = 1;
+        int32 valueInt = 2;
+        bool valueBool = 3;
+        double valueDouble = 4;
+        common.Empty valueNull = 5;
+    }
+}

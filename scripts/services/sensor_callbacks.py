@@ -7,6 +7,7 @@ from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image, Imu
 from std_msgs.msg import Header
 from geometry_msgs.msg import Vector3, Pose, Quaternion, PoseWithCovarianceStamped, Point
+from sensor_msgs.msg import NavSatFix
 from auv_msgs.msg import NavigationStatus, NED
 from underwater_msgs.msg import SonarFix
 from uuv_sensor_msgs.msg import DVL
@@ -81,7 +82,7 @@ def publish_depth(request, context):
 def publish_dvl(request, context):
     # not tested
     dvl = DVL()
-    dvl.velocity = request.groundVelocity.as_msg()
+    dvl.velocity = request.groundVelocity.as_ros()
     dvl.altitude = request.altitude
     dvl.beam_ranges.extend(request.beamRanges)
 
@@ -96,3 +97,14 @@ def publish_sonar(request, context):
 
     pub = RosPublisherRegistry.get_publisher(request.address.lower(), SonarFix)
     pub.publish(sonar)
+
+
+def publish_gnss(request, context):
+    geo_point = NavSatFix()
+    geo_point.latitude = request.point.latitude
+    geo_point.longitude = request.point.longitude
+    geo_point.altitude = request.point.altitude
+
+    pub = RosPublisherRegistry.get_publisher(request.address.lower(), NavSatFix)
+    pub.publish(geo_point)
+    pass

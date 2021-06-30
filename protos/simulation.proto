@@ -1,11 +1,6 @@
 syntax = "proto3";
 
-option java_multiple_files = true;
-option java_package = "autoferry.clients.simulation";
-option java_outer_classname = "simulation";
-option objc_class_prefix = "HLW";
-
-package GeminiOSPInterface;
+package simulatoncontrol;
 
 service Simulation {
     rpc DoStep(StepRequest) returns (StepResponse) {}
