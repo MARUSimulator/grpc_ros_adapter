@@ -24,6 +24,5 @@ message ParamValue {
         int32 valueInt = 2;
         bool valueBool = 3;
         double valueDouble = 4;
-        common.Empty valueNull = 5;
     }
 }

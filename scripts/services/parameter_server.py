@@ -15,11 +15,9 @@ class ParameterServer(parameter_server_pb2_grpc.ParameterServerServicer):
         pass
 
     def GetParameter(self, request, context):
-        param = rospy.get_param(request.name)
+        param = rospy.get_param(request.name, None)
         response = parameter_server_pb2.ParamValue()
-        if param == None:
-            response.valueNull = Empty()
-        elif isinstance(param, int):
+        if isinstance(param, int):
             response.valueInt = param
         elif isinstance(param, bool):
             response.valueBool = param
@@ -27,6 +25,8 @@ class ParameterServer(parameter_server_pb2_grpc.ParameterServerServicer):
             response.valueDouble = param
         elif isinstance(param, str):
             response.valueStr = param
+        elif param == None:
+            pass
         else:
             raise Exception("Type of parameter not supported")
         
@@ -35,7 +35,7 @@ class ParameterServer(parameter_server_pb2_grpc.ParameterServerServicer):
 
     def SetParameter(self, request, context):
         param = request.value
-        which_one = param.WhichOneof("ParamValue")
+        which_one = param.WhichOneof("parameterValue")
         value = getattr(param, which_one, None)
         if which_one and value:
             rospy.set_param(request.name, value)
