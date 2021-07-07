@@ -56,3 +56,48 @@ Make sure you have installed grpcio, grpcio-tools, protobuf. If not:
 
 Start the server.py script or launch the _launch_ file.
 
+### GRPC plugin install
+gRPC plugins don't come with python grpcio package.
+
+
+We must clone the source:
+`git clone --recursive https://github.com/grpc/grpc`
+Reset to v1.34.x commit:
+`cd grpc && git reset --hard 3530b9c`
+Compile:
+`make plugins -j 12`
+Now plugins are available in:
+`ls bins/opt`
+
+#### Protos in VS code:
+Install vscode-proto3 plugin:
+Ctrl+P and paste:
+`ext install zxh404.vscode-proto3`
+
+Edit unityrossample-ros/.vscode/settings.json:
+
+add 
+```
+"protoc": {
+		"path": "/usr/bin/protoc",
+		"options": [
+			"--plugin=protoc-gen-grpc_python=PATH_TO_grpc_python_plugin",
+			"--plugin=protoc-gen-grpc_csharp=PATH_TO_grpc_csharp_plugin",
+			"--proto_path=${workspaceRoot}/protos/",
+			"--python_out=${workspaceRoot}/scripts/protobuf",
+			"--grpc_python_out=${workspaceRoot}/scripts/protobuf",
+			"--csharp_out=${workspaceRoot}/cs_scripts/protobuf",
+			"--grpc_csharp_out=${workspaceRoot}/cs_scripts/protobuf"
+		]
+	}
+```
+and configure paths to python and c_sharp plugins you've built previously.
+
+Compiling:
+
+Ctr+Shift+P
+
+proto3: Compile This Proto
+
+
+
