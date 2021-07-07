@@ -66,8 +66,8 @@ Reset to v1.34.x commit:
 `cd grpc && git reset --hard 3530b9c`
 Compile:
 `make plugins -j 12`
-Now plugins are available in:
-`ls bins/opt`
+Now print plugin location:
+`cd bins/opt/ && pwd`
 
 #### Protos in VS code:
 Install vscode-proto3 plugin:
