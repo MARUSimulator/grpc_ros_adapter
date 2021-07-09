@@ -19,6 +19,7 @@ service SensorStreaming {
     rpc StreamImuSensor(stream ImuStreamingRequest) returns (StreamingResponse) {}
     rpc StreamPoseSensor(stream PoseStreamingRequest) returns (StreamingResponse) {}
     rpc StreamSonarSensor(stream SonarStreamingRequest) returns (StreamingResponse) {}
+    rpc StreamAisSensor(stream AISStreamingRequest) returns (StreamingResponse) {}
 } 
 
 message CameraStreamingRequest {
@@ -108,4 +109,8 @@ message SonarStreamingRequest {
     float range = 1;
     float bearing = 2;
     string address = 3;
+}
+message AISStreamingRequest {
+    common.AISPositionReport aisPositionReport = 1;
+    string address = 2;
 }

@@ -11,6 +11,7 @@ from sensor_msgs.msg import NavSatFix
 from auv_msgs.msg import NavigationStatus, NED
 from underwater_msgs.msg import SonarFix
 from uuv_sensor_msgs.msg import DVL
+from ros_adapter.msg import AISPositionReport
 from tf.transformations import quaternion_from_euler
 
 def publish_image(request, context):
@@ -108,3 +109,19 @@ def publish_gnss(request, context):
     pub = RosPublisherRegistry.get_publisher(request.address.lower(), NavSatFix)
     pub.publish(geo_point)
     pass
+
+def publish_ais(request, context):
+    report = AISPositionReport()
+    report.type = request.aisPositionReport.type
+    report.mmsi = request.aisPositionReport.mmsi
+    report.heading = request.aisPositionReport.heading
+    point = NavSatFix()
+    point.latitude = request.aisPositionReport.geopoint.latitude
+    point.longitude = request.aisPositionReport.geopoint.longitude
+    point.altitude = request.aisPositionReport.geopoint.altitude
+    report.position = point
+    report.speedOverGround = request.aisPositionReport.speedOverGround
+    report.courseOverGround = request.aisPositionReport.courseOverGround
+    pub = RosPublisherRegistry.get_publisher(request.address.lower(), AISPositionReport)
+    pub.publish(report)
+
