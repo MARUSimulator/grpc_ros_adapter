@@ -2,18 +2,14 @@ from queue import Queue, Empty
 import time
 import re
 import threading
-
 import rospy
 from utils.ros_publisher_resistry import RosPublisherRegistry
 
 from labust_msgs.msg import NanomodemRequest, NanomodemPayload, NanomodemRange
 
 from protobuf import acoustic_transmission_pb2
-
 from protobuf import acoustic_transmission_pb2_grpc
-from protobuf import common_pb2
 
-import traceback
 class Acoustics(acoustic_transmission_pb2_grpc.AcousticsServicer):
     """
     Server streaming service.
@@ -81,40 +77,40 @@ class Acoustics(acoustic_transmission_pb2_grpc.AcousticsServicer):
                 c(request, context)
 
             yield response
-       
 
     def ReturnAcousticPayload(self, request, context):
-        try:
-            msgType = None
-            msg = None
+        msgType = None
+        msg = None
 
-            sender_id = re.findall("\/(\d+)", request.address.lower())[0]
+        sender_id = re.findall("\/(\d+)", request.address.lower())[0]
 
-            if len(str(request.range)) > 0:
-                msgType = NanomodemRange
-                msg = NanomodemRange()
-                msg.range = request.range.range
-                msg.range_m = request.range.range_m
-                msg.id = request.range.id
-                pub_address = "nanomodem/{}/range".format(sender_id)
-            elif len(str(request.payload)) > 0:
-                msgType = NanomodemPayload
-                msg = NanomodemPayload()
-                msg.msg_type = request.payload.msg_type
-                msg.msg = [ord(character) for character in request.payload.msg]
-                msg.sender_id = request.payload.sender_id
-                pub_address = "nanomodem/{}/payload".format(sender_id)
+        if len(str(request.range)) > 0:
+            msgType = NanomodemRange
+            msg = NanomodemRange()
+            msg.range = request.range.range
+            msg.range_m = request.range.range_m
+            msg.id = request.range.id
+            # publish range messages to nanomodem/xxx/range
+            pub_address = "nanomodem/{}/range".format(sender_id)
 
-            pub = RosPublisherRegistry.get_publisher(pub_address, msgType)
-            pub.publish(msg)
+        elif len(str(request.payload)) > 0:
+            msgType = NanomodemPayload
+            msg = NanomodemPayload()
+            msg.msg_type = request.payload.msg_type
+            # convert from string to integer list (ascii encoding)
+            msg.msg = [ord(character) for character in request.payload.msg]
+            msg.sender_id = request.payload.sender_id
+            # publish payload messages to nanomodem/xxx/payload
+            pub_address = "nanomodem/{}/payload".format(sender_id)
 
-            callbacks = self._callbacks.get("ReturnAcousticPayload", [])
-            for c in callbacks:
-                c(request, context)
-            
-            yield acoustic_transmission_pb2.AcousticResponse(success=1)
-        except Exception as e:
-            print(e)
+        pub = RosPublisherRegistry.get_publisher(pub_address, msgType)
+        pub.publish(msg)
+
+        callbacks = self._callbacks.get("ReturnAcousticPayload", [])
+        for c in callbacks:
+            c(request, context)
+        
+        yield acoustic_transmission_pb2.AcousticResponse(success=1)
 
 
     def _cleanup(self, request, context):
