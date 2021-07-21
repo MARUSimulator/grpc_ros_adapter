@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.navigation";
+option java_outer_classname = "Navigation";
+option objc_class_prefix = "HLW";
+
+package acoustic_transmission;
+
+service Acoustics {
+    rpc GetAcousticRequest(CommandRequest) returns (stream AcousticResponse) {}
+    rpc ReturnAcousticPayload(AcousticPayload) returns (stream AcousticResponse) {}
+}
+
+message CommandRequest {
+    string address = 1;
+}
+
+message AcousticPayload {
+	string address = 1;
+    NanomodemPayload payload = 2;
+    NanomodemRange range = 3;
+}
+
+message AcousticResponse {
+    bool success = 1;
+    NanomodemRequest request = 2;
+}
+
+message NanomodemRequest {
+	enum Type {
+		BRDCST = 0;
+		UNICST = 1;
+		PINGID = 2;
+		VOLTID = 3;
+		CHNGID = 4;
+		STATUS = 5;
+		UNISTACK = 6;
+		TESTMSG = 7;
+		ECHOMSG = 8;
+		QUALITY = 9;
+	}
+
+	Type req_type = 1;
+	bool scheduled = 2;
+	string msg = 3;
+	uint32 id = 4;
+}
+
+message NanomodemPayload {
+	enum Type {
+		BRDCST = 0;
+		UNICST = 1;
+	}
+
+	Type msg_type = 1;
+	string msg = 2;
+	uint32 sender_id = 3;
+}
+
+message NanomodemRange {
+	uint32 range = 1;
+	float range_m = 2;
+	uint32 id = 3;
+}

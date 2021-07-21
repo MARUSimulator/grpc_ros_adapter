@@ -11,6 +11,7 @@ from protobuf import remote_control_pb2_grpc
 from protobuf import tf_pb2_grpc
 from protobuf import parameter_server_pb2_grpc
 from protobuf import simulation_control_pb2_grpc
+from protobuf import acoustic_transmission_pb2_grpc
 
 from services.ping_service import PingService
 from services.sensor_streaming import SensorStreaming
@@ -19,6 +20,8 @@ from services.navigation import Navigation
 from services.parameter_server import ParameterServer
 from services.frame_service import FrameService
 from services.simulation_control import SimulationControl
+from services.acoustic_transmission import Acoustics
+
 
 from services.sensor_callbacks import *
 
@@ -62,6 +65,10 @@ def serve(server_ip, server_port):
 
     simulation_control_pb2_grpc.add_SimulationControlServicer_to_server(
             SimulationControl(), server
+    )
+
+    acoustic_transmission_pb2_grpc.add_AcousticsServicer_to_server(
+            Acoustics(), server
     )
 
     server.add_insecure_port(server_ip + ':' + str(server_port))
