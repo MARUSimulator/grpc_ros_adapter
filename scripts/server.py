@@ -40,6 +40,7 @@ def serve(server_ip, server_port):
         "StreamDepthSensor": [ publish_depth ],
         "StreamDvlSensor": [ publish_dvl ],
         "StreamSonarSensor": [ publish_sonar ],
+        "StreamAisSensor" : [ publish_ais ],
         "StreamGnssSensor" : [ publish_gnss ]
     }
 

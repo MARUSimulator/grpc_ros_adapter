@@ -59,6 +59,11 @@ class SensorStreamingStub(object):
                 request_serializer=sensor__streaming__pb2.SonarStreamingRequest.SerializeToString,
                 response_deserializer=sensor__streaming__pb2.StreamingResponse.FromString,
                 )
+        self.StreamAisSensor = channel.stream_unary(
+                '/sensorstreaming.SensorStreaming/StreamAisSensor',
+                request_serializer=sensor__streaming__pb2.AISStreamingRequest.SerializeToString,
+                response_deserializer=sensor__streaming__pb2.StreamingResponse.FromString,
+                )
 
 
 class SensorStreamingServicer(object):
@@ -118,6 +123,12 @@ class SensorStreamingServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def StreamAisSensor(self, request_iterator, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_SensorStreamingServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -164,6 +175,11 @@ def add_SensorStreamingServicer_to_server(servicer, server):
             'StreamSonarSensor': grpc.stream_unary_rpc_method_handler(
                     servicer.StreamSonarSensor,
                     request_deserializer=sensor__streaming__pb2.SonarStreamingRequest.FromString,
+                    response_serializer=sensor__streaming__pb2.StreamingResponse.SerializeToString,
+            ),
+            'StreamAisSensor': grpc.stream_unary_rpc_method_handler(
+                    servicer.StreamAisSensor,
+                    request_deserializer=sensor__streaming__pb2.AISStreamingRequest.FromString,
                     response_serializer=sensor__streaming__pb2.StreamingResponse.SerializeToString,
             ),
     }
@@ -325,6 +341,23 @@ class SensorStreaming(object):
             metadata=None):
         return grpc.experimental.stream_unary(request_iterator, target, '/sensorstreaming.SensorStreaming/StreamSonarSensor',
             sensor__streaming__pb2.SonarStreamingRequest.SerializeToString,
+            sensor__streaming__pb2.StreamingResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def StreamAisSensor(request_iterator,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.stream_unary(request_iterator, target, '/sensorstreaming.SensorStreaming/StreamAisSensor',
+            sensor__streaming__pb2.AISStreamingRequest.SerializeToString,
             sensor__streaming__pb2.StreamingResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

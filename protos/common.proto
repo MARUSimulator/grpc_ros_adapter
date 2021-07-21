@@ -89,3 +89,13 @@ message GeoPoint {
 message Pwm {
     repeated float out = 1; 
 }
+
+message AISPositionReport {
+    uint32 type = 1;
+    uint32 mmsi = 2;
+    float heading = 3;
+    float courseOverGround = 4;
+    float speedOverGround = 5;
+    uint32 timestamp = 6;
+    GeoPoint geopoint = 7;
+}
