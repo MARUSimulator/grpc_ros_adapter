@@ -1,0 +1,4 @@
+[submodule "scripts/protobuf"]
+	path = scripts/protobuf
+	url = git@github.com:labust/labustsim-proto.git
+	branch = python

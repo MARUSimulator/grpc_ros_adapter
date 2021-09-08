@@ -10,7 +10,7 @@ import rospy
 from tf2_msgs.msg import TFMessage
 from threading import Lock
 
-class FrameService(tf_pb2_grpc.Tf):
+class FrameService(tf_pb2_grpc.TfServicer):
 
     def __init__(self):
         self.static_tfs = []
