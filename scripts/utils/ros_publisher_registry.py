@@ -1,7 +1,5 @@
 import rospy
 
-
-
 class RosPublisherRegistry:
 
     _publishers = dict()

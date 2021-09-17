@@ -1,12 +1,12 @@
 import numpy as np
 import cv2
 import rospy
-from utils.ros_publisher_resistry import RosPublisherRegistry
+from utils.ros_publisher_registry import RosPublisherRegistry
 
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image, Imu
 from std_msgs.msg import Header
-from geometry_msgs.msg import Vector3, Pose, Quaternion, PoseWithCovarianceStamped, Point
+from geometry_msgs.msg import Vector3, Pose, Quaternion, PoseWithCovarianceStamped, Point, TwistWithCovarianceStamped
 from sensor_msgs.msg import NavSatFix
 from auv_msgs.msg import NavigationStatus, NED
 from underwater_msgs.msg import SonarFix
@@ -50,11 +50,11 @@ def publish_imu(request, context):
 
     imu = Imu()
 
-    imu.linear_acceleration = request.acceleration.as_ros()
-    imu.angular_velocity = request.angularVelocity.as_ros()
-    eu = request.orientation.as_ros()
-    q = quaternion_from_euler(eu.x, eu.y, eu.z)
-    imu.orientation = Quaternion(*q)
+    imu.header.stamp = rospy.Time.from_sec(request.data.header.timestamp)
+    imu.header.frame_id = request.data.header.frameId
+    imu.linear_acceleration = request.data.linearAcceleration.as_ros()
+    imu.angular_velocity = request.data.angularVelocity.as_ros()
+    imu.orientation = request.data.orientation.as_ros()
 
     pub = RosPublisherRegistry.get_publisher(request.address.lower(), Imu)
     pub.publish(imu)
@@ -72,22 +72,23 @@ def publish_pose(request, context):
     pub.publish(nav)
 
 def publish_depth(request, context):
-
-    depth = request.depth
     pose = PoseWithCovarianceStamped()
-    pose.pose.pose.position = Point(0, 0, -depth)
+    pose.header.stamp = rospy.Time.from_sec(request.data.header.timestamp)
+    pose.header.frame_id = request.data.header.frameId
+    pose.pose.pose.position = Point(0, 0, -request.data.pose.pose.position.z)
+    #pose.pose.covariance = request.data.pose.covariance
 
     pub = RosPublisherRegistry.get_publisher(request.address.lower(), PoseWithCovarianceStamped)
     pub.publish(pose)
 
 def publish_dvl(request, context):
     # not tested
-    dvl = DVL()
-    dvl.velocity = request.groundVelocity.as_ros()
-    dvl.altitude = request.altitude
-    dvl.beam_ranges.extend(request.beamRanges)
+    dvl = TwistWithCovarianceStamped()
+    dvl.header.stamp = rospy.Time.from_sec(request.data.header.timestamp)
+    dvl.header.frame_id = request.data.header.frameId
+    dvl.twist.twist.linear = request.data.twist.twist.linear.as_ros()
 
-    pub = RosPublisherRegistry.get_publisher(request.address.lower(), DVL)
+    pub = RosPublisherRegistry.get_publisher(request.address.lower(), TwistWithCovarianceStamped)
     pub.publish(dvl)
 
 def publish_sonar(request, context):
@@ -102,9 +103,12 @@ def publish_sonar(request, context):
 
 def publish_gnss(request, context):
     geo_point = NavSatFix()
-    geo_point.latitude = request.point.latitude
-    geo_point.longitude = request.point.longitude
-    geo_point.altitude = request.point.altitude
+    geo_point.header.stamp = rospy.Time.from_sec(request.data.header.timestamp)
+    #geo_point.status.status = request.data.status
+    #geo_point.status.service = request.data.service
+    geo_point.latitude = request.data.latitude
+    geo_point.longitude = request.data.longitude
+    geo_point.altitude = request.data.altitude
 
     pub = RosPublisherRegistry.get_publisher(request.address.lower(), NavSatFix)
     pub.publish(geo_point)
