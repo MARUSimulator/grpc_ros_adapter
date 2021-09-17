@@ -5,7 +5,7 @@ import cv2
 
 from protobuf import parameter_server_pb2
 from protobuf import parameter_server_pb2_grpc
-from protobuf.common_pb2 import Empty
+from protobuf.std_pb2 import Empty
 
 import rospy
 

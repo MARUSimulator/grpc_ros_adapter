@@ -3,7 +3,8 @@ import numpy as np
 
 from std_msgs.msg import Float32
 from geometry_msgs.msg import Vector3, Quaternion
-import protobuf.common_pb2 as common
+import protobuf.std_pb2 as std
+import protobuf.geometry_pb2 as geometry
 
 def add_method(cls, name=""):
     def decorator(func, name=""):
@@ -34,11 +35,11 @@ _ROS_TO_UNITY_TRANSFORM = np.array([
 def vector_as_msg(self):
     v = np.array([self.x, self.y, self.z, 1])
     # v = _ROS_TO_UNITY_TRANSFORM.dot(v)
-    ret = common.Vector3()
+    ret = geometry.Vector3()
     ret.x, ret.y, ret.z = v[0], v[1], v[2]
     return ret
 
-@add_method(common.Vector3, "as_ros")
+@add_method(geometry.Vector3, "as_ros")
 def vector_as_ros(self):
     v = np.array([self.x, self.y, self.z , 1])
     # v = _UNITY_TO_ROS_TRANSFORM.dot(v)
@@ -46,10 +47,10 @@ def vector_as_ros(self):
 
 @add_method(Quaternion, "as_msg")
 def quaternion_as_msg(self):
-    ret = common.Quaternion()
+    ret = geometry.Quaternion()
     ret.x, ret.y, ret.z, ret.w = self.x, self.y, self.z, self.w
     return ret
 
-@add_method(common.Quaternion, "as_ros")
+@add_method(geometry.Quaternion, "as_ros")
 def quaternion_as_ros(self):
     return Quaternion(self.x, self.y, self.z, self.w)

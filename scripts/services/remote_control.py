@@ -8,7 +8,7 @@ from std_msgs.msg import Float32MultiArray
 
 from protobuf import remote_control_pb2
 from protobuf import remote_control_pb2_grpc
-from protobuf import common_pb2
+from protobuf import std_pb2
 
 
 class RemoteControl(remote_control_pb2_grpc.RemoteControlServicer):
@@ -70,8 +70,8 @@ class RemoteControl(remote_control_pb2_grpc.RemoteControlServicer):
                 continue
 
 
-            response = common_pb2.Pwm()
-            response.out.extend(pwm_out.data)
+            response = std_pb2.Float32Array()
+            response.data.extend(pwm_out.data)
             response = remote_control_pb2.ForceResponse(success=1, pwm=response)
 
             callbacks = self._callbacks.get("ApplyForce", [])
