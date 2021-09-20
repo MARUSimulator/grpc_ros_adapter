@@ -61,11 +61,12 @@ def publish_imu(request, context):
 
 
 def publish_pose(request, context):
-
     nav = NavigationStatus()
-    pos = request.pose.position.as_ros()
-    o = request.pose.orientation.as_ros()
-    nav.position = NED(pos.x, pos.y, pos.z)
+    pos = request.data.position
+    o = request.data.orientation.as_ros()
+    nav.header.stamp = rospy.Time.from_sec(request.data.header.timestamp)
+    nav.header.frame_id = request.data.header.frameId
+    nav.position =  NED(pos.north, pos.east, pos.depth)
     nav.orientation = o
 
     pub = RosPublisherRegistry.get_publisher(request.address.lower(), NavigationStatus)
@@ -104,8 +105,9 @@ def publish_sonar(request, context):
 def publish_gnss(request, context):
     geo_point = NavSatFix()
     geo_point.header.stamp = rospy.Time.from_sec(request.data.header.timestamp)
-    #geo_point.status.status = request.data.status
-    #geo_point.status.service = request.data.service
+    geo_point.header.frame_id = request.data.header.frameId
+    geo_point.status.status = request.data.status.status
+    geo_point.status.service = request.data.status.service
     geo_point.latitude = request.data.latitude
     geo_point.longitude = request.data.longitude
     geo_point.altitude = request.data.altitude
