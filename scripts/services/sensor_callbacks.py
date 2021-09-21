@@ -4,10 +4,9 @@ import rospy
 from utils.ros_publisher_registry import RosPublisherRegistry
 
 from cv_bridge import CvBridge, CvBridgeError
-from sensor_msgs.msg import Image, Imu
+from sensor_msgs.msg import Image, Imu, NavSatFix, PointCloud
 from std_msgs.msg import Header
 from geometry_msgs.msg import Vector3, Pose, Quaternion, PoseWithCovarianceStamped, Point, TwistWithCovarianceStamped
-from sensor_msgs.msg import NavSatFix
 from auv_msgs.msg import NavigationStatus, NED
 from underwater_msgs.msg import SonarFix
 from uuv_sensor_msgs.msg import DVL
@@ -131,3 +130,15 @@ def publish_ais(request, context):
     pub = RosPublisherRegistry.get_publisher(request.address.lower(), AISPositionReport)
     pub.publish(report)
 
+def publish_lidar(request, context):
+    pointcloud_msg = PointCloud()
+    header = Header()
+    header.frame_id = request.data.header.frameId
+    header.stamp = rospy.Time.from_sec(request.data.header.timestamp)
+    pointcloud_msg.header = header
+
+    pointcloud_msg.points = request.data.points
+    pointcloud_msg.channels = request.data.channels
+
+    pub = RosPublisherRegistry.get_publisher(request.address.lower(), PointCloud)
+    pub.publish(pointcloud_msg)
