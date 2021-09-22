@@ -92,13 +92,17 @@ def publish_dvl(request, context):
     pub.publish(dvl)
 
 def publish_sonar(request, context):
-    # not tested
-    sonar = SonarFix()
-    sonar.bearing = request.bearing
-    sonar.range = request.range
+    pointcloud_msg = PointCloud()
+    header = Header()
+    header.frame_id = request.data.header.frameId
+    header.stamp = rospy.Time.from_sec(request.data.header.timestamp)
+    pointcloud_msg.header = header
 
-    pub = RosPublisherRegistry.get_publisher(request.address.lower(), SonarFix)
-    pub.publish(sonar)
+    pointcloud_msg.points = request.data.points
+    pointcloud_msg.channels = request.data.channels
+
+    pub = RosPublisherRegistry.get_publisher(request.address.lower(), PointCloud)
+    pub.publish(pointcloud_msg)
 
 
 def publish_gnss(request, context):
