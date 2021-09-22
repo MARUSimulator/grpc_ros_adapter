@@ -1,0 +1,86 @@
+import threading
+
+import rospy
+import time
+from queue import Queue, Empty
+
+class Streamer:
+
+    """
+    Server streaming service.
+    POC implementation
+    """
+    def __init__(self, make_response, topic_msg_type, callbacks={}):
+
+        self._client_lock = threading.Lock()       
+        self._address_lock = threading.Lock()       
+        # map clients to their buffers
+        self._registered_clients = {}
+        # map address to clients that are listening to it
+        self._address_to_clients_map = {}
+        self._thread_sleep_if_empty = 0.05
+        self._callbacks = callbacks
+
+        self._topic_msg_type = topic_msg_type
+        self._make_response = make_response
+        
+
+    def _subscribe_to_topic(self, address, msg_type):
+        def callback(msg):
+            with self._address_lock:
+                with self._client_lock:
+                    for cl in self._address_to_clients_map[address]:
+                        self._registered_clients[(cl, address)].put(msg)
+
+        rospy.Subscriber(address, msg_type, callback)
+
+    def start_stream(self, request, context):
+        
+        client_id = context.peer() 
+        address = request.address.lower()
+        request_buffer = Queue(100) # every client has a request buffer for every veh it controls 
+
+        # add buffer to registered clients
+        with self._client_lock:
+            self._registered_clients[(client_id, address)] = request_buffer
+
+        # subscribe to topic if client is not already listening to it
+        with self._address_lock:
+            if address not in self._address_to_clients_map:
+                self._subscribe_to_topic(address, self._topic_msg_type)
+                self._address_to_clients_map[address] = [ client_id ]
+            if client_id not in self._address_to_clients_map[address]:
+                self._address_to_clients_map[address].append(client_id)
+
+
+        while True:
+            
+            # if connection closed
+            if not context.is_active():
+                self._remove_client(request, context)
+                return 
+
+            if request_buffer.empty():
+                time.sleep(self._thread_sleep_if_empty)
+                continue
+            
+            data = None
+            try:
+                data = request_buffer.get(timeout=1)
+            except Empty:
+                continue
+            response = self._make_response(data)
+
+            yield response
+
+    def _remove_client(self, request, context):
+        veh_id = request.vehId
+        client_id = context.peer()
+
+        with self._address_lock:
+            cl_list = self._address_to_clients_map[veh_id]
+            cl_list.remove(client_id)
+
+        with self._client_lock:
+            self._registered_clients.pop((client_id, veh_id))
+

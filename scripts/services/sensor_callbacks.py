@@ -91,6 +91,15 @@ def publish_dvl(request, context):
     pub = RosPublisherRegistry.get_publisher(request.address.lower(), TwistWithCovarianceStamped)
     pub.publish(dvl)
 
+def publish_sonar_fix(request, context):
+    # not tested
+    sonar = SonarFix()
+    sonar.bearing = request.bearing
+    sonar.range = request.range
+    pub = RosPublisherRegistry.get_publisher(request.address.lower(), SonarFix)
+    pub.publish(sonar)
+
+
 def publish_sonar(request, context):
     pointcloud_msg = PointCloud()
     header = Header()

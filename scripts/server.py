@@ -38,6 +38,7 @@ def serve(server_ip, server_port):
         "StreamDepthSensor": [ publish_depth ],
         "StreamDvlSensor": [ publish_dvl ],
         "StreamSonarSensor": [ publish_sonar ],
+        "StreamSonarFixSensor": [ publish_sonar_fix ],
         "StreamAisSensor" : [ publish_ais ],
         "StreamGnssSensor" : [ publish_gnss ],
         "StreamLidarSensor" : [publish_lidar]
@@ -66,7 +67,9 @@ def serve(server_ip, server_port):
     server.add_insecure_port(server_ip + ':' + str(server_port))
     print(server_ip + ":" + str(server_port))
     server.start()
-    server.wait_for_termination()
+    rospy.spin()
+#     server.wait_for_termination()
+
 
 
 if __name__ == '__main__':
