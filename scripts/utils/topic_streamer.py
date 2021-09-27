@@ -12,8 +12,8 @@ class Streamer:
     """
     def __init__(self, make_response, topic_msg_type, callbacks={}):
 
-        self._client_lock = threading.Lock()       
-        self._address_lock = threading.Lock()       
+        self._client_lock = threading.RLock()       
+        self._address_lock = threading.RLock()       
         # map clients to their buffers
         self._registered_clients = {}
         # map address to clients that are listening to it

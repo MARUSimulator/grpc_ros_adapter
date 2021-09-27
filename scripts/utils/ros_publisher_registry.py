@@ -14,6 +14,7 @@ class RosPublisherRegistry:
         publisher = cls._publishers.get(topic_name, None)
         if not publisher:
             publisher = rospy.Publisher(topic_name, data_class, queue_size=queue_size)
+            rospy.sleep(0.2)
             cls._publishers[topic_name] = publisher
 
         if not publisher.data_class == data_class:
