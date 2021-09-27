@@ -6,6 +6,7 @@ import grpc
 
 from protobuf import ping_pb2_grpc
 from protobuf import sensor_streaming_pb2_grpc
+from protobuf import commander_service_pb2_grpc
 from protobuf import remote_control_pb2_grpc
 from protobuf import tf_pb2_grpc
 from protobuf import parameter_server_pb2_grpc
@@ -17,6 +18,7 @@ from services.remote_control import RemoteControl
 from services.parameter_server import ParameterServer
 from services.frame_service import FrameService
 from services.simulation_control import SimulationControl
+from services.service_caller import ServiceCaller
 
 from services.sensor_callbacks import *
 
@@ -41,12 +43,13 @@ def serve(server_ip, server_port):
         "StreamSonarFixSensor": [ publish_sonar_fix ],
         "StreamAisSensor" : [ publish_ais ],
         "StreamGnssSensor" : [ publish_gnss ],
-        "StreamLidarSensor" : [publish_lidar]
+        "StreamLidarSensor" : [publish_lidar],
     }
 
     sensor_streaming_pb2_grpc.add_SensorStreamingServicer_to_server(
             SensorStreaming(sensor_streaming_callbacks),
             server)
+
 
     remote_control_pb2_grpc.add_RemoteControlServicer_to_server(
             RemoteControl(), server
@@ -63,6 +66,9 @@ def serve(server_ip, server_port):
     simulation_control_pb2_grpc.add_SimulationControlServicer_to_server(
             SimulationControl(), server
     )
+    commander_service_pb2_grpc.add_CommanderServicer_to_server(
+            ServiceCaller(),
+            server)
 
     server.add_insecure_port(server_ip + ':' + str(server_port))
     print(server_ip + ":" + str(server_port))

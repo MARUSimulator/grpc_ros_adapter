@@ -67,6 +67,9 @@ def publish_pose(request, context):
     nav.header.frame_id = request.data.header.frameId
     nav.position =  NED(pos.north, pos.east, pos.depth)
     nav.orientation = o
+    nav.seafloor_velocity = request.data.seafloorVelocity.as_ros()
+    nav.body_velocity = request.data.bodyVelocity.as_ros()
+    nav.orientation_rate = request.data.orientationRate.as_ros()
 
     pub = RosPublisherRegistry.get_publisher(request.address.lower(), NavigationStatus)
     pub.publish(nav)

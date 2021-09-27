@@ -29,7 +29,7 @@ class RemoteControl(remote_control_pb2_grpc.RemoteControlServicer):
         for msg in self._streamer.start_stream(request, context):
 
             response = std_pb2.Float32Array()
-            response.data.extend(msg.data)
+            response.data.extend(msg.pwm.data)
             response = remote_control_pb2.ForceResponse(success=1, pwm=response)
 
             callbacks = self._callbacks.get("ApplyForce", [])
