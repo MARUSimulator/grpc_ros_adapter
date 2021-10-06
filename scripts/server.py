@@ -69,7 +69,7 @@ def serve(server_ip, server_port):
     commander_service_pb2_grpc.add_CommanderServicer_to_server(
             ServiceCaller(),
             server)
-
+    
     server.add_insecure_port(server_ip + ':' + str(server_port))
     print(server_ip + ":" + str(server_port))
     server.start()
