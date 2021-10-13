@@ -2,7 +2,7 @@ import inspect, sys
 
 import numpy as np
 import cv2
-import rospy
+import utils.ros_handle as rh
 from utils.ros_publisher_registry import RosPublisherRegistry
 
 from google.protobuf import text_format
@@ -10,11 +10,6 @@ from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image, Imu, NavSatFix, PointCloud
 from std_msgs.msg import Header
 from geometry_msgs.msg import Vector3, Pose, Quaternion, PoseWithCovarianceStamped, Point, TwistWithCovarianceStamped
-from auv_msgs.msg import NavigationStatus, NED
-from underwater_msgs.msg import SonarFix
-from uuv_sensor_msgs.msg import DVL
-from ros_adapter.msg import AISPositionReport
-
 
 def publish_image(request, context):
 
@@ -39,7 +34,7 @@ def publish_image(request, context):
         # BGR
         msg = context.bridge.cv2_to_imgmsg(bgr_image, 'bgr8')
 
-        header.stamp = rospy.Time.from_sec(request.timeStamp)
+        header.stamp = rh.Time.from_sec(request.timeStamp)
         msg.header = header
     except CvBridgeError as e:
         print(e)
@@ -52,7 +47,7 @@ def publish_imu(request, context):
 
     imu = Imu()
 
-    imu.header.stamp = rospy.Time.from_sec(request.data.header.timestamp)
+    imu.header.stamp = rh.Time.from_sec(request.data.header.timestamp)
     imu.header.frame_id = request.data.header.frameId
     imu.linear_acceleration = request.data.linearAcceleration.as_ros()
     imu.angular_velocity = request.data.angularVelocity.as_ros()
@@ -63,10 +58,11 @@ def publish_imu(request, context):
 
 
 def publish_pose(request, context):
+    from auv_msgs.msg import NavigationStatus, NED
     nav = NavigationStatus()
     pos = request.data.position
     o = request.data.orientation.as_ros()
-    nav.header.stamp = rospy.Time.from_sec(request.data.header.timestamp)
+    nav.header.stamp = rh.Time.from_sec(request.data.header.timestamp)
     nav.header.frame_id = request.data.header.frameId
     nav.position =  NED(pos.north, pos.east, pos.depth)
     nav.orientation = o
@@ -79,8 +75,8 @@ def publish_pose(request, context):
 
 def publish_depth(request, context):
     pose = PoseWithCovarianceStamped()
-    pose.header.stamp = rospy.Time.from_sec(request.data.header.timestamp)
-    pose.header.frame_id = request.data.header.frameId or ""
+    pose.header.stamp = rh.Time.from_sec(request.data.header.timestamp)
+    pose.header.frame_id = request.data.header.frameId
     pose.pose.pose.position = Point(0, 0, -request.data.pose.pose.position.z)
     #pose.pose.covariance = request.data.pose.covariance
 
@@ -88,9 +84,11 @@ def publish_depth(request, context):
     pub.publish(pose)
 
 def publish_dvl(request, context):
+
+    from uuv_sensor_msgs.msg import DVL
     # not tested
     dvl = TwistWithCovarianceStamped()
-    dvl.header.stamp = rospy.Time.from_sec(request.data.header.timestamp)
+    dvl.header.stamp = rh.Time.from_sec(request.data.header.timestamp)
     dvl.header.frame_id = request.data.header.frameId
     dvl.twist.twist.linear = request.data.twist.twist.linear.as_ros()
 
@@ -98,6 +96,8 @@ def publish_dvl(request, context):
     pub.publish(dvl)
 
 def publish_sonar_fix(request, context):
+
+    from underwater_msgs.msg import SonarFix
     # not tested
     sonar = SonarFix()
     sonar.bearing = request.bearing
@@ -110,7 +110,7 @@ def publish_sonar(request, context):
     pointcloud_msg = PointCloud()
     header = Header()
     header.frame_id = request.data.header.frameId
-    header.stamp = rospy.Time.from_sec(request.data.header.timestamp)
+    header.stamp = rh.Time.from_sec(request.data.header.timestamp)
     pointcloud_msg.header = header
 
     pointcloud_msg.points = request.data.points
@@ -122,7 +122,7 @@ def publish_sonar(request, context):
 
 def publish_gnss(request, context):
     geo_point = NavSatFix()
-    geo_point.header.stamp = rospy.Time.from_sec(request.data.header.timestamp)
+    geo_point.header.stamp = rh.Time.from_sec(request.data.header.timestamp)
     geo_point.header.frame_id = request.data.header.frameId
     geo_point.status.status = request.data.status.status
     geo_point.status.service = request.data.status.service
@@ -135,6 +135,7 @@ def publish_gnss(request, context):
     pass
 
 def publish_ais(request, context):
+    from ros_adapter.msg import AISPositionReport
     report = AISPositionReport()
     report.type = request.aisPositionReport.type
     report.mmsi = request.aisPositionReport.mmsi
@@ -153,7 +154,7 @@ def publish_lidar(request, context):
     pointcloud_msg = PointCloud()
     header = Header()
     header.frame_id = request.data.header.frameId
-    header.stamp = rospy.Time.from_sec(request.data.header.timestamp)
+    header.stamp = rh.Time.from_sec(request.data.header.timestamp)
     pointcloud_msg.header = header
 
     pointcloud_msg.points = request.data.points

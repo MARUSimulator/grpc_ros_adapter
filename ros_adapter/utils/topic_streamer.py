@@ -1,6 +1,6 @@
 import threading
 
-import rospy
+import utils.ros_handle as rh
 import time
 from queue import Queue, Empty
 
@@ -32,7 +32,7 @@ class Streamer:
                     for cl in self._address_to_clients_map[address]:
                         self._registered_clients[(cl, address)].put(msg)
 
-        rospy.Subscriber(address, msg_type, callback)
+        rh.Subscription(msg_type, address, callback, 1)
 
     def start_stream(self, request, context):
         
@@ -51,7 +51,6 @@ class Streamer:
                 self._address_to_clients_map[address] = [ client_id ]
             if client_id not in self._address_to_clients_map[address]:
                 self._address_to_clients_map[address].append(client_id)
-
 
         while True:
             
