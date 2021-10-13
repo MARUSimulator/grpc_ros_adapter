@@ -10,6 +10,8 @@ import rospy
 
 class ServiceCaller(commander_service_pb2_grpc.CommanderServicer):
     """
+    NOTE: Used for a specific use case. This is not tested and not to be used!!
+
     Service used to control the flow of the simulation
     Simulator dictates the clock and does a Step request for ROS nodes
     """
@@ -19,7 +21,6 @@ class ServiceCaller(commander_service_pb2_grpc.CommanderServicer):
 
     def PrimitivePointer(self, request, context):
         rospy.wait_for_service('/d2/commander/primitive/pointer')
-        # TEMP HARDCODED FOR BTS!!!!
         try:
             pointer_service = rospy.ServiceProxy('/d2/commander/primitive/pointer', PointerPrimitiveService)
             srvout = PointerPrimitiveServiceRequest()

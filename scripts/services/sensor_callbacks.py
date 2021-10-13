@@ -1,8 +1,11 @@
+import inspect, sys
+
 import numpy as np
 import cv2
 import rospy
 from utils.ros_publisher_registry import RosPublisherRegistry
 
+from google.protobuf import text_format
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image, Imu, NavSatFix, PointCloud
 from std_msgs.msg import Header
@@ -11,7 +14,7 @@ from auv_msgs.msg import NavigationStatus, NED
 from underwater_msgs.msg import SonarFix
 from uuv_sensor_msgs.msg import DVL
 from ros_adapter.msg import AISPositionReport
-from tf.transformations import quaternion_from_euler
+
 
 def publish_image(request, context):
 
@@ -77,7 +80,7 @@ def publish_pose(request, context):
 def publish_depth(request, context):
     pose = PoseWithCovarianceStamped()
     pose.header.stamp = rospy.Time.from_sec(request.data.header.timestamp)
-    pose.header.frame_id = request.data.header.frameId
+    pose.header.frame_id = request.data.header.frameId or ""
     pose.pose.pose.position = Point(0, 0, -request.data.pose.pose.position.z)
     #pose.pose.covariance = request.data.pose.covariance
 
@@ -158,3 +161,6 @@ def publish_lidar(request, context):
 
     pub = RosPublisherRegistry.get_publisher(request.address.lower(), PointCloud)
     pub.publish(pointcloud_msg)
+
+# expose only functions
+__all__ = [x[0] for x in inspect.getmembers(sys.modules[__name__], inspect.isfunction)]

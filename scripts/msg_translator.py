@@ -9,8 +9,6 @@ import google.protobuf.descriptor as descriptor
 
 from copy import deepcopy
 
-import protobuf.labust_pb2 as labust_pb2
-import protobuf.marine_pb2 as marine_pb2
 
 from geometry_msgs.msg import Pose
 
@@ -47,10 +45,10 @@ class ProtoRosTranslator:
 
         NOTE 1: Accepts both list and single genpy.Message objects
         """
-        if isinstance(proto_msgs, list):
+        if isinstance(ros_msgs, list):
             self.ros_msgs.update(zip((msg._type for msg in ros_msgs), ros_msgs))
             return
-        self.ros_msgs[proto_msgs._type] = ros_msgs
+        self.ros_msgs[ros_msgs._type] = ros_msgs
 
 
     def is_proto_msg(self, msg):
@@ -275,45 +273,17 @@ class ProtoRosTranslator:
 
 
 
-
-if __name__ == "__main__":
-
-    database = protobuf.symbol_database.Default()
-    proto_msgs = database._classes
-
-    import ros
-    import protobuf.sensor_pb2 as sensor_pb2
-    pack = rospkg.RosPack()
+def get_all_ros_msgs():
     ros_msgs = []
+    pack = rospkg.RosPack()
     for p in pack.list():
         for msg_name in rosmsg.list_msgs(p, pack):
             msg = rosmessage.get_message_class(msg_name)
             if msg:
                 ros_msgs.append(msg)
+    return ros_msgs
 
-    translator = ProtoRosTranslator(proto_msgs, ros_msgs)
-
-    pose = labust_pb2.geometry__pb2.Point(x=1)
-    trans = translator.proto2ros(pose)
-
-    pose2 = labust_pb2.geometry__pb2.PoseWithCovariance()
-    pose2.covariance.extend([1, 2, 3, 4, 5, 6])
-    trans2 = translator.proto2ros(pose2)
-
-    pc = sensor_pb2.PointCloud()
-    pc.points.extend([labust_pb2.geometry__pb2.Point(x=5, y=3), labust_pb2.geometry__pb2.Point(x=1, y=2)])
-    trans3 = translator.proto2ros(pc)
-
-    import geometry_msgs
-    pr = geometry_msgs.msg.Point(x=5, y=3)
-    trans3 = translator.ros2proto(pr)
-
-    pr2 = geometry_msgs.msg.PoseWithCovariance()
-    pr2.covariance = [1, 2, 3, 4, 5, 6]
-    trans5 = translator.ros2proto(pr2)
-
-    import sensor_msgs
-    pcr = sensor_msgs.msg.PointCloud()
-    pcr.points.extend([geometry_msgs.msg.Point(x=5, y=3), geometry_msgs.msg.Point(x=1, y=2)])
-    trans6 = translator.ros2proto(pcr)
-    a = 5
+def get_all_proto_msgs():
+    database = protobuf.symbol_database.Default()
+    proto_msgs = database._classes
+    return proto_msgs
