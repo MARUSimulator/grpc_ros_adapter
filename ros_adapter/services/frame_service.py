@@ -1,13 +1,10 @@
 
-import numpy as np
-import grpc
-import cv2
 import time
 
 from protobuf import tf_pb2_grpc
 from protobuf import tf_pb2
 
-import rospy
+import utils.ros_handle as rh
 from tf2_msgs.msg import TFMessage
 from threading import Lock
 
@@ -21,8 +18,8 @@ class FrameService(tf_pb2_grpc.TfServicer):
         self.tfs = []
         self._has_new_data = False
         self._thread_sleep_time = 0.01
-        rospy.Subscriber("/tf", TFMessage, self.tf_callback)
-        rospy.Subscriber("/tf_static", TFMessage, self.static_tf_callback)
+        rh.Subscription(TFMessage, "/tf", self.tf_callback, 10)
+        rh.Subscription(TFMessage, "/tf_static", self.static_tf_callback, 10)
     
     def _find_tf_in_list(self, tf, l):
         return next(((i, v) for i, v in enumerate(l) \

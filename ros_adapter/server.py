@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
+import sys, os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from concurrent import futures
-import rospy
 import grpc
 
 from protobuf import ping_pb2_grpc
@@ -11,6 +12,7 @@ from protobuf import remote_control_pb2_grpc
 from protobuf import tf_pb2_grpc
 from protobuf import parameter_server_pb2_grpc
 from protobuf import simulation_control_pb2_grpc
+from protobuf import acoustic_transmission_pb2_grpc
 
 from services.ping_service import PingService
 from services.sensor_streaming import SensorStreaming
@@ -19,8 +21,10 @@ from services.parameter_server import ParameterServer
 from services.frame_service import FrameService
 from services.simulation_control import SimulationControl
 from services.service_caller import ServiceCaller
+from services.acoustic_transmission import AcousticTransmission
 
 from services.sensor_callbacks import *
+import utils.ros_handle as rh 
 
 def serve(server_ip, server_port):
     """
@@ -43,7 +47,7 @@ def serve(server_ip, server_port):
         "StreamSonarFixSensor": [ publish_sonar_fix ],
         "StreamAisSensor" : [ publish_ais ],
         "StreamGnssSensor" : [ publish_gnss ],
-        "StreamLidarSensor" : [publish_lidar],
+        "StreamLidarSensor" : [ publish_lidar ]
     }
 
     sensor_streaming_pb2_grpc.add_SensorStreamingServicer_to_server(
@@ -70,19 +74,38 @@ def serve(server_ip, server_port):
             ServiceCaller(),
             server)
     
+
+    acoustic_transmission_pb2_grpc.add_AcousticTransmissionServicer_to_server(
+            AcousticTransmission(), server
+    )
+
     server.add_insecure_port(server_ip + ':' + str(server_port))
     print(server_ip + ":" + str(server_port))
     server.start()
-    rospy.spin()
+    rh.spin()
 #     server.wait_for_termination()
 
 
+def main(args=None):
 
-if __name__ == '__main__':
+    _default_parameters = {
+        "LocalOriginLat" : float(45),
+        "LocalOriginLon" : float(12)
+    }
 
-    rospy.init_node('syntetic_data')
-    server_params = rospy.get_param('~')
-    server_ip = server_params["server_ip"]
-    server_port = server_params["server_port"]
+    rh.init("ros_adapter", "ros_adapter", args)
+    server_ip = rh.get_param("server_ip") or "0.0.0.0"
+    server_port = rh.get_param("port") or 30053
+
+    for k, v in _default_parameters.items():
+        rh.set_param(k, v)
 
     serve(server_ip, server_port)
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+

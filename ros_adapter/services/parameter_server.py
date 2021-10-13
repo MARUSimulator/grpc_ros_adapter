@@ -1,13 +1,8 @@
-
-import numpy as np
-import grpc
-import cv2
-
 from protobuf import parameter_server_pb2
 from protobuf import parameter_server_pb2_grpc
 from protobuf.std_pb2 import Empty
 
-import rospy
+import utils.ros_handle as rh
 
 class ParameterServer(parameter_server_pb2_grpc.ParameterServerServicer):
 
@@ -15,7 +10,7 @@ class ParameterServer(parameter_server_pb2_grpc.ParameterServerServicer):
         pass
 
     def GetParameter(self, request, context):
-        param = rospy.get_param(request.name, None)
+        param = rh.get_param(request.name, None)
         response = parameter_server_pb2.ParamValue()
         if isinstance(param, int):
             response.valueInt = param
@@ -38,7 +33,7 @@ class ParameterServer(parameter_server_pb2_grpc.ParameterServerServicer):
         which_one = param.WhichOneof("parameterValue")
         value = getattr(param, which_one, None)
         if which_one and value:
-            rospy.set_param(request.name, value)
+            rh.set_param(request.name, value)
         
         return Empty()
             

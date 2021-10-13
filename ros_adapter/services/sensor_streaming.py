@@ -1,9 +1,4 @@
 
-import numpy as np
-import grpc
-import cv2
-
-
 import utils.extensions
 from protobuf import sensor_streaming_pb2
 from protobuf import sensor_streaming_pb2_grpc
