@@ -64,7 +64,7 @@ def publish_pose(request, context):
     o = request.data.orientation.as_ros()
     nav.header.stamp = rh.Time.from_sec(request.data.header.timestamp)
     nav.header.frame_id = request.data.header.frameId
-    nav.position =  NED(pos.north, pos.east, pos.depth)
+    nav.position =  NED(north=pos.north, east=pos.east, depth=pos.depth)
     nav.orientation = o
     nav.seafloor_velocity = request.data.seafloorVelocity.as_ros()
     nav.body_velocity = request.data.bodyVelocity.as_ros()
@@ -77,7 +77,7 @@ def publish_depth(request, context):
     pose = PoseWithCovarianceStamped()
     pose.header.stamp = rh.Time.from_sec(request.data.header.timestamp)
     pose.header.frame_id = request.data.header.frameId
-    pose.pose.pose.position = Point(0, 0, -request.data.pose.pose.position.z)
+    pose.pose.pose.position = Point(x=0, y=0, z=-request.data.pose.pose.position.z)
     #pose.pose.covariance = request.data.pose.covariance
 
     pub = RosPublisherRegistry.get_publisher(request.address.lower(), PoseWithCovarianceStamped)

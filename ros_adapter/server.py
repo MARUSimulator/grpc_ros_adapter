@@ -20,8 +20,8 @@ from services.remote_control import RemoteControl
 from services.parameter_server import ParameterServer
 from services.frame_service import FrameService
 from services.simulation_control import SimulationControl
-from services.service_caller import ServiceCaller
 from services.acoustic_transmission import AcousticTransmission
+# from services.service_caller import ServiceCaller
 
 from services.sensor_callbacks import *
 import utils.ros_handle as rh 
@@ -30,7 +30,7 @@ def serve(server_ip, server_port):
     """
     Add service handles to server and start server execution
     """
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=20))
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=20), )
 
 
     ping_pb2_grpc.add_PingServicer_to_server(
@@ -70,9 +70,10 @@ def serve(server_ip, server_port):
     simulation_control_pb2_grpc.add_SimulationControlServicer_to_server(
             SimulationControl(), server
     )
-    commander_service_pb2_grpc.add_CommanderServicer_to_server(
-            ServiceCaller(),
-            server)
+# works only for ros1
+#     commander_service_pb2_grpc.add_CommanderServicer_to_server(
+#             ServiceCaller(),
+#             server)
     
 
     acoustic_transmission_pb2_grpc.add_AcousticTransmissionServicer_to_server(

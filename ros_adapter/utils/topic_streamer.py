@@ -4,6 +4,8 @@ import utils.ros_handle as rh
 import time
 from queue import Queue, Empty
 
+from labust_msgs.msg import NanomodemRequest
+
 class Streamer:
 
     """
@@ -25,14 +27,16 @@ class Streamer:
         self._make_response = make_response
         
 
+    
+
     def _subscribe_to_topic(self, address, msg_type):
-        def callback(msg):
+        def callback(msg, *args):
             with self._address_lock:
                 with self._client_lock:
                     for cl in self._address_to_clients_map[address]:
                         self._registered_clients[(cl, address)].put(msg)
 
-        rh.Subscription(msg_type, address, callback, 1)
+        rh.Subscription(msg_type, address, callback, 10)
 
     def start_stream(self, request, context):
         
@@ -68,7 +72,12 @@ class Streamer:
                 data = request_buffer.get(timeout=1)
             except Empty:
                 continue
-            response = self._make_response(data)
+
+            try:
+                response = self._make_response(data)
+            except Exception as e:
+                rh.logerr(f"Cannot create response message for topic in {address}. {repr(e)}.")
+                continue
 
             yield response
 
