@@ -9,6 +9,7 @@ from labust_msgs.msg import NanomodemRange, NanomodemPayload, NanomodemRequest
 from protobuf import labust_pb2
 from protobuf import acoustic_transmission_pb2
 from protobuf import acoustic_transmission_pb2_grpc
+
 class AcousticTransmission(acoustic_transmission_pb2_grpc.AcousticTransmissionServicer):
     """
     Server streaming service.
@@ -64,10 +65,10 @@ class AcousticTransmission(acoustic_transmission_pb2_grpc.AcousticTransmissionSe
         yield acoustic_transmission_pb2.AcousticResponse(success=1)
     @staticmethod
     def make_response(nanomodem_req):
-        response = labust_pb2.NanomodemRequest()
-        response.reqType = nanomodem_req.req_type - 1
-        response.scheduled = nanomodem_req.scheduled
-        response.msg = nanomodem_req.msg
-        response.id = nanomodem_req.id
-        responseObj = acoustic_transmission_pb2.AcousticResponse(success=1, request=response)
-        return responseObj
+        request = labust_pb2.NanomodemRequest()
+        request.reqType = nanomodem_req.req_type - 1
+        request.scheduled = nanomodem_req.scheduled
+        request.msg = nanomodem_req.msg
+        request.id = nanomodem_req.id
+        requestObj = acoustic_transmission_pb2.AcousticRequest(success=1, request=request)
+        return requestObj

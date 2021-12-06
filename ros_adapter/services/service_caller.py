@@ -1,8 +1,6 @@
 from protobuf import commander_service_pb2
 from protobuf import commander_service_pb2_grpc
 
-from labust_msgs.srv import PointerPrimitiveService, PointerPrimitiveServiceRequest
-from std_msgs.msg import Int32MultiArray
 
 import rospy
 
@@ -20,6 +18,10 @@ class ServiceCaller(commander_service_pb2_grpc.CommanderServicer):
         pass
 
     def PrimitivePointer(self, request, context):
+        # temp ros1 solution
+        # ROS2 has request and response defined inside class
+        from std_msgs.msg import Int32MultiArray
+        from labust_msgs.srv import PointerPrimitiveService, PointerPrimitiveServiceRequest
         rospy.wait_for_service('/d2/commander/primitive/pointer')
         try:
             pointer_service = rospy.ServiceProxy('/d2/commander/primitive/pointer', PointerPrimitiveService)
