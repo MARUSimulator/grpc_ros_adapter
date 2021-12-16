@@ -7,11 +7,11 @@ from protobuf import tf_pb2
 import utils.ros_handle as rh
 from tf2_msgs.msg import TFMessage
 from threading import Lock
+from geometry_msgs.msg import TransformStamped, Transform
 
 class FrameService(tf_pb2_grpc.TfServicer):
 
     def __init__(self):
-        
         self._static_tfs_lock = Lock()
         self._tfs_lock = Lock()
         self.static_tfs = []
@@ -94,3 +94,24 @@ class FrameService(tf_pb2_grpc.TfServicer):
             yield response
 
             time.sleep(self._thread_sleep_time)
+
+    def PublishFrame(self, request_iterator, context):
+        for request in request_iterator:
+            frame = TransformStamped()
+            frame.header.stamp = rospy.Time.from_sec(request.header.timestamp)
+            frame.header.frame_id = request.frameId
+            frame.child_frame_id = request.childFrameId
+            frame.transform = Transform()
+            frame.transform.translation = request.translation.as_ros()
+            frame.transform.rotation = request.rotation.as_ros()
+
+            from utils.ros_publisher_registry import RosPublisherRegistry
+
+            topic = request.address.lower()
+            if topic.startswith("/"):
+                topic = topic[1:]
+
+            tfmsg = TFMessage()
+            tfmsg.transforms.append(frame)
+            pub = RosPublisherRegistry.get_publisher(topic, TFMessage)
+            pub.publish(tfmsg)
