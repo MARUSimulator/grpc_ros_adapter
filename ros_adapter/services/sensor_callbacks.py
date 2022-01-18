@@ -3,11 +3,12 @@ import inspect, sys
 import numpy as np
 import cv2
 import utils.ros_handle as rh
+from protobuf.sensor_pb2 import PointCloud2
 from utils.ros_publisher_registry import RosPublisherRegistry
 
 from google.protobuf import text_format
 from cv_bridge import CvBridge, CvBridgeError
-from sensor_msgs.msg import Image, Imu, NavSatFix, PointCloud
+from sensor_msgs.msg import Image, Imu, NavSatFix, PointCloud, PointCloud2, PointField
 from std_msgs.msg import Header
 from geometry_msgs.msg import Vector3, Pose, Quaternion, PoseWithCovarianceStamped, Point, TwistWithCovarianceStamped
 
@@ -150,7 +151,7 @@ def publish_ais(request, context):
     pub = RosPublisherRegistry.get_publisher(request.address.lower(), AISPositionReport)
     pub.publish(report)
 
-def publish_lidar(request, context):
+def publish_pointcloud(request, context):
     pointcloud_msg = PointCloud()
     header = Header()
     header.frame_id = request.data.header.frameId
@@ -161,6 +162,33 @@ def publish_lidar(request, context):
     pointcloud_msg.channels = request.data.channels
 
     pub = RosPublisherRegistry.get_publisher(request.address.lower(), PointCloud)
+    pub.publish(pointcloud_msg)
+
+def publish_pointcloud2(request, context):
+    pointcloud_msg = PointCloud2()
+    header = Header()
+    header.frame_id = request.data.header.frameId
+    header.stamp = rh.Time.from_sec(request.data.header.timestamp)
+    pointcloud_msg.header = header
+
+    pointcloud_msg.data = request.data.data
+
+    fields = []
+    for f in request.data.fields:
+        pf = PointField()
+        pf.count = f.count
+        pf.datatype = f.datatype
+        pf.offset = f.offset
+        pf.name = f.name
+        fields.append(pf)
+    pointcloud_msg.fields = fields
+    pointcloud_msg.height = request.data.height
+    pointcloud_msg.width = request.data.width
+    pointcloud_msg.is_bigendian = request.data.isBigEndian
+    pointcloud_msg.point_step = request.data.pointStep
+    pointcloud_msg.row_step = request.data.rowStep
+
+    pub = RosPublisherRegistry.get_publisher(request.address.lower(), PointCloud2)
     pub.publish(pointcloud_msg)
 
 # expose only functions

@@ -127,3 +127,27 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
             self.trigger_callbacks(self.StreamAisSensor, request)
 
         return sensor_streaming_pb2.StreamingResponse(success=True)
+
+    def StreamPointCloud(self, request_iterator, context):
+        """
+        Takes in a gRPC PointCloud2StreamingRequest containing
+        all the data needed to create and publish a PointCloud2
+        ROS message.
+        """
+
+        for request in request_iterator:
+            self.trigger_callbacks(self.StreamPointCloud, request)
+
+        return sensor_streaming_pb2.StreamingResponse(success=True)
+
+    def StreamPointCloud2(self, request_iterator, context):
+        """
+        Takes in a gRPC PointCloudStreamingRequest containing
+        all the data needed to create and publish a PointCloud2
+        ROS message.
+        """
+
+        for request in request_iterator:
+            self.trigger_callbacks(self.StreamPointCloud2, request)
+
+        return sensor_streaming_pb2.StreamingResponse(success=True)
