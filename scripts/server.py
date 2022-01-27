@@ -10,6 +10,7 @@ from protobuf import remote_control_pb2_grpc
 from protobuf import tf_pb2_grpc
 from protobuf import parameter_server_pb2_grpc
 from protobuf import simulation_control_pb2_grpc
+from protobuf import visualization_pb2_grpc
 
 from services.ping_service import PingService
 from services.sensor_streaming import SensorStreaming
@@ -17,14 +18,16 @@ from services.remote_control import RemoteControl
 from services.parameter_server import ParameterServer
 from services.frame_service import FrameService
 from services.simulation_control import SimulationControl
-
+from services.visualization import Visualization
 from services.sensor_callbacks import *
 
 def serve(server_ip, server_port):
     """
     Add service handles to server and start server execution
     """
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=20))
+
+    options = [('grpc.max_receive_message_length', 100 * 1024 * 1024)]
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=20),options = options)
 
 
     ping_pb2_grpc.add_PingServicer_to_server(
@@ -62,6 +65,10 @@ def serve(server_ip, server_port):
 
     simulation_control_pb2_grpc.add_SimulationControlServicer_to_server(
             SimulationControl(), server
+    )
+
+    visualization_pb2_grpc.add_VisualizationServicer_to_server(
+            Visualization(), server
     )
 
     server.add_insecure_port(server_ip + ':' + str(server_port))
