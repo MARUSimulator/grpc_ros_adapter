@@ -21,7 +21,8 @@
   <build_export_depend>std_msgs</build_export_depend>
   <exec_depend>rospy</exec_depend>
   <exec_depend>std_msgs</exec_depend>
-
+  <exec_depend>uuv_sensor_msgs</exec_depend>
+  
 
   <export>
     <build_type condition="$ROS_VERSION == 2">ament_python</build_type>
