@@ -1,4 +1,4 @@
-[submodule "ros_adapter/protobuf"]
-	path = ros_adapter/protobuf
-	url = https://github.com/labust/labustsim-proto
+[submodule "grpc_ros_adapter/protobuf"]
+	path = grpc_ros_adapter/protobuf
+	url = git@github.com:labust/labustsim-proto.git
 	branch = python

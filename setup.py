@@ -1,7 +1,7 @@
 from setuptools import setup
 import os
 from glob import glob
-package_name = 'ros_adapter'
+package_name = 'grpc_ros_adapter'
 submodules = [f'{package_name}/protobuf', f'{package_name}/services', f'{package_name}/utils']
 setup(
     name=package_name,

@@ -6,10 +6,10 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument('debug', default_value='false'),
         Node(
-            package='ros_adapter',
+            package='grpc_ros_adapter',
             executable='server',
-            namespace='ros_adapter',
-            name='ros_adapter',
+            namespace='grpc_ros_adapter',
+            name='grpc_ros_adapter',
             parameters=[
             {
                 "server_ip" : "0.0.0.0",

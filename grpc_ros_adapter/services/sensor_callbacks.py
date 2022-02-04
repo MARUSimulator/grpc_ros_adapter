@@ -136,7 +136,7 @@ def publish_gnss(request, context):
     pass
 
 def publish_ais(request, context):
-    from ros_adapter.msg import AISPositionReport
+    from grpc_ros_adapter.msg import AISPositionReport
     report = AISPositionReport()
     report.type = request.aisPositionReport.type
     report.mmsi = request.aisPositionReport.mmsi

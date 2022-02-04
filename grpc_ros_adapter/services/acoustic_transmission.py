@@ -2,7 +2,6 @@ import utils.ros_handle as rh
 from utils import topic_streamer
 from utils.ros_publisher_registry import RosPublisherRegistry
 
-# from ros_adapter.msg import NanomodemPayload, NanomodemRequest
 from std_msgs.msg import Header
 from labust_msgs.msg import NanomodemRange, NanomodemPayload, NanomodemRequest
 

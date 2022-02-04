@@ -14,7 +14,7 @@ import protobuf.geometry_pb2 as geometry_proto
 import geometry_msgs.msg as geometry_ros
 import underwater_msgs.msg as underwater_ros
 
-PACKAGE_NAME = "ros_adapter"
+PACKAGE_NAME = "grpc_ros_adapter"
 NODE_TYPE = "server.py"
 
 @pytest.fixture(scope="module")
