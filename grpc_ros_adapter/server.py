@@ -1,18 +1,16 @@
 #!/usr/bin/env python3
-import sys, os
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from concurrent import futures
+import rospy
 import grpc
 
 from protobuf import ping_pb2_grpc
 from protobuf import sensor_streaming_pb2_grpc
-from protobuf import commander_service_pb2_grpc
 from protobuf import remote_control_pb2_grpc
 from protobuf import tf_pb2_grpc
 from protobuf import parameter_server_pb2_grpc
 from protobuf import simulation_control_pb2_grpc
-from protobuf import acoustic_transmission_pb2_grpc
+from protobuf import visualization_pb2_grpc
 
 from services.ping_service import PingService
 from services.sensor_streaming import SensorStreaming
@@ -20,17 +18,16 @@ from services.remote_control import RemoteControl
 from services.parameter_server import ParameterServer
 from services.frame_service import FrameService
 from services.simulation_control import SimulationControl
-from services.acoustic_transmission import AcousticTransmission
-# from services.service_caller import ServiceCaller
-
+from services.visualization import Visualization
 from services.sensor_callbacks import *
-import utils.ros_handle as rh 
 
 def serve(server_ip, server_port):
     """
     Add service handles to server and start server execution
     """
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=20), )
+
+    options = [('grpc.max_receive_message_length', 100 * 1024 * 1024)]
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=20),options = options)
 
 
     ping_pb2_grpc.add_PingServicer_to_server(
@@ -43,19 +40,16 @@ def serve(server_ip, server_port):
         "StreamPoseSensor": [ publish_pose ],
         "StreamDepthSensor": [ publish_depth ],
         "StreamDvlSensor": [ publish_dvl ],
-        "StreamSonarSensor": [ publish_pointcloud ],
+        "StreamSonarSensor": [ publish_sonar ],
         "StreamSonarFixSensor": [ publish_sonar_fix ],
         "StreamAisSensor" : [ publish_ais ],
         "StreamGnssSensor" : [ publish_gnss ],
-        "StreamLidarSensor" : [ publish_pointcloud ],
-        "StreamPointCloud" : [ publish_pointcloud ],
-        "StreamPointCloud2" : [ publish_pointcloud2 ]
+        "StreamLidarSensor" : [publish_pointcloud]
     }
 
     sensor_streaming_pb2_grpc.add_SensorStreamingServicer_to_server(
             SensorStreaming(sensor_streaming_callbacks),
             server)
-
 
     remote_control_pb2_grpc.add_RemoteControlServicer_to_server(
             RemoteControl(), server
@@ -72,43 +66,24 @@ def serve(server_ip, server_port):
     simulation_control_pb2_grpc.add_SimulationControlServicer_to_server(
             SimulationControl(), server
     )
-# works only for ros1
-#     commander_service_pb2_grpc.add_CommanderServicer_to_server(
-#             ServiceCaller(),
-#             server)
-    
 
-    acoustic_transmission_pb2_grpc.add_AcousticTransmissionServicer_to_server(
-            AcousticTransmission(), server
+    visualization_pb2_grpc.add_VisualizationServicer_to_server(
+            Visualization(), server
     )
 
     server.add_insecure_port(server_ip + ':' + str(server_port))
     print(server_ip + ":" + str(server_port))
     server.start()
-    rh.spin()
+    rospy.spin()
 #     server.wait_for_termination()
 
 
-def main(args=None):
 
-    _default_parameters = {
-        "LocalOriginLat" : float(45),
-        "LocalOriginLon" : float(12)
-    }
+if __name__ == '__main__':
 
-    rh.init("ros_adapter", "ros_adapter", args)
-    server_ip = rh.get_param("server_ip") or "0.0.0.0"
-    server_port = rh.get_param("port") or 30053
-
-    for k, v in _default_parameters.items():
-        rh.set_param(k, v)
+    rospy.init_node('syntetic_data')
+    server_params = rospy.get_param('~')
+    server_ip = server_params["server_ip"]
+    server_port = server_params["server_port"]
 
     serve(server_ip, server_port)
-
-
-if __name__ == "__main__":
-    main()
-
-
-
-

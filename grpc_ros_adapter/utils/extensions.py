@@ -1,8 +1,8 @@
 from functools import wraps, partial
 import numpy as np
 
-from std_msgs.msg import Float32
-from geometry_msgs.msg import Vector3, Quaternion
+from std_msgs.msg import Float32, ColorRGBA
+from geometry_msgs.msg import Vector3, Quaternion, Pose, Point
 import protobuf.std_pb2 as std
 import protobuf.geometry_pb2 as geometry
 
@@ -54,3 +54,38 @@ def quaternion_as_msg(self):
 @add_method(geometry.Quaternion, "as_ros")
 def quaternion_as_ros(self):
     return Quaternion(self.x, self.y, self.z, self.w)
+
+@add_method(geometry.Point, "as_ros")
+def point_as_ros(self):
+    ret = Point()
+    ret.x = self.x
+    ret.y = self.y
+    ret.z = self.z
+    return ret
+
+@add_method(Point, "as_msg")
+def point_as_msg(self):
+    ret = geometry.Point()
+    ret.x, ret.x, ret.z = self.x, self.y, self.z
+    return ret
+
+
+@add_method(geometry.Pose, "as_ros")
+def pose_as_ros(self):
+    ret = Pose()
+    ret.position = self.position.as_ros()
+    ret.orientation = self.orientation.as_ros()
+    return ret
+
+@add_method(Pose, "as_msg")
+def pose_as_msg(self):
+    ret = geometry.Pose()
+    ret.position.CopyFrom(self.position.as_msg())
+    ret.orientation.CopyFrom(self.orientation.as_msg())
+    return ret
+
+@add_method(ColorRGBA, "as_msg")
+def color_as_msg(self):
+    ret = std.ColorRGBA()
+    ret.r, ret.g, ret.b, ret.a = self.r, self.g, self.b, self.a
+    return ret
