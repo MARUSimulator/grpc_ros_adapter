@@ -3,6 +3,7 @@ import time
 
 from protobuf import tf_pb2_grpc
 from protobuf import tf_pb2
+import rospy
 
 import utils.ros_handle as rh
 from tf2_msgs.msg import TFMessage
@@ -37,7 +38,7 @@ class FrameService(tf_pb2_grpc.TfServicer):
             tf.header.frame_id = tf.header.frame_id[1:]
 
 
-    def tf_callback(self, message):
+    def tf_callback(self, message, dummy):
         with self._tfs_lock:
             for new_tf in message.transforms:
                 self._standardize_tf(new_tf)
