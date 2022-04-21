@@ -57,7 +57,6 @@ class Streamer:
                 self._address_to_clients_map[address].append(client_id)
 
         while True:
-            
             # if connection closed
             if not context.is_active():
                 self._remove_client(request, context)
@@ -66,7 +65,7 @@ class Streamer:
             if request_buffer.empty():
                 time.sleep(self._thread_sleep_if_empty)
                 continue
-            
+
             data = None
             try:
                 data = request_buffer.get(timeout=1)

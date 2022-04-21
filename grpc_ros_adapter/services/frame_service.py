@@ -3,7 +3,6 @@ import time
 
 from protobuf import tf_pb2_grpc
 from protobuf import tf_pb2
-import rospy
 
 import utils.ros_handle as rh
 from tf2_msgs.msg import TFMessage
@@ -21,7 +20,7 @@ class FrameService(tf_pb2_grpc.TfServicer):
         self._thread_sleep_time = 0.01
         rh.Subscription(TFMessage, "/tf", self.tf_callback, 10)
         rh.Subscription(TFMessage, "/tf_static", self.static_tf_callback, 10)
-    
+
     def _find_tf_in_list(self, tf, l):
         return next(((i, v) for i, v in enumerate(l) \
             if v.child_frame_id == tf.child_frame_id \
@@ -99,7 +98,7 @@ class FrameService(tf_pb2_grpc.TfServicer):
     def PublishFrame(self, request_iterator, context):
         for request in request_iterator:
             frame = TransformStamped()
-            frame.header.stamp = rospy.Time.from_sec(request.header.timestamp)
+            frame.header.stamp = rh.Time.from_sec(request.header.timestamp)
             frame.header.frame_id = request.frameId
             frame.child_frame_id = request.childFrameId
             frame.transform = Transform()

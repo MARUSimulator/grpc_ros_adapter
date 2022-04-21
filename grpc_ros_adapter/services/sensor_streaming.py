@@ -1,8 +1,8 @@
 
-import utils.extensions
+from protobuf.sensor_pb2 import PointCloud2
 from protobuf import sensor_streaming_pb2
 from protobuf import sensor_streaming_pb2_grpc
-
+from utils import topic_streamer
 
 class Context:
     pass
@@ -151,3 +151,38 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
             self.trigger_callbacks(self.StreamPointCloud2, request)
 
         return sensor_streaming_pb2.StreamingResponse(success=True)
+
+    def GetPointCloud2(self, request, context):
+        from sensor_msgs.msg import PointCloud2 as PC2
+        _streamer = topic_streamer.Streamer(lambda x: x, PC2)
+        print("connected to pc2")
+        for msg in _streamer.start_stream(request, context):
+            from protobuf.sensor_pb2 import PointCloud2
+            response = sensor_streaming_pb2.PointCloud2StreamingRequest()
+            response.data.height = msg.height
+            response.data.width = msg.width
+            response.data.isBigEndian = msg.is_bigendian
+            response.data.pointStep = msg.point_step
+            response.data.rowStep = msg.row_step
+            response.data.is_dense = msg.is_dense
+
+            response.data.header.timestamp = msg.header.stamp.to_sec()
+            response.data.header.frameId = msg.header.frame_id
+
+            response.data.data = msg.data
+            from protobuf.sensor_pb2 import PointField
+            fields = []
+            for pf in msg.fields:
+                field = PointField()
+                field.name = pf.name
+                field.offset = pf.offset
+                field.datatype = pf.datatype
+                field.count = pf.count
+                fields.append(field)
+            response.data.fields.extend(fields)
+
+            callbacks = self._callbacks.get("GetPointCloud2", [])
+            for c in callbacks:
+                c(response, context)
+            print("pointcloud sent")
+            yield response
