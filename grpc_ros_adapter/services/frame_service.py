@@ -105,7 +105,7 @@ class FrameService(tf_pb2_grpc.TfServicer):
             frame.transform.translation = request.translation.as_ros()
             frame.transform.rotation = request.rotation.as_ros()
 
-            from utils.ros_publisher_registry import RosPublisherRegistry
+            from grpc_ros_adapter.grpc_ros_adapter.utils.ros_registry import RosRegistry
 
             topic = request.address.lower()
             if topic.startswith("/"):
@@ -113,5 +113,5 @@ class FrameService(tf_pb2_grpc.TfServicer):
 
             tfmsg = TFMessage()
             tfmsg.transforms.append(frame)
-            pub = RosPublisherRegistry.get_publisher(topic, TFMessage)
+            pub = RosRegistry.get_publisher(topic, TFMessage)
             pub.publish(tfmsg)

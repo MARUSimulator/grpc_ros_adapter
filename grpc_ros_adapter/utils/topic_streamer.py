@@ -4,7 +4,7 @@ import utils.ros_handle as rh
 import time
 from queue import Queue, Empty
 
-from labust_msgs.msg import NanomodemRequest
+# from labust_msgs.msg import NanomodemRequest
 
 class Streamer:
 

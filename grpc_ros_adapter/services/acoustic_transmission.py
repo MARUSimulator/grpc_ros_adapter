@@ -1,6 +1,6 @@
 import utils.ros_handle as rh
 from utils import topic_streamer
-from utils.ros_publisher_registry import RosPublisherRegistry
+from utils.ros_registry import RosRegistry
 
 from std_msgs.msg import Header
 from labust_msgs.msg import NanomodemRange, NanomodemPayload, NanomodemRequest
@@ -54,7 +54,7 @@ class AcousticTransmission(acoustic_transmission_pb2_grpc.AcousticTransmissionSe
 
             pub_address = request.address.lower()
 
-        pub = RosPublisherRegistry.get_publisher(pub_address, msgType)
+        pub = RosRegistry.get_publisher(pub_address, msgType)
         pub.publish(msg)
 
         callbacks = self._callbacks.get("ReturnAcousticPayload", [])
@@ -62,6 +62,7 @@ class AcousticTransmission(acoustic_transmission_pb2_grpc.AcousticTransmissionSe
             c(request, context)
 
         yield acoustic_transmission_pb2.AcousticResponse(success=1)
+
     @staticmethod
     def make_response(nanomodem_req):
         request = labust_pb2.NanomodemRequest()

@@ -20,12 +20,23 @@ class ProtoRosTranslator:
 
     """
 
-    def __init__(self, proto_msg_list, ros_msg_list, 
-            ros2proto_custom_translator=None, proto2ros_custom_translator=None):
-        self.ros_msgs = dict(zip((msg._type for msg in ros_msg_list), ros_msg_list))
-        self.proto_msgs = dict(zip((msg.full_name for msg in proto_msg_list), proto_msg_list))
+    def __init__(self, 
+            proto_msg_list : list = None, 
+            ros_msg_list : list = None, 
+            ros2proto_custom_translator : dict  = None, 
+            proto2ros_custom_translator : dict = None,
+            proto_remaps : list = None):
+
+        proto_msg_list = proto_msg_list or get_all_proto_msgs()
+        ros_msg_list = ros_msg_list or get_all_ros_msgs()
         self.ros2proto_custom_translator = ros2proto_custom_translator or {}
         self.proto2ros_custom_translator = proto2ros_custom_translator or {}
+
+
+        self.proto_remaps = proto_remaps or {}
+
+        self.ros_msgs = dict(zip((msg._type for msg in ros_msg_list), ros_msg_list))
+        self.proto_msgs = dict(zip((msg.full_name for msg in proto_msg_list), proto_msg_list))
 
 
     def add_proto_msgs(self, proto_msgs):
@@ -119,12 +130,14 @@ class ProtoRosTranslator:
 
     def get_proto_msg_cls_for_ros_msg(self, ros_msg):
         ros_msg_name = ros_msg._type
-        replace_slashes = ros_msg_name.replace("/", ".")
-        maybe_msg = self.proto_msgs.get(replace_slashes, None)
+        ros_msg_name = ros_msg_name.replace("/", ".")
+        for remap_to, remap_from in self.proto_remaps.items():
+            ros_msg_name = ros_msg_name.replace(remap_from, remap_to)
+        maybe_msg = self.proto_msgs.get(ros_msg_name, None)
         if maybe_msg:
             return maybe_msg
 
-        split = replace_slashes.split(".")
+        split = ros_msg_name.split(".")
         new_try_path_list = [(name.replace("_msgs", ".") if i != len(split)-1 else name) for (i, name) in enumerate(split) ]
         new_try_path = "".join(new_try_path_list)
         maybe_msg = self.proto_msgs.get(new_try_path, None)
@@ -133,12 +146,14 @@ class ProtoRosTranslator:
     def get_ros_msg_cls_for_proto_msg(self, proto_msg):
 
         proto_msg_name = proto_msg.DESCRIPTOR.full_name
-        replace_dots = proto_msg_name.replace(".", "/")
-        maybe_msg = self.ros_msgs.get(replace_dots, None)
+        proto_msg_name = proto_msg_name.replace(".", "/")
+        for remap_from, remap_to in self.proto_remaps.items():
+            proto_msg_name = proto_msg_name.replace(remap_from, remap_to)
+        maybe_msg = self.ros_msgs.get(proto_msg_name, None)
         if maybe_msg:
             return maybe_msg
 
-        split = replace_dots.split("/")
+        split = proto_msg_name.split("/")
         new_try_path_list = [(name + "_msgs/" if i != len(split)-1 else name) for (i, name) in enumerate(split) ]
         new_try_path = "".join(new_try_path_list)
         maybe_msg = self.ros_msgs.get(new_try_path, None)
@@ -181,7 +196,11 @@ class ProtoRosTranslator:
                 setattr(proto_msg, name, value)
                 return
             elif self.is_ros_list(ros_value):
-                field.extend(self._ros2proto_list(ros_value))
+                if isinstance(field, bytes):
+                    value = bytes(ros_value)
+                    setattr(proto_msg, name, value)
+                else:
+                    field.extend(self._ros2proto_list(ros_value))
                 return
             elif self.is_ros_obj(ros_value):
                 field.CopyFrom(self._ros2proto_obj(ros_value))
@@ -201,6 +220,9 @@ class ProtoRosTranslator:
         return ret_list
 
     def _proto2ros_list(self, field_info, proto_list):
+        if field_info.type == descriptor.FieldDescriptor.TYPE_BYTES:
+            return proto_list
+
         ret_list = []
         for item in proto_list:
             ret_list.append(self._proto2ros_token(field_info, item, from_list=True))
@@ -241,7 +263,8 @@ class ProtoRosTranslator:
         raise Exception("Error while translating proto to ros message!")
 
     def is_ros_list(self, ros_value):
-        return isinstance(ros_value, list)
+        return isinstance(ros_value, list) or \
+            isinstance(ros_value, tuple)
 
     def is_ros_obj(self, ros_value):
         return self.is_ros_msg(ros_value)
@@ -252,7 +275,9 @@ class ProtoRosTranslator:
                 isinstance(ros_value, str)
 
     def is_proto_list(self, field_info, from_list=False):
-        return not from_list and field_info.label == descriptor.FieldDescriptor.LABEL_REPEATED
+        return not from_list and \
+            (field_info.label == descriptor.FieldDescriptor.LABEL_REPEATED 
+            or field_info.type == descriptor.FieldDescriptor.TYPE_BYTES)
 
     def is_proto_obj(self, field_info, from_list=False):
         return field_info.type == descriptor.FieldDescriptor.TYPE_MESSAGE \

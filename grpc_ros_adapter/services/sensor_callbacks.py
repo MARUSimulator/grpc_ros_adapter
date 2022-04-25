@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 import utils.ros_handle as rh
 from protobuf.sensor_pb2 import PointCloud2
-from utils.ros_publisher_registry import RosPublisherRegistry
+from utils.ros_registry import RosRegistry
 
 from google.protobuf import text_format
 from cv_bridge import CvBridge, CvBridgeError
@@ -40,7 +40,7 @@ def publish_image(request, context):
     except CvBridgeError as e:
         print(e)
 
-    pub = RosPublisherRegistry.get_publisher(request.address.lower(), Image)
+    pub = RosRegistry.get_publisher(request.address.lower(), Image)
     pub.publish(msg)
 
 
@@ -54,7 +54,7 @@ def publish_imu(request, context):
     imu.angular_velocity = request.data.angularVelocity.as_ros()
     imu.orientation = request.data.orientation.as_ros()
 
-    pub = RosPublisherRegistry.get_publisher(request.address.lower(), Imu)
+    pub = RosRegistry.get_publisher(request.address.lower(), Imu)
     pub.publish(imu)
 
 
@@ -71,7 +71,7 @@ def publish_pose(request, context):
     nav.body_velocity = request.data.bodyVelocity.as_ros()
     nav.orientation_rate = request.data.orientationRate.as_ros()
 
-    pub = RosPublisherRegistry.get_publisher(request.address.lower(), NavigationStatus)
+    pub = RosRegistry.get_publisher(request.address.lower(), NavigationStatus)
     pub.publish(nav)
 
 def publish_depth(request, context):
@@ -81,7 +81,7 @@ def publish_depth(request, context):
     pose.pose.pose.position = Point(x=0, y=0, z=-request.data.pose.pose.position.z)
     #pose.pose.covariance = request.data.pose.covariance
 
-    pub = RosPublisherRegistry.get_publisher(request.address.lower(), PoseWithCovarianceStamped)
+    pub = RosRegistry.get_publisher(request.address.lower(), PoseWithCovarianceStamped)
     pub.publish(pose)
 
 def publish_dvl(request, context):
@@ -93,7 +93,7 @@ def publish_dvl(request, context):
     dvl.header.frame_id = request.data.header.frameId
     dvl.twist.twist.linear = request.data.twist.twist.linear.as_ros()
 
-    pub = RosPublisherRegistry.get_publisher(request.address.lower(), TwistWithCovarianceStamped)
+    pub = RosRegistry.get_publisher(request.address.lower(), TwistWithCovarianceStamped)
     pub.publish(dvl)
 
 def publish_sonar_fix(request, context):
@@ -103,7 +103,7 @@ def publish_sonar_fix(request, context):
     sonar = SonarFix()
     sonar.bearing = request.bearing
     sonar.range = request.range
-    pub = RosPublisherRegistry.get_publisher(request.address.lower(), SonarFix)
+    pub = RosRegistry.get_publisher(request.address.lower(), SonarFix)
     pub.publish(sonar)
 
 
@@ -117,7 +117,7 @@ def publish_sonar(request, context):
     pointcloud_msg.points = request.data.points
     pointcloud_msg.channels = request.data.channels
 
-    pub = RosPublisherRegistry.get_publisher(request.address.lower(), PointCloud)
+    pub = RosRegistry.get_publisher(request.address.lower(), PointCloud)
     pub.publish(pointcloud_msg)
 
 
@@ -131,7 +131,7 @@ def publish_gnss(request, context):
     geo_point.longitude = request.data.longitude
     geo_point.altitude = request.data.altitude
 
-    pub = RosPublisherRegistry.get_publisher(request.address.lower(), NavSatFix)
+    pub = RosRegistry.get_publisher(request.address.lower(), NavSatFix)
     pub.publish(geo_point)
     pass
 
@@ -148,7 +148,7 @@ def publish_ais(request, context):
     report.position = point
     report.speedOverGround = request.aisPositionReport.speedOverGround
     report.courseOverGround = request.aisPositionReport.courseOverGround
-    pub = RosPublisherRegistry.get_publisher(request.address.lower(), AISPositionReport)
+    pub = RosRegistry.get_publisher(request.address.lower(), AISPositionReport)
     pub.publish(report)
 
 def publish_pointcloud(request, context):
@@ -161,7 +161,7 @@ def publish_pointcloud(request, context):
     pointcloud_msg.points = request.data.points
     pointcloud_msg.channels = request.data.channels
 
-    pub = RosPublisherRegistry.get_publisher(request.address.lower(), PointCloud)
+    pub = RosRegistry.get_publisher(request.address.lower(), PointCloud)
     pub.publish(pointcloud_msg)
 
 def publish_pointcloud2(request, context):
@@ -188,7 +188,7 @@ def publish_pointcloud2(request, context):
     pointcloud_msg.point_step = request.data.pointStep
     pointcloud_msg.row_step = request.data.rowStep
 
-    pub = RosPublisherRegistry.get_publisher(request.address.lower(), PointCloud2)
+    pub = RosRegistry.get_publisher(request.address.lower(), PointCloud2)
     pub.publish(pointcloud_msg)
 
 # expose only functions
