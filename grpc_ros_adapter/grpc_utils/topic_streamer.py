@@ -31,10 +31,10 @@ class Streamer:
         rh.Subscription(msg_type, address, callback, 10)
 
     def start_stream(self, request, context):
-        
-        client_id = context.peer() 
+
+        client_id = context.peer()
         address = request.address.lower()
-        request_buffer = Queue(100) # every client has a request buffer for every veh it controls 
+        request_buffer = Queue(100) # every client has a request buffer for every veh it controls
 
         # add buffer to registered clients
         self._registered_clients[(client_id, address)] = request_buffer

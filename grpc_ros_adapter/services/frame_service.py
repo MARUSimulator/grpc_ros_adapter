@@ -29,7 +29,7 @@ class FrameService(tf_pb2_grpc.TfServicer):
 
     def _standardize_tf(self, tf):
         """
-        Some tfs have '/' character at the beginning of the name. 
+        Some tfs have '/' character at the beginning of the name.
         It is removed
         """
         if tf.child_frame_id.startswith('/'):

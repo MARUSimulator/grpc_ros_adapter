@@ -62,6 +62,7 @@ class AcousticTransmission(acoustic_transmission_pb2_grpc.AcousticTransmissionSe
             c(request, context)
 
         yield acoustic_transmission_pb2.AcousticResponse(success=1)
+
     @staticmethod
     def make_response(nanomodem_req):
         request = labust_pb2.AcousticModemRequest()
