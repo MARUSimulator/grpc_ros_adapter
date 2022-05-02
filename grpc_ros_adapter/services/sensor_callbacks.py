@@ -46,22 +46,19 @@ def publish_image(request, context):
 
 
 def publish_imu(request, context):
-    try:
-        imu = Imu()
+    imu = Imu()
 
-        imu.header.stamp = rh.Time.from_sec(request.data.header.timestamp)
-        imu.header.frame_id = request.data.header.frameId
-        imu.linear_acceleration = request.data.linearAcceleration.as_ros()
-        print("1")
-        imu.angular_velocity = request.data.angularVelocity.as_ros()
-        print("2")
-        imu.orientation = request.data.orientation.as_ros()
-        print("3")
+    imu.header.stamp = rh.Time.from_sec(request.data.header.timestamp)
+    imu.header.frame_id = request.data.header.frameId
+    imu.linear_acceleration = request.data.linearAcceleration.as_ros()
+    print("1")
+    imu.angular_velocity = request.data.angularVelocity.as_ros()
+    print("2")
+    imu.orientation = request.data.orientation.as_ros()
+    print("3")
 
-        pub = RosPublisherRegistry.get_publisher(request.address.lower(), Imu)
-        pub.publish(imu)
-    except Exception as e:
-        print(e)
+    pub = RosPublisherRegistry.get_publisher(request.address.lower(), Imu)
+    pub.publish(imu)
 
 
 def publish_pose(request, context):

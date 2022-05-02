@@ -41,12 +41,9 @@ def vector_as_msg(self):
 
 @add_method(geometry.Vector3, "as_ros")
 def vector_as_ros(self):
-    try:
-        v = np.array([self.x, self.y, self.z , 1])
-        # v = _UNITY_TO_ROS_TRANSFORM.dot(v)
-        return Vector3(v[0], v[1], v[2])
-    except Exception as e:
-        print(e)
+    v = np.array([self.x, self.y, self.z , 1])
+    # v = _UNITY_TO_ROS_TRANSFORM.dot(v)
+    return Vector3(v[0], v[1], v[2])
 
 @add_method(Quaternion, "as_msg")
 def quaternion_as_msg(self):

@@ -152,10 +152,9 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
 
         return sensor_streaming_pb2.StreamingResponse(success=True)
 
-    def GetPointCloud2(self, request, context):
+    def RequestPointCloud2(self, request, context):
         from sensor_msgs.msg import PointCloud2 as PC2
         _streamer = topic_streamer.Streamer(lambda x: x, PC2)
-        print("connected to pc2")
         for msg in _streamer.start_stream(request, context):
             from protobuf.sensor_pb2 import PointCloud2
             response = sensor_streaming_pb2.PointCloud2StreamingRequest()
@@ -181,8 +180,7 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
                 fields.append(field)
             response.data.fields.extend(fields)
 
-            callbacks = self._callbacks.get("GetPointCloud2", [])
+            callbacks = self._callbacks.get("RequestPointCloud2", [])
             for c in callbacks:
                 c(response, context)
-            print("pointcloud sent")
             yield response
