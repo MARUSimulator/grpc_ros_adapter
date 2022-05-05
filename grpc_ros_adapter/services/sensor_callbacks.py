@@ -3,6 +3,7 @@ import inspect, sys
 import numpy as np
 import cv2
 import utils.ros_handle as rh
+import utils.extensions
 from protobuf.sensor_pb2 import PointCloud2
 from utils.ros_publisher_registry import RosPublisherRegistry
 
@@ -45,7 +46,6 @@ def publish_image(request, context):
 
 
 def publish_imu(request, context):
-
     imu = Imu()
 
     imu.header.stamp = rh.Time.from_sec(request.data.header.timestamp)
