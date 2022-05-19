@@ -14,8 +14,6 @@ class Streamer:
     """
     def __init__(self, make_response, topic_msg_type, callbacks={}):
 
-        self._client_lock = threading.RLock()       
-        self._address_lock = threading.RLock()       
         # map clients to their buffers
         self._registered_clients = {}
         # map address to clients that are listening to it
@@ -31,10 +29,8 @@ class Streamer:
 
     def _subscribe_to_topic(self, address, msg_type):
         def callback(msg, *args):
-            with self._address_lock:
-                with self._client_lock:
-                    for cl in self._address_to_clients_map[address]:
-                        self._registered_clients[(cl, address)].put(msg)
+            for cl in self._address_to_clients_map[address]:
+                self._registered_clients[(cl, address)].put(msg, block=False)
 
         rh.Subscription(msg_type, address, callback, 10)
 
@@ -45,16 +41,14 @@ class Streamer:
         request_buffer = Queue(100) # every client has a request buffer for every veh it controls 
 
         # add buffer to registered clients
-        with self._client_lock:
-            self._registered_clients[(client_id, address)] = request_buffer
+        self._registered_clients[(client_id, address)] = request_buffer
 
         # subscribe to topic if client is not already listening to it
-        with self._address_lock:
-            if address not in self._address_to_clients_map:
-                self._subscribe_to_topic(address, self._topic_msg_type)
-                self._address_to_clients_map[address] = [ client_id ]
-            if client_id not in self._address_to_clients_map[address]:
-                self._address_to_clients_map[address].append(client_id)
+        if address not in self._address_to_clients_map:
+            self._subscribe_to_topic(address, self._topic_msg_type)
+            self._address_to_clients_map[address] = [ client_id ]
+        if client_id not in self._address_to_clients_map[address]:
+            self._address_to_clients_map[address].append(client_id)
 
         while True:
             # if connection closed
@@ -81,13 +75,10 @@ class Streamer:
             yield response
 
     def _remove_client(self, request, context):
-        veh_id = request.vehId
+        address = request.address.lower()
         client_id = context.peer()
-
-        with self._address_lock:
-            cl_list = self._address_to_clients_map[veh_id]
-            cl_list.remove(client_id)
-
-        with self._client_lock:
-            self._registered_clients.pop((client_id, veh_id))
+        
+        cl_list = self._address_to_clients_map[address]
+        cl_list.remove(client_id)
+        self._registered_clients.pop((client_id, address))
 

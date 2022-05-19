@@ -18,11 +18,11 @@ IS_INIT = False
 if not IS_INIT:
     _NODE = None
 
-def init(node_name, namespace, args):
+def init(node_name, namespace="", args=[]):
     global _NODE
     global IS_INIT
     if ROS_VERSION == ROS_1:
-        _NODE = _HANDLER.init_node(node_name)
+        _NODE = _HANDLER.init_node(node_name, argv=args)
     if ROS_VERSION == ROS_2:
         _HANDLER.init(args=args)
         _NODE = _HANDLER.create_node(
@@ -47,11 +47,13 @@ def spin_once():
         _HANDLER.spin_once(_NODE)
 
 
-def get_param(param_name, defalut=None):
+def get_param(param_name:str, default=None):
     if ROS_VERSION == ROS_1:
-        return _HANDLER.get_param(f"{param_name}", defalut)
+        return _HANDLER.get_param(f"{param_name}", default)
     if ROS_VERSION == ROS_2:
-        p =  _NODE.get_parameter_or(param_name, defalut)
+        if param_name.startswith('~'):
+            param_name = param_name[1:]
+        p =  _NODE.get_parameter_or(param_name, default)
         return p and p.value
 
 def set_param(param_name, value):

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from concurrent import futures
-import rospy
+import utils.ros_handle as rh
 import grpc
 
 from protobuf import ping_pb2_grpc
@@ -78,16 +78,15 @@ def serve(server_ip, server_port):
     server.add_insecure_port(server_ip + ':' + str(server_port))
     print(server_ip + ":" + str(server_port))
     server.start()
-    rospy.spin()
+    rh.spin()
 #     server.wait_for_termination()
 
 
 
 if __name__ == '__main__':
 
-    rospy.init_node('syntetic_data')
-    server_params = rospy.get_param('~')
-    server_ip = server_params["server_ip"]
-    server_port = server_params["server_port"]
+    rh.init('syntetic_data')
+    server_ip = rh.get_param("~server_ip") or "[::]"
+    server_port = rh.get_param("~server_port") or 30052
 
     serve(server_ip, server_port)
