@@ -25,6 +25,8 @@ After cloning, run following command to pull latest proto generated source files
 * If you encounter build errors, you can try building with python3:
 `catkin build -DPYTHON_EXECUTABLE=/usr/bin/python3 -DPYTHON_INCLUDE_DIR=/usr/include/python3.7m`
 
+* `source devel/setup.bash`
+
 * Start grpc server:
 `roslaunch grpc_ros_adapter launch_server.launch`
 
