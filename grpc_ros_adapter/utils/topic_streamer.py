@@ -4,8 +4,6 @@ import utils.ros_handle as rh
 import time
 from queue import Queue, Empty
 
-from labust_msgs.msg import NanomodemRequest
-
 class Streamer:
 
     """
@@ -23,9 +21,7 @@ class Streamer:
 
         self._topic_msg_type = topic_msg_type
         self._make_response = make_response
-        
 
-    
 
     def _subscribe_to_topic(self, address, msg_type):
         def callback(msg, *args):

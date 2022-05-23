@@ -3,7 +3,7 @@ from utils import topic_streamer
 from utils.ros_publisher_registry import RosPublisherRegistry
 
 from std_msgs.msg import Header
-from labust_msgs.msg import NanomodemRange, NanomodemPayload, NanomodemRequest
+from uuv_sensor_msgs.msg import AcousticModemRange, AcousticModemPayload, AcousticModemRequest
 
 from protobuf import labust_pb2
 from protobuf import acoustic_transmission_pb2
@@ -16,7 +16,7 @@ class AcousticTransmission(acoustic_transmission_pb2_grpc.AcousticTransmissionSe
     """
     def __init__(self, callbacks={}):
         self._streamer = topic_streamer.Streamer(
-                AcousticTransmission.make_response, NanomodemRequest)
+                AcousticTransmission.make_response, AcousticModemRequest)
 
     def StreamAcousticRequests(self, request, context):
         for msg in self._streamer.start_stream(request, context):
@@ -27,8 +27,8 @@ class AcousticTransmission(acoustic_transmission_pb2_grpc.AcousticTransmissionSe
         msg = None
 
         if len(str(request.range)) > 0:
-            msgType = NanomodemRange
-            msg = NanomodemRange()
+            msgType = AcousticModemRange
+            msg = AcousticModemRange()
             msg.range = request.range.range
             msg.range_m = request.range.rangeM
             msg.id = request.range.id
@@ -41,8 +41,8 @@ class AcousticTransmission(acoustic_transmission_pb2_grpc.AcousticTransmissionSe
             pub_address = request.address.lower()
 
         elif len(str(request.payload)) > 0:
-            msgType = NanomodemPayload
-            msg = NanomodemPayload()
+            msgType = AcousticModemPayload
+            msg = AcousticModemPayload()
             msg.msg_type = request.payload.msgType
             msg.msg = request.payload.msg
             msg.sender_id = request.payload.senderId
@@ -64,7 +64,7 @@ class AcousticTransmission(acoustic_transmission_pb2_grpc.AcousticTransmissionSe
         yield acoustic_transmission_pb2.AcousticResponse(success=1)
     @staticmethod
     def make_response(nanomodem_req):
-        request = labust_pb2.NanomodemRequest()
+        request = labust_pb2.AcousticModemRequest()
         request.reqType = nanomodem_req.req_type - 1
         request.scheduled = nanomodem_req.scheduled
         request.msg = nanomodem_req.msg
