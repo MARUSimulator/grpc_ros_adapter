@@ -26,7 +26,7 @@ def serve(server_ip, server_port):
     Add service handles to server and start server execution
     """
     MAX_MESSAGE_LENGTH = 100 * 1024 * 1024
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=20),
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=100),
     options=[
         ('grpc.max_send_message_length', MAX_MESSAGE_LENGTH),
         ('grpc.max_receive_message_length', MAX_MESSAGE_LENGTH),
@@ -79,6 +79,7 @@ def serve(server_ip, server_port):
     print(server_ip + ":" + str(server_port))
     server.start()
     rh.spin()
+    server.stop(1)
 #     server.wait_for_termination()
 
 
