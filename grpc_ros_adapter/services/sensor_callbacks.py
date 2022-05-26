@@ -99,7 +99,7 @@ def publish_dvl(request, context):
 def publish_sonar_fix(request, context):
 
     from underwater_msgs.msg import SonarFix
-    not tested
+    # not tested
     sonar = SonarFix()
     sonar.bearing = request.bearing
     sonar.range = request.range
