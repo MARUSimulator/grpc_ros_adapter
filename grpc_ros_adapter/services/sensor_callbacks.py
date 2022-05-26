@@ -3,7 +3,7 @@ import inspect, sys
 import numpy as np
 import cv2
 import grpc_ros_adapter.utils.ros_handle as rh
-import grpc_ros_adapter.utils.extensions
+from grpc_ros_adapter.utils.extensions import *
 from grpc_ros_adapter.protobuf.sensor_pb2 import PointCloud2
 from grpc_ros_adapter.utils.ros_publisher_registry import RosPublisherRegistry
 
@@ -67,9 +67,9 @@ def publish_pose(request, context):
     nav.header.frame_id = request.data.header.frameId
     nav.position =  NED(north=pos.north, east=pos.east, depth=pos.depth)
     nav.orientation = o
-    nav.seafloor_velocity = request.data.seafloorVelocity.as_ros()
-    nav.body_velocity = request.data.bodyVelocity.as_ros()
-    nav.orientation_rate = request.data.orientationRate.as_ros()
+    nav.seafloor_velocity = point_as_ros(request.data.seafloorVelocity)
+    nav.body_velocity = point_as_ros(request.data.bodyVelocity)
+    nav.orientation_rate = vector_as_ros(request.data.orientationRate)
 
     pub = RosPublisherRegistry.get_publisher(request.address.lower(), NavigationStatus)
     pub.publish(nav)
@@ -99,7 +99,7 @@ def publish_dvl(request, context):
 def publish_sonar_fix(request, context):
 
     from underwater_msgs.msg import SonarFix
-    # not tested
+    not tested
     sonar = SonarFix()
     sonar.bearing = request.bearing
     sonar.range = request.range

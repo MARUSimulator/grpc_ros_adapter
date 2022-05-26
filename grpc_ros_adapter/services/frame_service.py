@@ -3,7 +3,7 @@ import time
 
 from grpc_ros_adapter.protobuf import tf_pb2_grpc
 from grpc_ros_adapter.protobuf import tf_pb2
-from  grpc_ros_adapter.utils import extensions
+from grpc_ros_adapter.utils.extensions import *
 
 import grpc_ros_adapter.utils.ros_handle as rh
 from tf2_msgs.msg import TFMessage
@@ -98,25 +98,21 @@ class FrameService(tf_pb2_grpc.TfServicer):
 
     def PublishFrame(self, request_iterator, context):
         for request in request_iterator:
-            try:
-                frame = TransformStamped()
-                frame.header.stamp = rh.Time.from_sec(request.header.timestamp)
-                frame.header.frame_id = request.frameId
-                frame.child_frame_id = request.childFrameId
-                frame.transform = Transform()
-                frame.transform.translation = extensions.vector_as_ros(request.translation)
-                frame.transform.rotation = extensions.quaternion_as_ros(request.rotation)
+            frame = TransformStamped()
+            frame.header.stamp = rh.Time.from_sec(request.header.timestamp)
+            frame.header.frame_id = request.frameId
+            frame.child_frame_id = request.childFrameId
+            frame.transform = Transform()
+            frame.transform.translation = request.translation.as_ros()
+            frame.transform.rotation = request.rotation.as_ros()
 
-                from grpc_ros_adapter.utils.ros_publisher_registry import RosPublisherRegistry
+            from grpc_ros_adapter.utils.ros_publisher_registry import RosPublisherRegistry
 
-                topic = request.address.lower()
-                if topic.startswith("/"):
-                    topic = topic[1:]
+            topic = request.address.lower()
+            if topic.startswith("/"):
+                topic = topic[1:]
 
-                tfmsg = TFMessage()
-                tfmsg.transforms.append(frame)
-                pub = RosPublisherRegistry.get_publisher(topic, TFMessage)
-                pub.publish(tfmsg)
-            except Exception as e:
-                import traceback
-                rh.logerr(str(traceback.format_exc()))
+            tfmsg = TFMessage()
+            tfmsg.transforms.append(frame)
+            pub = RosPublisherRegistry.get_publisher(topic, TFMessage)
+            pub.publish(tfmsg)
