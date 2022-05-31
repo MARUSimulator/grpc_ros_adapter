@@ -5,7 +5,7 @@ package_name = 'grpc_ros_adapter'
 submodules = [f'{package_name}/protobuf', f'{package_name}/services', f'{package_name}/utils']
 setup(
     name=package_name,
-    version='0.0.1',
+    version='0.1.0',
     packages=[package_name, *submodules],
     data_files=[
         ('share/ament_index/resource_index/packages',
