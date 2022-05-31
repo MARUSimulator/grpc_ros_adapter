@@ -29,6 +29,5 @@
 
   <export>
    <build_type>ament_python</build_type>
- </export>
   </export>
 </package>
