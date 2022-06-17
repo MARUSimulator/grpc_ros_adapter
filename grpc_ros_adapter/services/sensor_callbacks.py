@@ -2,6 +2,7 @@ import inspect, sys
 
 import numpy as np
 import cv2
+from grpc_ros_adapter.protobuf.geometry_pb2 import PoseWithCovariance
 import grpc_ros_adapter.utils.ros_handle as rh
 from grpc_ros_adapter.utils.extensions import *
 from grpc_ros_adapter.protobuf.sensor_pb2 import PointCloud2
@@ -11,7 +12,7 @@ from google.protobuf import text_format
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image, Imu, NavSatFix, PointCloud, PointCloud2, PointField
 from std_msgs.msg import Header
-from geometry_msgs.msg import Vector3, Pose, Quaternion, PoseWithCovarianceStamped, Point, TwistWithCovarianceStamped
+from geometry_msgs.msg import PoseWithCovarianceStamped, Point, TwistWithCovarianceStamped
 
 def publish_image(request, context):
 
@@ -59,26 +60,28 @@ def publish_imu(request, context):
 
 
 def publish_pose(request, context):
-    from auv_msgs.msg import NavigationStatus, NED
-    nav = NavigationStatus()
-    pos = request.data.position
-    o = request.data.orientation.as_ros()
+    nav = PoseWithCovarianceStamped()
+    pos = request.data.pose.pose.position
+    o = request.data.pose.pose.orientation
     nav.header.stamp = rh.Time.from_sec(request.data.header.timestamp)
     nav.header.frame_id = request.data.header.frameId
-    nav.position =  NED(north=pos.north, east=pos.east, depth=pos.depth)
-    nav.orientation = o
-    nav.seafloor_velocity = point_as_ros(request.data.seafloorVelocity)
-    nav.body_velocity = point_as_ros(request.data.bodyVelocity)
-    nav.orientation_rate = vector_as_ros(request.data.orientationRate)
+    nav.pose.pose.position.x = pos.x
+    nav.pose.pose.position.y = pos.y
+    nav.pose.pose.position.z = pos.z
 
-    pub = RosPublisherRegistry.get_publisher(request.address.lower(), NavigationStatus)
+    nav.pose.pose.orientation.w = o.w
+    nav.pose.pose.orientation.x = o.x
+    nav.pose.pose.orientation.y = o.y
+    nav.pose.pose.orientation.z = o.z
+
+    pub = RosPublisherRegistry.get_publisher(request.address.lower(), PoseWithCovarianceStamped)
     pub.publish(nav)
 
 def publish_depth(request, context):
     pose = PoseWithCovarianceStamped()
     pose.header.stamp = rh.Time.from_sec(request.data.header.timestamp)
     pose.header.frame_id = request.data.header.frameId
-    pose.pose.pose.position = Point(x=0, y=0, z=-request.data.pose.pose.position.z)
+    pose.pose.pose.position = Point(x=0., y=0., z=-request.data.pose.pose.position.z)
     #pose.pose.covariance = request.data.pose.covariance
 
     pub = RosPublisherRegistry.get_publisher(request.address.lower(), PoseWithCovarianceStamped)

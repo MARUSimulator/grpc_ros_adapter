@@ -20,7 +20,7 @@ class ProtoRosTranslator:
 
     """
 
-    def __init__(self, proto_msg_list, ros_msg_list, 
+    def __init__(self, proto_msg_list, ros_msg_list,
             ros2proto_custom_translator=None, proto2ros_custom_translator=None):
         self.ros_msgs = dict(zip((msg._type for msg in ros_msg_list), ros_msg_list))
         self.proto_msgs = dict(zip((msg.full_name for msg in proto_msg_list), proto_msg_list))

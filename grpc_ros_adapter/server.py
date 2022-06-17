@@ -26,7 +26,7 @@ def serve(server_ip, server_port):
     Add service handles to server and start server execution
     """
     MAX_MESSAGE_LENGTH = 100 * 1024 * 1024
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=20),
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=100),
     options=[
         ('grpc.max_send_message_length', MAX_MESSAGE_LENGTH),
         ('grpc.max_receive_message_length', MAX_MESSAGE_LENGTH),
@@ -84,7 +84,7 @@ def serve(server_ip, server_port):
 
 def main():
     rh.init('syntetic_data')
-    server_ip = rh.get_param("~server_ip") or "localhost"
+    server_ip = rh.get_param("~server_ip") or "0.0.0.0"
     server_port = rh.get_param("~server_port") or 30052
 
     serve(server_ip, server_port)
