@@ -10,7 +10,7 @@ from grpc_ros_adapter.utils.ros_publisher_registry import RosPublisherRegistry
 
 from google.protobuf import text_format
 from cv_bridge import CvBridge, CvBridgeError
-from sensor_msgs.msg import Image, Imu, NavSatFix, PointCloud, PointCloud2, PointField
+from sensor_msgs.msg import Image, CompressedImage, Imu, NavSatFix, PointCloud, PointCloud2, PointField
 from std_msgs.msg import Header
 from geometry_msgs.msg import PoseWithCovarianceStamped, Point, TwistWithCovarianceStamped
 
