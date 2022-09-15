@@ -10,8 +10,6 @@
   <maintainer email="labust@fer.hr">LABUST</maintainer>
   <license>Apache-2.0</license>
 
-  <buildtool_depend>ament_python</buildtool_depend>
-  <buildtool_depend>rosidl_default_generators</buildtool_depend>
 
   <build_depend>builtin_interfaces</build_depend>
   <build_depend>geometry_msgs</build_depend>
@@ -24,8 +22,6 @@
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>auv_msgs</exec_depend>
   <exec_depend>uuv_sensor_msgs</exec_depend>
-
-  <member_of_group>rosidl_interface_packages</member_of_group>
 
   <export>
    <build_type>ament_python</build_type>
