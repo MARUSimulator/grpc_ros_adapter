@@ -39,6 +39,7 @@ def serve(server_ip, server_port):
 
     sensor_streaming_callbacks =  {
         "StreamCameraSensor": [ publish_image ],
+        "StreamSonarImage": [ publish_sonar_image ],
         "StreamImuSensor": [ publish_imu ],
         "StreamPoseSensor": [ publish_pose ],
         "StreamDepthSensor": [ publish_depth ],

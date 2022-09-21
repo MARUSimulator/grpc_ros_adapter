@@ -1,5 +1,4 @@
 import inspect, sys
-
 import numpy as np
 import cv2
 from grpc_ros_adapter.protobuf.geometry_pb2 import PoseWithCovariance
@@ -61,6 +60,20 @@ def publish_image(request, context):
         pub = RosPublisherRegistry.get_publisher(request.address.lower() + "/compressed", CompressedImage)
         pub.publish(msg)
 
+def publish_sonar_image(request, context):
+    if not hasattr(context, "bridge"):
+        context.bridge = CvBridge()
+
+    msg = Image()
+    header = Header()
+    header.stamp = rh.Time.from_sec(request.data.header.timestamp)
+    header.frame_id = request.data.header.frameId
+
+    img = cv2.imdecode(np.frombuffer(request.data.data, dtype="int8"), cv2.IMREAD_ANYCOLOR)
+    msg = context.bridge.cv2_to_imgmsg(img, 'bgr8')
+    msg.header = header
+    pub = RosPublisherRegistry.get_publisher(request.address.lower(), Image)
+    pub.publish(msg)
 
 def publish_imu(request, context):
     imu = Imu()
