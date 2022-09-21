@@ -110,6 +110,12 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
 
         return sensor_streaming_pb2.StreamingResponse(success=True)
 
+    def StreamSonarImage(self, request_iterator, context):
+        for request in request_iterator:
+            self.trigger_callbacks(self.StreamSonarImage, request)
+
+        return sensor_streaming_pb2.StreamingResponse(success=True)
+
     def StreamSonarSensor(self, request_iterator, context):
         for request in request_iterator:
             self.trigger_callbacks(self.StreamSonarSensor, request)

@@ -60,6 +60,17 @@ def publish_image(request, context):
         pub.publish(msg)
 
 
+def publish_sonar_image(request, context):
+    msg = CompressedImage()
+    header = Header()
+    header.stamp = rh.Time.from_sec(request.data.header.timestamp)
+    header.frame_id = request.data.header.frameId
+    msg.header = header
+    msg.data = request.data.data
+    msg.format = request.data.format
+    pub = RosPublisherRegistry.get_publisher(request.address.lower() + "/compressed", CompressedImage)
+    pub.publish(msg)
+
 def publish_imu(request, context):
     imu = Imu()
 
