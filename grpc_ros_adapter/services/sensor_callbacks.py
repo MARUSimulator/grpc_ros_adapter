@@ -9,41 +9,67 @@ from utils.ros_publisher_registry import RosPublisherRegistry
 
 from google.protobuf import text_format
 from cv_bridge import CvBridge, CvBridgeError
-from sensor_msgs.msg import Image, Imu, NavSatFix, PointCloud, PointCloud2, PointField
+from sensor_msgs.msg import Image, CompressedImage, Imu, NavSatFix, PointCloud, PointCloud2, PointField
 from std_msgs.msg import Header
 from geometry_msgs.msg import Vector3, Pose, Quaternion, PoseWithCovarianceStamped, Point, TwistWithCovarianceStamped
 
 def publish_image(request, context):
-
     if not hasattr(context, "bridge"):
         context.bridge = CvBridge()
 
-    img_string = request.data
-    cv_image = np.fromstring(img_string, np.uint8)
 
-    # NOTE, the height is specifiec as a parameter before the width
-    cv_image = cv_image.reshape(request.height, request.width, 3)
-    cv_image = cv2.flip(cv_image, 0)
+    if len(str(request.image)) > 0:
+        img_string = request.image.data
+        cv_image = np.fromstring(img_string, np.uint8)
 
-    bgr_image = cv2.cvtColor(cv_image, cv2.COLOR_RGB2BGR)
+        # NOTE, the height is specifiec as a parameter before the width
+        cv_image = cv_image.reshape(request.image.height, request.image.width, 3)
+        cv_image = cv2.flip(cv_image, 0)
 
-    msg = Image()
-    header = Header()
-    try:
-        # RGB
-        # msg = self.bridge.cv2_to_imgmsg(cv_image, 'rgb8')
+        bgr_image = cv2.cvtColor(cv_image, cv2.COLOR_RGB2BGR)
 
-        # BGR
-        msg = context.bridge.cv2_to_imgmsg(bgr_image, 'bgr8')
+        msg = Image()
+        header = Header()
+        try:
+            # RGB
+            # msg = self.bridge.cv2_to_imgmsg(cv_image, 'rgb8')
 
-        header.stamp = rh.Time.from_sec(request.timeStamp)
+            # BGR
+            msg = context.bridge.cv2_to_imgmsg(bgr_image, 'bgr8')
+
+            header.stamp = rh.Time.from_sec(request.image.header.timestamp)
+            header.frame_id = request.image.header.frameId
+            msg.header = header
+        except CvBridgeError as e:
+            print(e)
+
+        pub = RosPublisherRegistry.get_publisher(request.address.lower(), Image)
+        pub.publish(msg)
+
+    elif len(str(request.compressedImage)) > 0:
+
+        msg = CompressedImage()
+        header = Header()
+        header.stamp = rh.Time.from_sec(request.compressedImage.header.timestamp)
+        header.frame_id = request.compressedImage.header.frameId
         msg.header = header
-    except CvBridgeError as e:
-        print(e)
+        msg.data = request.compressedImage.data
+        msg.format = request.compressedImage.format
 
-    pub = RosPublisherRegistry.get_publisher(request.address.lower(), Image)
+        pub = RosPublisherRegistry.get_publisher(request.address.lower() + "/compressed", CompressedImage)
+        pub.publish(msg)
+
+
+def publish_sonar_image(request, context):
+    msg = CompressedImage()
+    header = Header()
+    header.stamp = rh.Time.from_sec(request.data.header.timestamp)
+    header.frame_id = request.data.header.frameId
+    msg.header = header
+    msg.data = request.data.data
+    msg.format = request.data.format
+    pub = RosPublisherRegistry.get_publisher(request.address.lower() + "/compressed", CompressedImage)
     pub.publish(msg)
-
 
 def publish_imu(request, context):
     imu = Imu()
