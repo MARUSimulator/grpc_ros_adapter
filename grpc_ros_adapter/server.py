@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+import sys, os
+
+pardir = os.path.abspath(os.path.join(__file__, os.pardir))
+sys.path.append(pardir)
 
 from concurrent import futures
 import utils.ros_handle as rh
@@ -83,12 +87,14 @@ def serve(server_ip, server_port):
     server.stop(1)
 #     server.wait_for_termination()
 
-
-
-if __name__ == '__main__':
-
+def main():
     rh.init('syntetic_data')
     server_ip = rh.get_param("~server_ip") or "[::]"
     server_port = rh.get_param("~server_port") or 30052
 
     serve(server_ip, server_port)
+
+
+if __name__ == '__main__':
+        main()
+    

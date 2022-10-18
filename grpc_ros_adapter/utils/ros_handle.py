@@ -11,6 +11,7 @@ if ROS_VERSION == ROS_1:
     _HANDLER = rospy
 if ROS_VERSION == ROS_2:
     import rclpy
+    from builtin_interfaces.msg import Time as Ros2Time 
     _HANDLER = rclpy
 
 
@@ -102,7 +103,7 @@ class _Time:
         if ROS_VERSION == ROS_1:
             return _HANDLER.Time.from_sec(sec)
         if ROS_VERSION == ROS_2:
-            return _HANDLER.time.Time.from_msg(sec)
+            return _HANDLER.time.Time(seconds=sec).to_msg()
 
 
 def logerr(msg, *args, **kwargs):
