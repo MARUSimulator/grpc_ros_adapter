@@ -10,6 +10,7 @@ def generate_launch_description():
             executable='server',
             namespace='grpc_ros_adapter',
             name='grpc_ros_adapter',
+            output="screen",
             parameters=[
             {
                 "server_ip" : "0.0.0.0",

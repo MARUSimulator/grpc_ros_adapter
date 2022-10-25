@@ -1,3 +1,4 @@
+from email import utils
 import inspect, sys
 
 import numpy as np
@@ -7,7 +8,6 @@ import utils.extensions
 from protobuf.sensor_pb2 import PointCloud2
 from utils.ros_publisher_registry import RosPublisherRegistry
 
-from google.protobuf import text_format
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image, CompressedImage, Imu, NavSatFix, PointCloud, PointCloud2, PointField
 from std_msgs.msg import Header
@@ -18,7 +18,7 @@ def publish_image(request, context):
         context.bridge = CvBridge()
 
 
-    if len(str(request.image)) > 0:
+    if len(request.image.data) > 0:
         img_string = request.image.data
         cv_image = np.fromstring(img_string, np.uint8)
 
@@ -46,7 +46,7 @@ def publish_image(request, context):
         pub = RosPublisherRegistry.get_publisher(request.address.lower(), Image)
         pub.publish(msg)
 
-    elif len(str(request.compressedImage)) > 0:
+    elif len(request.compressedImage.data) > 0:
 
         msg = CompressedImage()
         header = Header()
@@ -72,8 +72,8 @@ def publish_sonar_image(request, context):
     pub.publish(msg)
 
 def publish_imu(request, context):
-    imu = Imu()
 
+    imu = Imu()
     imu.header.stamp = rh.Time.from_sec(request.data.header.timestamp)
     imu.header.frame_id = request.data.header.frameId
     imu.linear_acceleration = request.data.linearAcceleration.as_ros()

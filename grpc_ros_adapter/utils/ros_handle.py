@@ -11,7 +11,7 @@ if ROS_VERSION == ROS_1:
     _HANDLER = rospy
 if ROS_VERSION == ROS_2:
     import rclpy
-    from builtin_interfaces.msg import Time as Ros2Time 
+    from builtin_interfaces.msg import Time as Ros2Time
     _HANDLER = rclpy
 
 

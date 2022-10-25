@@ -3,9 +3,7 @@ from protobuf.sensor_pb2 import PointCloud2
 from protobuf import sensor_streaming_pb2
 from protobuf import sensor_streaming_pb2_grpc
 from utils import topic_streamer
-
-class Context:
-    pass
+from types import SimpleNamespace
 
 class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
     def __init__(self, callbacks={}):
@@ -18,7 +16,7 @@ class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
     def _get_callback_context(self, callback):
         context = self._callback_contexts.get(callback, None)
         if not context:
-            context = Context()
+            context = SimpleNamespace()
         self._callback_contexts[callback] = context
         return context
 

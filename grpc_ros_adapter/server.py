@@ -4,18 +4,23 @@ import sys, os
 pardir = os.path.abspath(os.path.join(__file__, os.pardir))
 sys.path.append(pardir)
 
-from concurrent import futures
-import utils.ros_handle as rh
-import grpc
+# add subpackages to path so that package name does not need to be used in imports
+import sys, os
 
-from protobuf import ping_pb2_grpc
-from protobuf import sensor_streaming_pb2_grpc
-from protobuf import remote_control_pb2_grpc
-from protobuf import tf_pb2_grpc
-from protobuf import parameter_server_pb2_grpc
-from protobuf import simulation_control_pb2_grpc
-from protobuf import visualization_pb2_grpc
-from protobuf import acoustic_transmission_pb2_grpc
+# add module folder to path so that submodules work correctly
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+
+import utils.ros_handle as rh
+from concurrent import futures
+import grpc
+import protobuf.ping_pb2_grpc
+import protobuf.sensor_streaming_pb2_grpc
+import protobuf.remote_control_pb2_grpc
+import protobuf.tf_pb2_grpc
+import protobuf.parameter_server_pb2_grpc
+import protobuf.simulation_control_pb2_grpc
+import protobuf.visualization_pb2_grpc
+import protobuf.acoustic_transmission_pb2_grpc
 
 from services.ping_service import PingService
 from services.sensor_streaming import SensorStreaming
@@ -39,7 +44,7 @@ def serve(server_ip, server_port):
     ])
 
 
-    ping_pb2_grpc.add_PingServicer_to_server(
+    protobuf.ping_pb2_grpc.add_PingServicer_to_server(
             PingService(),
             server)
 
@@ -58,34 +63,34 @@ def serve(server_ip, server_port):
         "StreamPointCloud2" : [publish_pointcloud2]
     }
 
-    sensor_streaming_pb2_grpc.add_SensorStreamingServicer_to_server(
+    protobuf.sensor_streaming_pb2_grpc.add_SensorStreamingServicer_to_server(
             SensorStreaming(sensor_streaming_callbacks),
             server)
 
-    remote_control_pb2_grpc.add_RemoteControlServicer_to_server(
+    protobuf.remote_control_pb2_grpc.add_RemoteControlServicer_to_server(
             RemoteControl(), server
     )
 
-    tf_pb2_grpc.add_TfServicer_to_server(
+    protobuf.tf_pb2_grpc.add_TfServicer_to_server(
             FrameService(), server
     )
 
-    parameter_server_pb2_grpc.add_ParameterServerServicer_to_server(
+    protobuf.parameter_server_pb2_grpc.add_ParameterServerServicer_to_server(
             ParameterServer(), server
     )
 
-    simulation_control_pb2_grpc.add_SimulationControlServicer_to_server(
+    protobuf.simulation_control_pb2_grpc.add_SimulationControlServicer_to_server(
             SimulationControl(), server
     )
 
-    visualization_pb2_grpc.add_VisualizationServicer_to_server(
+    protobuf.visualization_pb2_grpc.add_VisualizationServicer_to_server(
             Visualization(), server
     )
 
     # try importing uuv_sensor_msgs, if exists, add acoustic transmition
     try:
         import uuv_sensor_msgs
-        acoustic_transmission_pb2_grpc.add_AcousticTransmissionServicer_to_server(
+        protobuf.acoustic_transmission_pb2_grpc.add_AcousticTransmissionServicer_to_server(
                 AcousticTransmission()
         )
     except ImportError:
@@ -109,4 +114,3 @@ def main():
 
 if __name__ == '__main__':
         main()
-    
