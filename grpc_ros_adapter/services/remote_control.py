@@ -1,8 +1,8 @@
 from std_msgs.msg import Float32MultiArray
-from grpc_ros_adapter.utils import topic_streamer
-from grpc_ros_adapter.protobuf import remote_control_pb2
-from grpc_ros_adapter.protobuf import remote_control_pb2_grpc
-from grpc_ros_adapter.protobuf import std_pb2
+from utils import topic_streamer
+import remote_control_pb2
+import remote_control_pb2_grpc
+import std_pb2
 
 
 

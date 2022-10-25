@@ -22,6 +22,7 @@
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>auv_msgs</exec_depend>
   <exec_depend>uuv_sensor_msgs</exec_depend>
+  <exec_depend>python3-grpcio</exec_depend>
 
   <export>
    <build_type>ament_python</build_type>

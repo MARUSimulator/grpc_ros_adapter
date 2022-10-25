@@ -1,25 +1,31 @@
 #!/usr/bin/env python3
 
+# add subpackages to path so that package name does not need to be used in imports
+import sys, os
+
+# add module folder to path so that submodules work correctly
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+
+import utils.ros_handle as rh
 from concurrent import futures
-import grpc_ros_adapter.utils.ros_handle as rh
 import grpc
+import protobuf
+import ping_pb2_grpc
+import sensor_streaming_pb2_grpc
+import remote_control_pb2_grpc
+import tf_pb2_grpc
+import parameter_server_pb2_grpc
+import simulation_control_pb2_grpc
+import visualization_pb2_grpc
 
-from grpc_ros_adapter.protobuf import ping_pb2_grpc
-from grpc_ros_adapter.protobuf import sensor_streaming_pb2_grpc
-from grpc_ros_adapter.protobuf import remote_control_pb2_grpc
-from grpc_ros_adapter.protobuf import tf_pb2_grpc
-from grpc_ros_adapter.protobuf import parameter_server_pb2_grpc
-from grpc_ros_adapter.protobuf import simulation_control_pb2_grpc
-from grpc_ros_adapter.protobuf import visualization_pb2_grpc
-
-from grpc_ros_adapter.services.ping_service import PingService
-from grpc_ros_adapter.services.sensor_streaming import SensorStreaming
-from grpc_ros_adapter.services.remote_control import RemoteControl
-from grpc_ros_adapter.services.parameter_server import ParameterServer
-from grpc_ros_adapter.services.frame_service import FrameService
-from grpc_ros_adapter.services.simulation_control import SimulationControl
-from grpc_ros_adapter.services.visualization import Visualization
-from grpc_ros_adapter.services.sensor_callbacks import *
+from services.ping_service import PingService
+from services.sensor_streaming import SensorStreaming
+from services.remote_control import RemoteControl
+from services.parameter_server import ParameterServer
+from services.frame_service import FrameService
+from services.simulation_control import SimulationControl
+from services.visualization import Visualization
+from services.sensor_callbacks import *
 
 def serve(server_ip, server_port):
     """

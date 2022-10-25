@@ -1,8 +1,8 @@
 
-from grpc_ros_adapter.protobuf.sensor_pb2 import PointCloud2
-from grpc_ros_adapter.protobuf import sensor_streaming_pb2
-from grpc_ros_adapter.protobuf import sensor_streaming_pb2_grpc
-from grpc_ros_adapter.utils import topic_streamer
+from sensor_pb2 import PointCloud2
+import sensor_streaming_pb2
+import sensor_streaming_pb2_grpc
+from utils import topic_streamer
 
 class Context:
     pass

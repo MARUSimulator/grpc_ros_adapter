@@ -1,6 +1,6 @@
-grpcio
+grpcio==1.44
 pyyaml
 rospkg
 opencv-python
 numpy
-protobuf
+protobuf==3.17.3

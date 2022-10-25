@@ -1,13 +1,13 @@
-import grpc_ros_adapter.utils.ros_handle as rh
-from grpc_ros_adapter.utils import topic_streamer
-from grpc_ros_adapter.utils.ros_publisher_registry import RosPublisherRegistry
+import utils.ros_handle as rh
+from utils import topic_streamer
+from utils.ros_publisher_registry import RosPublisherRegistry
 
 from std_msgs.msg import Header
 from uuv_sensor_msgs.msg import AcousticModemRange, AcousticModemPayload, AcousticModemRequest
 
-from grpc_ros_adapter.protobuf import labust_pb2
-from grpc_ros_adapter.protobuf import acoustic_transmission_pb2
-from grpc_ros_adapter.protobuf import acoustic_transmission_pb2_grpc
+import labust_pb2
+import acoustic_transmission_pb2
+import acoustic_transmission_pb2_grpc
 
 class AcousticTransmission(acoustic_transmission_pb2_grpc.AcousticTransmissionServicer):
     """

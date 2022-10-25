@@ -1,6 +1,6 @@
 import threading
 
-import grpc_ros_adapter.utils.ros_handle as rh
+import utils.ros_handle as rh
 import time
 from queue import Queue, Empty
 

@@ -1,5 +1,5 @@
-from grpc_ros_adapter.protobuf import ping_pb2
-from grpc_ros_adapter.protobuf import ping_pb2_grpc
+import ping_pb2
+import ping_pb2_grpc
 
 class PingService(ping_pb2_grpc.PingServicer):
     """

@@ -1,8 +1,8 @@
-from grpc_ros_adapter.protobuf import commander_service_pb2
-from grpc_ros_adapter.protobuf import commander_service_pb2_grpc
+import commander_service_pb2
+import commander_service_pb2_grpc
 
 
-from grpc_ros_adapter.utils import ros_handle as rh
+from utils import ros_handle as rh
 
 
 

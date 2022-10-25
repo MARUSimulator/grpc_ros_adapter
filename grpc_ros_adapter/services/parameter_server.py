@@ -1,8 +1,8 @@
-from grpc_ros_adapter.protobuf import parameter_server_pb2
-from grpc_ros_adapter.protobuf import parameter_server_pb2_grpc
-from grpc_ros_adapter.protobuf.std_pb2 import Empty
+import parameter_server_pb2
+import parameter_server_pb2_grpc
+from std_pb2 import Empty
 
-import grpc_ros_adapter.utils.ros_handle as rh
+import utils.ros_handle as rh
 
 class ParameterServer(parameter_server_pb2_grpc.ParameterServerServicer):
 
