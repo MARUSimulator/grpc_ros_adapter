@@ -4,8 +4,8 @@ import time
 from protobuf import tf_pb2_grpc
 from protobuf import tf_pb2
 
-import utils.ros_handle as rh
-import utils.extensions
+import grpc_utils.ros_handle as rh
+import grpc_utils.extensions
 from tf2_msgs.msg import TFMessage
 from threading import Lock
 from geometry_msgs.msg import TransformStamped, Transform

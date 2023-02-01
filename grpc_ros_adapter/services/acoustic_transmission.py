@@ -1,6 +1,6 @@
-import utils.ros_handle as rh
-from utils import topic_streamer
-from utils.ros_publisher_registry import RosPublisherRegistry
+import grpc_utils.ros_handle as rh
+from grpc_utils import topic_streamer
+from grpc_utils.ros_publisher_registry import RosPublisherRegistry
 
 from std_msgs.msg import Header
 from uuv_sensor_msgs.msg import AcousticModemRange, AcousticModemPayload, AcousticModemRequest

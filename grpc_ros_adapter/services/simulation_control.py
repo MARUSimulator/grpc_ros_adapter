@@ -1,7 +1,7 @@
 from protobuf import simulation_control_pb2
 from protobuf import simulation_control_pb2_grpc
 
-import utils.ros_handle as rh
+import grpc_utils.ros_handle as rh
 from rosgraph_msgs.msg import Clock
 
 

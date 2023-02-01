@@ -1,4 +1,4 @@
-import utils.ros_handle as rh
+import grpc_utils.ros_handle as rh
 import time
 
 class RosPublisherRegistry:

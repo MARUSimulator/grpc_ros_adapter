@@ -1,6 +1,5 @@
 import os
 
-
 ROS_1 = 1
 ROS_2 = 2
 

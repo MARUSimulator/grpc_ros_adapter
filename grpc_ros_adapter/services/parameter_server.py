@@ -2,7 +2,7 @@ from protobuf import parameter_server_pb2
 from protobuf import parameter_server_pb2_grpc
 from protobuf.std_pb2 import Empty
 
-import utils.ros_handle as rh
+import grpc_utils.ros_handle as rh
 
 class ParameterServer(parameter_server_pb2_grpc.ParameterServerServicer):
 

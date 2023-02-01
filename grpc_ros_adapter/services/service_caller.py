@@ -2,8 +2,8 @@ from protobuf import commander_service_pb2
 from protobuf import commander_service_pb2_grpc
 from std_msgs.msg import Int32MultiArray
 
-import utils.ros_handle as rh
-import rospy
+
+import grpc_utils.ros_handle as rh
 
 
 

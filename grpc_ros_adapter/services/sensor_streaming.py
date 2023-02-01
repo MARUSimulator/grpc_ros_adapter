@@ -2,7 +2,7 @@
 from protobuf.sensor_pb2 import PointCloud2
 from protobuf import sensor_streaming_pb2
 from protobuf import sensor_streaming_pb2_grpc
-from utils import topic_streamer
+from grpc_utils import topic_streamer
 from types import SimpleNamespace
 
 class SensorStreaming(sensor_streaming_pb2_grpc.SensorStreamingServicer):
