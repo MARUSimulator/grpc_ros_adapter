@@ -6,7 +6,8 @@ import sys, os
 # add module folder to path so that submodules work correctly
 sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
-import utils.ros_handle as rh
+
+import grpc_utils.ros_handle as rh
 from concurrent import futures
 import grpc
 import protobuf

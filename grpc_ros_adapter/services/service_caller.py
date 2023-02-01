@@ -2,7 +2,7 @@ import commander_service_pb2
 import commander_service_pb2_grpc
 
 
-from utils import ros_handle as rh
+from grpc_utils import ros_handle as rh
 
 
 

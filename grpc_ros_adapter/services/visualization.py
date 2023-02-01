@@ -12,7 +12,7 @@
 # # See the License for the specific language governing permissions and
 # # limitations under the License.
 
-from utils import topic_streamer
+from grpc_utils import topic_streamer
 import visualization_pb2
 import visualization_pb2_grpc
 import std_pb2

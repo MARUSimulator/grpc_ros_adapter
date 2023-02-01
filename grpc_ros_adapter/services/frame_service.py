@@ -3,9 +3,9 @@ import time
 
 import tf_pb2_grpc
 import tf_pb2
-from utils.extensions import *
+from grpc_utils.extensions import *
 
-import utils.ros_handle as rh
+import grpc_utils.ros_handle as rh
 from tf2_msgs.msg import TFMessage
 from threading import Lock
 from geometry_msgs.msg import TransformStamped, Transform

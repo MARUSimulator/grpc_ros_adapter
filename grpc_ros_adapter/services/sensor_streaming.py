@@ -2,7 +2,7 @@
 from sensor_pb2 import PointCloud2
 import sensor_streaming_pb2
 import sensor_streaming_pb2_grpc
-from utils import topic_streamer
+from grpc_utils import topic_streamer
 
 class Context:
     pass

@@ -2,10 +2,10 @@ from email import utils
 import inspect, sys
 import numpy as np
 import cv2
-import utils.ros_handle as rh
-from utils.extensions import *
+import grpc_utils.ros_handle as rh
+from grpc_utils.extensions import *
 from sensor_pb2 import PointCloud2
-from utils.ros_publisher_registry import RosPublisherRegistry
+from grpc_utils.ros_publisher_registry import RosPublisherRegistry
 
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image, CompressedImage, Imu, NavSatFix, PointCloud, PointCloud2, PointField

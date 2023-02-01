@@ -1,5 +1,5 @@
 from std_msgs.msg import Float32MultiArray
-from utils import topic_streamer
+from grpc_utils import topic_streamer
 import remote_control_pb2
 import remote_control_pb2_grpc
 import std_pb2
