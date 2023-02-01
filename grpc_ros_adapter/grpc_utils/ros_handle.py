@@ -110,6 +110,24 @@ class _Time:
                 logerr(str(e))
             return t
 
+    def __call__(
+        self,
+        *,
+        secs: float,
+        nsecs: float
+        ):
+        if ROS_VERSION == ROS_1:
+            return _HANDLER.Time.from_sec(secs + 1e-9 * nsecs)
+        if ROS_VERSION == ROS_2:
+            t = None
+            try:
+                from rclpy.clock import ClockType
+                t = _HANDLER.time.Time(nanoseconds=(nsecs + 1e9 * secs), clock_type=ClockType.SYSTEM_TIME).to_msg()
+            except Exception as e:
+                logerr(str(e))
+            return t
+
+
 
 def logerr(msg, *args, **kwargs):
     if ROS_VERSION == ROS_1:
