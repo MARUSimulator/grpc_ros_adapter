@@ -117,6 +117,12 @@ def loginfo(msg):
     if ROS_VERSION == ROS_2:
         _NODE.get_logger().info(msg)
 
+def logwarn(msg):
+    if ROS_VERSION == ROS_1:
+        _HANDLER.logwarn(msg)
+    if ROS_VERSION == ROS_2:
+        _NODE.get_logger().warn(msg)
+
 def logdebug(msg):
     if ROS_VERSION == ROS_1:
         _HANDLER.logdebug(msg)

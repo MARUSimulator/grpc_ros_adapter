@@ -11,6 +11,7 @@ from protobuf import tf_pb2_grpc
 from protobuf import parameter_server_pb2_grpc
 from protobuf import simulation_control_pb2_grpc
 from protobuf import visualization_pb2_grpc
+from protobuf import acoustic_transmission_pb2_grpc
 
 from services.ping_service import PingService
 from services.sensor_streaming import SensorStreaming
@@ -19,6 +20,7 @@ from services.parameter_server import ParameterServer
 from services.frame_service import FrameService
 from services.simulation_control import SimulationControl
 from services.visualization import Visualization
+from services.acoustic_transmission import AcousticTransmission
 from services.sensor_callbacks import *
 
 def serve(server_ip, server_port):
@@ -75,6 +77,16 @@ def serve(server_ip, server_port):
     visualization_pb2_grpc.add_VisualizationServicer_to_server(
             Visualization(), server
     )
+
+    # try importing uuv_sensor_msgs, if exists, add acoustic transmition
+    try:
+        import uuv_sensor_msgs
+        acoustic_transmission_pb2_grpc.add_AcousticTransmissionServicer_to_server(
+                AcousticTransmission()
+        )
+    except ImportError:
+        rh.logwarn("Cannot import package 'uuv_sensor_msgs'. Acoustic transmition will be disabled")
+
 
     server.add_insecure_port(server_ip + ':' + str(server_port))
     print(server_ip + ":" + str(server_port))
