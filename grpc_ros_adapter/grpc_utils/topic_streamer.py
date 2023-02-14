@@ -50,7 +50,7 @@ class Streamer:
             # if connection closed
             if not context.is_active():
                 self._remove_client(request, context)
-                return 
+                return
 
             if request_buffer.empty():
                 time.sleep(self._thread_sleep_if_empty)

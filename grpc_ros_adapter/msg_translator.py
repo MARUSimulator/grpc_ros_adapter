@@ -2,7 +2,7 @@ import rosmsg, genpy
 import roslib.message as rosmessage
 import std_msgs
 import rospkg
-import rospy
+import grpc_utils.ros_handle as rh
 
 import google.protobuf as protobuf
 import google.protobuf.descriptor as descriptor
@@ -20,10 +20,10 @@ class ProtoRosTranslator:
 
     """
 
-    def __init__(self, 
-            proto_msg_list : list = None, 
-            ros_msg_list : list = None, 
-            ros2proto_custom_translator : dict  = None, 
+    def __init__(self,
+            proto_msg_list : list = None,
+            ros_msg_list : list = None,
+            ros2proto_custom_translator : dict  = None,
             proto2ros_custom_translator : dict = None,
             proto_remaps : list = None):
 
@@ -81,7 +81,7 @@ class ProtoRosTranslator:
         by field names
         """
         if not self.is_ros_msg(msg):
-            rospy.logdebug(f"Given object {msg} is not a ros message")
+            rh.logdebug(f"Given object {msg} is not a ros message")
             return None
 
         custom_trans = self.ros2proto_custom_translator.get(msg._type, None)
@@ -101,7 +101,7 @@ class ProtoRosTranslator:
         by field names
         """
         if not self.is_proto_msg(msg):
-            rospy.logdebug(f"Given object {msg} is not a proto message")
+            rh.logdebug(f"Given object {msg} is not a proto message")
             return None
 
         custom_trans = self.proto2ros_custom_translator.get(msg.DESCRIPTOR.full_name, None)
@@ -109,6 +109,8 @@ class ProtoRosTranslator:
             return custom_trans(msg)
 
         ros_msg = self.get_ros_msg_cls_for_proto_msg(msg)
+        if ros_msg is None:
+            return None
         new_ros_msg = self.create_empty_ros(ros_msg)
 
         for field_info in msg.DESCRIPTOR.fields:
@@ -157,6 +159,8 @@ class ProtoRosTranslator:
         new_try_path_list = [(name + "_msgs/" if i != len(split)-1 else name) for (i, name) in enumerate(split) ]
         new_try_path = "".join(new_try_path_list)
         maybe_msg = self.ros_msgs.get(new_try_path, None)
+        if maybe_msg is None:
+            rh.logerr(f"Cannot find ros message for {proto_msg_name}")
         return maybe_msg
 
 
@@ -167,24 +171,28 @@ class ProtoRosTranslator:
             ros_msg.stamp.secs = int(proto_msg.timestamp)
             ros_msg.stamp.nsecs = int((proto_msg.timestamp - ros_msg.stamp.secs) * 1e9)
             ros_msg.frame_id = proto_msg.frameId
-        elif isinstance(ros_msg, rospy.Time):
+        elif isinstance(ros_msg, rh.RosTime):
             ros_msg.secs = proto_msg.secs
             ros_msg.nsecs = proto_msg.nsecs
-        elif isinstance(ros_msg, rospy.Duration):
+        elif isinstance(ros_msg, rh.RosDuration):
             ros_msg.secs = proto_msg.secs
             ros_msg.nsecs = proto_msg.nsecs
         else:
             name = field_info.name
-            setattr(ros_msg, name, self._proto2ros_token(field_info, getattr(proto_msg, name)))
+            attr = getattr(ros_msg, name)
+            if hasattr(attr, "data"):
+                setattr(attr, "data", self._proto2ros_token(field_info, getattr(proto_msg, name)))
+            else:
+                setattr(ros_msg, name, self._proto2ros_token(field_info, getattr(proto_msg, name)))
 
     def _set_ros_field2proto_field(self, field_info, ros_msg, proto_msg):
         if isinstance(ros_msg, std_msgs.msg.Header):
             proto_msg.timestamp = ros_msg.stamp.secs + 1e-9 * ros_msg.stamp.nsecs
             proto_msg.frameId = ros_msg.frame_id
-        elif isinstance(ros_msg, rospy.Time):
+        elif isinstance(ros_msg, rh.RosTime):
             proto_msg.secs = ros_msg.secs
             proto_msg.nsecs = ros_msg.nsecs
-        elif isinstance(ros_msg, rospy.Duration):
+        elif isinstance(ros_msg, rh.RosDuration):
             proto_msg.secs = ros_msg.secs
             proto_msg.nsecs = ros_msg.nsecs
         else:
@@ -204,7 +212,7 @@ class ProtoRosTranslator:
                 return
             elif self.is_ros_obj(ros_value):
                 field.CopyFrom(self._ros2proto_obj(ros_value))
-                return 
+                return
             raise Exception("Error while translating proto to ros message!")
         pass
 
@@ -243,7 +251,7 @@ class ProtoRosTranslator:
                 field_info.type == descriptor.FieldDescriptor.TYPE_UINT32 or \
                 field_info.type == descriptor.FieldDescriptor.TYPE_UINT64:
             return int(proto_primitive)
-            
+
         if field_info.type == descriptor.FieldDescriptor.TYPE_FLOAT or \
                 field_info.type == descriptor.FieldDescriptor.TYPE_DOUBLE:
             return float(proto_primitive)
@@ -259,7 +267,7 @@ class ProtoRosTranslator:
             return self._proto2ros_list(field_info, proto_value)
         elif self.is_proto_obj(field_info, from_list):
             return self._proto2ros_obj(proto_value)
-        
+
         raise Exception("Error while translating proto to ros message!")
 
     def is_ros_list(self, ros_value):
@@ -276,7 +284,7 @@ class ProtoRosTranslator:
 
     def is_proto_list(self, field_info, from_list=False):
         return not from_list and \
-            (field_info.label == descriptor.FieldDescriptor.LABEL_REPEATED 
+            (field_info.label == descriptor.FieldDescriptor.LABEL_REPEATED
             or field_info.type == descriptor.FieldDescriptor.TYPE_BYTES)
 
     def is_proto_obj(self, field_info, from_list=False):

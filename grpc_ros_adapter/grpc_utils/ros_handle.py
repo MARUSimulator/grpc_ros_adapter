@@ -5,13 +5,21 @@ ROS_2 = 2
 
 ROS_VERSION = int(os.getenv("ROS_VERSION"))
 _HANDLER = None
+_ROS_TIME = None
+_ROS_DURATION = None
+
 if ROS_VERSION == ROS_1:
     import rospy
     _HANDLER = rospy
+    _ROS_TIME = rospy.Time
+    _ROS_DURATION = rospy.Duration
 if ROS_VERSION == ROS_2:
     import rclpy
     from builtin_interfaces.msg import Time as Ros2Time
+    from builtin_interfaces.msg import Duration as Ros2Duration
     _HANDLER = rclpy
+    _ROS_TIME = Ros2Time
+    _ROS_DURATION = Ros2Duration
 
 
 IS_INIT = False
@@ -147,6 +155,8 @@ def logdebug(msg):
     if ROS_VERSION == ROS_2:
         _NODE.get_logger().debug(msg)
 
+RosTime = _ROS_TIME
+RosDuration = _ROS_DURATION
 Subscription = _Subscription()
 Publisher = _Publisher()
 Time = _Time()

@@ -97,7 +97,7 @@ def serve(server_ip, server_port):
     try:
         import uuv_sensor_msgs
         acoustic_transmission_pb2_grpc.add_AcousticTransmissionServicer_to_server(
-                AcousticTransmission()
+                AcousticTransmission(), server
         )
     except ImportError:
         rh.logwarn("Cannot import package 'uuv_sensor_msgs'. Acoustic transmition will be disabled")
@@ -107,7 +107,7 @@ def serve(server_ip, server_port):
             LoraTransmission(), server
     )
 
-    RosPublisherRegistry.remap_proto2ros('rfcommunication', 'mbzirc_msgs')
+    RosPublisherRegistry.remap_proto2ros('rfcommunication', 'rf_msgs')
     server.add_insecure_port(server_ip + ':' + str(server_port))
     print(server_ip + ":" + str(server_port))
     server.start()

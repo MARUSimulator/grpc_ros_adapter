@@ -28,11 +28,15 @@ class RosPublisherRegistry:
 
     @classmethod
     def translate_ros2proto(cls, msg):
-        return cls._translator.ros2proto(msg)
+        if rh.ROS_VERSION == 1:
+            return cls._translator.ros2proto(msg)
+        rh.logerr("Message translation only supported for ROS1")
 
     @classmethod
     def translate_proto2ros(cls, msg):
-        return cls._translator.proto2ros(msg)
+        if rh.ROS_VERSION == 1:
+            return cls._translator.proto2ros(msg)
+        rh.logerr("Message translation only supported for ROS1")
 
     @classmethod
     def add_proto2ros_translator(cls, msg, translate):
