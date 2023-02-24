@@ -16,6 +16,7 @@ from grpc_utils import topic_streamer
 import visualization_pb2
 import visualization_pb2_grpc
 import std_pb2
+import grpc_utils.ros_handle as rh
 from visualization_msgs.msg import Marker, MarkerArray
 
 
@@ -35,7 +36,8 @@ class Visualization(visualization_pb2_grpc.VisualizationServicer):
             try:
                 response = Visualization.Ros2Msg(msg)
             except Exception as e:
-                print(e)
+                rh.logerr(e)
+
             callbacks = self._callbacks.get("SetMarker", [])
             for c in callbacks:
                 c(response, context)
@@ -64,7 +66,7 @@ class Visualization(visualization_pb2_grpc.VisualizationServicer):
     def Ros2Msg(request):
         response = visualization_pb2.Marker()
         response.header.frameId = request.header.frame_id
-        response.header.timestamp = request.header.stamp.to_nsec()
+        response.header.timestamp = request.header.stamp.nanosec
 
         response.ns = request.ns
         response.id = request.id
@@ -73,7 +75,7 @@ class Visualization(visualization_pb2_grpc.VisualizationServicer):
         response.pose.CopyFrom(request.pose.as_msg())
         response.scale.CopyFrom(request.scale.as_msg())
         response.color.CopyFrom(request.color.as_msg())
-        response.lifetime = request.lifetime.to_sec()
+        response.lifetime = request.lifetime.sec
         response.frameLocked = request.frame_locked
         response.points.extend([x.as_msg() for x in request.points])
         response.colors.extend([x.as_msg() for x in request.colors])
