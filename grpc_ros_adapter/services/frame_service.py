@@ -48,7 +48,7 @@ class FrameService(tf_pb2_grpc.TfServicer):
                 self.tfs.append(new_tf)
         self._has_new_data = True
 
-    def static_tf_callback(self, message):
+    def static_tf_callback(self, message, dummy=None):
         with self._static_tfs_lock:
             for new_tf in message.transforms:
                 self._standardize_tf(new_tf)

@@ -87,15 +87,32 @@ def publish_imu(request, context):
 def publish_pose(request, context):
     from auv_msgs.msg import NavigationStatus, NED
     nav = NavigationStatus()
-    pos = request.data.position
-    o = request.data.orientation.as_ros()
+    pos = request.data.pose.pose.position.as_ros()
+
+
+    o = request.data.pose.pose.orientation.as_ros()
+
+
+
     nav.header.stamp = rh.Time.from_sec(request.data.header.timestamp)
     nav.header.frame_id = request.data.header.frameId
-    nav.position =  NED(north=pos.north, east=pos.east, depth=pos.depth)
+
+    nav.position =  NED(north=pos.y, east=pos.x, depth=pos.z)
+
     nav.orientation = o
-    nav.seafloor_velocity = request.data.seafloorVelocity.as_ros()
-    nav.body_velocity = request.data.bodyVelocity.as_ros()
-    nav.orientation_rate = request.data.orientationRate.as_ros()
+    try:
+        nav.seafloor_velocity = request.data.seafloorVelocity.as_ros()
+    except:
+        pass
+    try:
+        nav.body_velocity = request.data.bodyVelocity.as_ros()
+    except:
+        pass
+    try:
+        nav.orientation_rate = request.data.orientationRate.as_ros()
+    except:
+        pass
+
 
     pub = RosPublisherRegistry.get_publisher(request.address.lower(), NavigationStatus)
     pub.publish(nav)

@@ -1,10 +1,10 @@
 from protobuf import commander_service_pb2
 from protobuf import commander_service_pb2_grpc
 
-
+import utils.ros_handle as rh
 import rospy
 
-
+from std_msgs.msg import Int32MultiArray
 
 class ServiceCaller(commander_service_pb2_grpc.CommanderServicer):
     """
@@ -18,14 +18,16 @@ class ServiceCaller(commander_service_pb2_grpc.CommanderServicer):
         pass
 
     def PrimitivePointer(self, request, context):
+        rh.loginfo("CALLED SERVICE")
         # temp ros1 solution
         # ROS2 has request and response defined inside class
-        from std_msgs.msg import Int32MultiArray
+
         from labust_msgs.srv import PointerPrimitiveService, PointerPrimitiveServiceRequest
         rospy.wait_for_service('/d2/commander/primitive/pointer')
         try:
             pointer_service = rospy.ServiceProxy('/d2/commander/primitive/pointer', PointerPrimitiveService)
             srvout = PointerPrimitiveServiceRequest()
+            rh.loginfo(str(request))
             srvout.radius = request.radius
             srvout.radius_topic = request.radiusTopic
             srvout.guidance_topic = request.guidanceTopic
@@ -39,5 +41,5 @@ class ServiceCaller(commander_service_pb2_grpc.CommanderServicer):
             self.velcon_selection.publish(outselect)
             return commander_service_pb2.PrimitivePointerResponse(success=True)
         except rospy.ServiceException as e:
-            print("Service call failed: %s"%e)       
+            rh.loginfo("Service call failed: %s"%e)
             return commander_service_pb2.PrimitivePointerResponse(success=False)

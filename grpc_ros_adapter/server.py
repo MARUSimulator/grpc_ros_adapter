@@ -11,6 +11,7 @@ from protobuf import tf_pb2_grpc
 from protobuf import parameter_server_pb2_grpc
 from protobuf import simulation_control_pb2_grpc
 from protobuf import visualization_pb2_grpc
+from protobuf import commander_service_pb2_grpc
 
 from services.ping_service import PingService
 from services.sensor_streaming import SensorStreaming
@@ -20,6 +21,7 @@ from services.frame_service import FrameService
 from services.simulation_control import SimulationControl
 from services.visualization import Visualization
 from services.sensor_callbacks import *
+from services.service_caller import ServiceCaller
 
 def serve(server_ip, server_port):
     """
@@ -74,6 +76,10 @@ def serve(server_ip, server_port):
 
     visualization_pb2_grpc.add_VisualizationServicer_to_server(
             Visualization(), server
+    )
+
+    commander_service_pb2_grpc.add_CommanderServicer_to_server(
+        ServiceCaller(), server
     )
 
     server.add_insecure_port(server_ip + ':' + str(server_port))
