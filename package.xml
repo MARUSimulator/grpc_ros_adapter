@@ -10,8 +10,6 @@
   <maintainer email="labust@fer.hr">LABUST</maintainer>
   <license>Apache-2.0</license>
 
-  <buildtool_depend>ament_python</buildtool_depend>
-
   <depend>builtin_interfaces</depend>
   <depend>geometry_msgs</depend>
   <depend>launch</depend>
